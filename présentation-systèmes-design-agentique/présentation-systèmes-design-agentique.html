@@ -1041,6 +1041,42 @@ S9 — NOUVEAUX ACTEURS (diagramme natif)
         </div>
 
         <!-- ══════════════════════════════════════════════════
+S9b — CHATBOT VS SYSTÈME AGENTIQUE
+══════════════════════════════════════════════════ -->
+
+        <div class="slide" id="s9b">
+            <div class="accent-bar"></div>
+            <div class="glow" style="width:350px;height:350px;top:-60px;right:-60px;background:rgba(43,127,255,0.35);"></div>
+            <div class="col-full">
+                <span class="label anim">Chatbot vs Système agentique</span>
+                <h2 class="anim" style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:34px;font-weight:700;line-height:1.2;">Un agent qui répond. Un système qui coordonne.</h2>
+                <div class="anim" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                    <div style="background:rgba(255,85,85,0.07);border:1px solid rgba(255,85,85,0.2);border-radius:12px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:30px;">💬</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:16px;font-weight:700;color:var(--red);">Usage chatbot</h3>
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">Réactif — répond à une question</span>
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">Génère un composant à la demande</span>
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">S'arrête après chaque réponse</span>
+                        </div>
+                    </div>
+                    <div style="background:rgba(20,217,200,0.07);border:1px solid rgba(20,217,200,0.25);border-radius:12px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;">
+                        <div style="font-size:30px;">🔁</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:16px;font-weight:700;color:var(--cyan);">Système agentique</h3>
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">Plusieurs agents coordonnés</span>
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">Travail à travers outils, fichiers, workflows</span>
+                            <span class="pill" style="font-size:13px;color:var(--grey0);">Points d'approbation humaine à chaque étape critique</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote anim">
+                    Un chatbot répond. Un agent agit. Un système d'agents coordonne le travail à travers des outils, des workflows et des points d'approbation. <span style="display:block;margin-top:8px;font-size:12px;color:var(--grey);font-style:normal;">— Romina Kavcic</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
 S10 — LE PROBLÈME
 ══════════════════════════════════════════════════ -->
 
@@ -1277,6 +1313,42 @@ S12 — CE QUI CHANGE
         </div>
 
         <!-- ══════════════════════════════════════════════════
+S12b — LE COMPOSANT DEVIENT UN CONTRAT
+══════════════════════════════════════════════════ -->
+
+        <div class="slide" id="s12b">
+            <div class="accent-bar"></div>
+            <div class="glow" style="width:350px;height:350px;bottom:-60px;right:-60px;background:rgba(20,217,200,0.25);"></div>
+            <div class="layout-split">
+                <div class="col-left" style="flex:1;gap:20px;">
+                    <span class="label anim">Changement de paradigme</span>
+                    <h2 class="anim" style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:36px;font-weight:700;line-height:1.2;">Le composant devient un contrat.</h2>
+                    <p class="anim" style="font-size:15px;color:var(--grey0);line-height:1.6;">Dans un système classique, un composant est quelque chose qu'on importe. Dans un système agentique, il porte ses règles, ses contraintes et ses conditions d'escalade.</p>
+                    <div class="quote anim">
+                        Le bouton ne se résume plus à son code — il devient un contrat entre design, code, intention produit, accessibilité et comportement. <span style="display:block;margin-top:8px;font-size:12px;color:var(--grey);font-style:normal;">— Romina Kavcic</span>
+                    </div>
+                </div>
+                <div class="col-right" style="width:440px;padding:60px 44px;border-left:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;gap:20px;justify-content:center;">
+                    <div class="anim" style="background:rgba(255,85,85,0.08);border:1px solid rgba(255,85,85,0.2);border-radius:12px;padding:22px 24px;">
+                        <div style="font-size:11px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Système classique</div>
+                        <pre style="font-family:monospace;font-size:13px;color:var(--grey0);line-height:1.6;">&lt;Button variant="primary"&gt;
+  Soumettre
+&lt;/Button&gt;</pre>
+                    </div>
+                    <div class="anim" style="background:rgba(20,217,200,0.07);border:1px solid rgba(20,217,200,0.25);border-radius:12px;padding:22px 24px;">
+                        <div style="font-size:11px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Système agentique</div>
+                        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--grey0);">
+                            <span><span style="color:var(--cyan);">→</span> Utiliser pour l'action principale d'un flux</span>
+                            <span><span style="color:var(--cyan);">→</span> Ne pas utiliser sans pattern de confirmation si destructif</span>
+                            <span><span style="color:var(--cyan);">→</span> Contraste minimum 4.5:1 requis</span>
+                            <span><span style="color:var(--cyan);">→</span> Escalader si la variante demandée n'existe pas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
 S13 — DOC VIVANTE (diagramme natif)
 ══════════════════════════════════════════════════ -->
 
@@ -1439,6 +1511,48 @@ S13 — DOC VIVANTE (diagramme natif)
         </div>
 
         <!-- ══════════════════════════════════════════════════
+S13b — QUATRE AGENTS, UN ORCHESTRATEUR
+══════════════════════════════════════════════════ -->
+
+        <div class="slide" id="s13b">
+            <div class="accent-bar"></div>
+            <div class="glow" style="width:400px;height:400px;top:-80px;left:50%;transform:translateX(-50%);background:rgba(155,127,255,0.3);"></div>
+            <div class="col-full">
+                <span class="label anim">En pratique</span>
+                <h2 class="anim" style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:34px;font-weight:700;line-height:1.2;">Quatre agents. Un orchestrateur.</h2>
+                <div class="anim" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+                    <div style="padding:20px 22px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:26px;">🎨</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);">Agent designer</h3>
+                        <p style="font-size:13px;color:var(--grey0);line-height:1.5;">Surveille la dérive dans Figma. Produit des rapports — ne modifie pas automatiquement.</p>
+                    </div>
+                    <div style="padding:20px 22px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:26px;">💻</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);">Agent développeur</h3>
+                        <p style="font-size:13px;color:var(--grey0);line-height:1.5;">Détecte les mauvais usages de tokens dans le code et ouvre des PRs de correction.</p>
+                    </div>
+                    <div style="padding:20px 22px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:26px;">📝</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);">Agent documentation</h3>
+                        <p style="font-size:13px;color:var(--grey0);line-height:1.5;">Maintient la doc synchronisée : changelogs, guides de migration, notes d'accessibilité.</p>
+                    </div>
+                    <div style="padding:20px 22px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:10px;">
+                        <div style="font-size:26px;">✅</div>
+                        <h3 style="font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);">Agent QA</h3>
+                        <p style="font-size:13px;color:var(--grey0);line-height:1.5;">Exécute les vérifications avant merge : accessibilité, régressions visuelles, conformité tokens.</p>
+                    </div>
+                </div>
+                <div class="anim" style="background:rgba(20,217,200,0.07);border:1px solid rgba(20,217,200,0.25);border-radius:12px;padding:18px 28px;display:flex;align-items:flex-start;gap:12px;">
+                    <span style="font-size:22px;">🔀</span>
+                    <div>
+                        <span style="font-family:'Atkinson Hyperlegible',sans-serif;font-weight:700;font-size:16px;color:var(--cyan);">Orchestrateur</span>
+                        <p style="font-size:14px;color:var(--grey0);margin-top:6px;line-height:1.6;">Coordonne les agents. Décide quels changements sont sûrs, lesquels nécessitent une approbation humaine, et quand escalader.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
 S14 — CE QUE CE N'EST PAS + CE QUE ÇA CHANGE POUR VOUS
 ══════════════════════════════════════════════════ -->
 
@@ -1575,7 +1689,7 @@ S15 — SYNTHÈSE
 
     <div id="nav">
         <button id="btn-prev">←</button>
-        <span id="slide-counter">1 / 15</span>
+        <span id="slide-counter">1 / 18</span>
         <button id="btn-next">→</button>
     </div>
 
