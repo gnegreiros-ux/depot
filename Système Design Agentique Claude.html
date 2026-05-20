@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Le système de design agentique — Présentation executive 2026</title>
+<meta name="author" content="Guilherme Negreiros">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --accent:      #1A3F6F;
+  --accent2:     #122D52;
+  --accent-lt:   #D0DEF0;
+  --accent-md:   #7EA8D4;
+
+  --green:       #0A6E4F;
+  --green-bg:    #E4F2EC;
+  --green-p:     #D0EBE0;   /* bg principe 01 */
+  --blue:        #0F4C8A;
+  --blue-bg:     #E3EDF8;
+  --blue-p:      #CDDDF5;   /* bg principe 02 */
+  --coral:       #A83318;
+  --coral-bg:    #FAE8E4;
+  --coral-p:     #F5D8D1;   /* bg principe 03 */
+  --violet:      #4A3AB0;
+  --violet-p:    #DDD9F5;   /* bg principe 04 */
+  --amber:       #7A4B00;
+  --slate:       #3D4F5C;
+
+  --tp:          #111827;
+  --ts:          #374151;
+  --tm:          #4B5563;
+  --tsu:         #6B7280;
+  --border:      #D1D5DB;
+  --surf:        #F9FAFB;
+  --surf2:       #F3F4F6;
+
+  --font: 'Atkinson Hyperlegible', sans-serif;
+  --label-size: 9.5pt;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--tp);
+  background: #CBD5E1;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media screen {
+  body { padding: 32px 0; }
+  .page { width: 215.9mm; background: white; margin: 0 auto 32px; box-shadow: 0 6px 40px rgba(0,0,0,0.22); }
+  .print-bar {
+    width: 215.9mm; margin: 0 auto 20px;
+    background: var(--accent); color: white;
+    padding: 11px 20px; border-radius: 6px;
+    font-family: var(--font); font-size: 10pt;
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+  }
+  .print-bar:hover { background: var(--accent2); }
+}
+
+@media print {
+  @page { size: letter portrait; margin: 0; }
+  body { background: white; padding: 0; }
+  .print-bar { display: none; }
+  .page { width: 215.9mm; height: 279.4mm; page-break-after: always; overflow: hidden; background: white; }
+  .page:last-child { page-break-after: avoid; }
+}
+
+/* ── Titre de section uniforme ── */
+.slabel {
+  font-size: var(--label-size);
+  font-weight: 700;
+  /*letter-spacing: 0.16em;*/
+  text-transform: uppercase;
+  color: var(--tm);
+  margin-bottom: 9pt;
+  font-style: normal;
+}
+
+/* ══════════════════════════════════════
+   PAGE 1
+   Header  68mm │ spacer 8mm │ Problem 48mm
+   spacer   8mm │ Callout 25mm │ Comp 1fr
+══════════════════════════════════════ */
+.page-1 {
+  display: grid;
+  grid-template-rows: 60mm 8mm 48mm 8mm 25mm 1fr;
+  height: 279.4mm;
+}
+
+.p1-header { background: var(--accent); padding: 13mm 16mm 0; }
+.kicker { font-size: 7.5pt; font-weight: 700; /*letter-spacing: 0.2em;*/ text-transform: uppercase; color: var(--accent-md); margin-bottom: 8pt; }
+.main-title { font-size: 34pt; font-weight: 700; font-style: normal; color: #fff; line-height: 1.05; margin-bottom: 10pt; }
+.subtitle { font-size: 12pt; color: var(--accent-lt); line-height: 1.65; max-width: 120mm; }
+
+.p1-problem { padding: 0 16mm; }
+.problem-box { background: var(--surf2); border-radius: 6pt; padding: 13pt 16pt; border-left: 3.5pt solid var(--accent); margin-top: 4mm;}
+.problem-box p { font-size: 10pt; color: var(--ts); line-height: 1.75; }
+.problem-box strong { color: var(--tp); font-weight: 700; }
+
+.p1-callout { background: var(--accent2); display: flex; align-items: center; padding: 0 16mm; }
+.callout { font-size: 12.5pt; font-weight: 400; font-style: italic; color: #E8F0F9; /*line-height: 1.65;*/ padding-left: 16pt; border-left: 3pt solid var(--accent-md); }
+
+.p1-comp { padding: 8mm 16mm; display: flex; flex-direction: column; }
+.comp-section-title {
+   font-size: 16pt; 
+   font-weight: 700; 
+   font-style: normal; 
+   /*letter-spacing: 0.08em;
+   text-transform: uppercase; */
+   color: var(--tm); 
+   line-height: 1.2; 
+   padding-top: 7mm; 
+   margin-bottom: 8pt; 
+   white-space: nowrap; 
+}
+.comp-grid { display: grid; grid-template-columns: repeat(3,1fr); grid-auto-rows: auto; gap: 14pt; margin-top: 9pt;}
+.comp-card { background: var(--surf); border: 0.75pt solid var(--border); border-radius: 6pt; padding: 14pt; display: flex; flex-direction: column; }
+.comp-card.c1 { border-top: 3.5pt solid var(--green); }
+.comp-card.c2 { border-top: 3.5pt solid var(--blue); }
+.comp-card.c3 { border-top: 3.5pt solid var(--coral); }
+.comp-card.c4 { border-top: 3.5pt solid var(--violet); }
+.comp-card.c5 { border-top: 3.5pt solid var(--amber); }
+.comp-card.c6 { border-top: 3.5pt solid var(--slate); }
+.comp-icon { font-size: 20pt; margin-bottom: 7pt; }
+.c1 .comp-icon { color: var(--green); }
+.c2 .comp-icon { color: var(--blue); }
+.c3 .comp-icon { color: var(--coral); }
+.c4 .comp-icon { color: var(--violet); }
+.c5 .comp-icon { color: var(--amber); }
+.c6 .comp-icon { color: var(--slate); }
+.comp-title { font-size: 11pt; font-weight: 700; color: var(--tp); margin-bottom: 5pt; line-height: 1.3; }
+.comp-desc  { font-size: 7.5pt; color: var(--ts); line-height: 1.6; }
+.comp-note  { font-size: 10pt; color: var(--tsu); font-style: normal; margin-top: 7pt; }
+
+/* ══════════════════════════════════════
+   PAGE 2
+   Header    28mm
+   Audience  ~130mm  (cards même hauteur = stretch)
+   Divider   8mm
+   Principes header + 2 cards  ~113mm
+══════════════════════════════════════ */
+.page-2 {
+  display: grid;
+  grid-template-rows: 28mm 130mm 8mm 1fr;
+  height: 279.4mm;
+}
+
+.p2-header { padding: 9mm 16mm 0; border-bottom: 2pt solid var(--accent); display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 8pt; }
+.page-title { font-size: 22pt; font-weight: 700; font-style: normal; color: var(--accent); }
+.page-sup { font-size: 7.5pt; font-weight: 700; /*letter-spacing: 0.12em;*/ text-transform: uppercase; color: var(--tsu); }
+
+/* Audience — stretch pour égaliser les hauteurs */
+.p2-audience { padding: 8mm 16mm 0; display: flex; flex-direction: column; }
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8pt;
+  flex: 1;
+  margin-top: 9pt;
+  align-items: stretch;   /* toutes les cards à la même hauteur */
+}
+.aud-card { border-radius: 7pt; padding: 14pt 13pt; display: flex; flex-direction: column; }
+.aud-card.design { background: var(--green-bg); }
+.aud-card.dev    { background: var(--blue-bg); }
+.aud-card.mgmt   { background: var(--coral-bg); }
+.aud-icon { font-size: 20pt; margin-bottom: 8pt; }
+.aud-card.design .aud-icon { color: var(--green); }
+.aud-card.dev    .aud-icon { color: var(--blue); }
+.aud-card.mgmt   .aud-icon { color: var(--coral); }
+.aud-role { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 5pt; }
+.aud-card.design .aud-role { color: var(--green); }
+.aud-card.dev    .aud-role { color: var(--blue); }
+.aud-card.mgmt   .aud-role { color: var(--coral); }
+.aud-heading { font-size: 11pt; font-weight: 700; color: var(--tp); margin-bottom: 10pt; line-height: 1.3; }
+.bl { list-style: none; flex: 1; }
+.bl li { font-size: 9pt; color: var(--ts); padding: 4.5pt 0 4.5pt 13pt; border-bottom: 0.75pt solid rgba(0,0,0,0.08); line-height: 1.5; position: relative; }
+.bl li:last-child { border-bottom: none; }
+.bl li::before { content: '→'; position: absolute; left: 0; font-size: 8pt; font-weight: 700; }
+.aud-card.design .bl li::before { color: var(--green); }
+.aud-card.dev    .bl li::before { color: var(--blue); }
+.aud-card.mgmt   .bl li::before { color: var(--coral); }
+
+/* Principes sur page 2 — 2 premières cards */
+.p2-principes { padding: 0 16mm 8mm; display: flow; flex-direction: column; }
+.p2-principes .slabel { padding-top: 6mm; }
+.p-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20pt;
+  flex: 1;
+  margin-top: 30pt;
+}
+.principe-card { border-radius: 7pt; padding: 24pt; }
+.pc1 { background: var(--green-p); }
+.pc2 { background: var(--blue-p); }
+.pc3 { background: var(--coral-p); }
+.pc4 { background: var(--violet-p); }
+.pn { font-size: 14pt; font-weight: 700; color: var(--tsu); margin-bottom: 3pt; letter-spacing: 0.05em; }
+.pc1 .pn { color: var(--green); }
+.pc2 .pn { color: var(--blue); }
+.pc3 .pn { color: var(--coral); }
+.pc4 .pn { color: var(--violet); }
+.pt { font-size: 11pt; font-weight: 700; color: var(--tp); margin-bottom: 5pt; }
+.pd { font-size: 9pt; color: var(--ts); line-height: 1.55; }
+
+/* ══════════════════════════════════════
+   PAGE 3
+   Header   28mm
+   2-col (freedom + 2 autres principes)  ~115mm
+   Reassure ~90mm
+   Footer    ~46mm
+══════════════════════════════════════ */
+.page-3 {
+  display: grid;
+  grid-template-rows: 28mm 115mm 1fr 56mm;
+  height: 279.4mm;
+}
+
+.p3-header { padding: 9mm 16mm 0; border-bottom: 2pt solid var(--accent); display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 8pt; }
+
+.p3-2col { padding: 8mm 16mm 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; }
+.col-block { display: flex; flex-direction: column; margin-top: 40pt;}
+.freedom-box { background: var(--surf); border: 0.75pt solid var(--border); border-radius: 7pt; padding: 13pt 14pt; flex: 1; margin-top: 9pt; }
+.freedom-title { font-size: 11pt; font-weight: 700; color: var(--tp); margin-bottom: 9pt; display: flex; align-items: center; gap: 7pt; }
+.freedom-title i { font-size: 20pt; color: var(--tm); }
+.freedom-box p { font-size: 11pt; color: var(--ts); line-height: 1.7; margin-bottom: 7pt; }
+.freedom-box p:last-child { margin-bottom: 0; }
+
+/* 2 derniers principes (03, 04) sur page 3 */
+.p3-principes-col { display: flex; flex-direction: column; }
+.p3-principes-col .slabel { padding-top: 0; }
+.p3-principes-col .p-grid-2col { margin-top: 9pt; flex: 1; }
+
+.p3-reassure { padding: 8mm 16mm 0; display: flex; flex-direction: column; }
+.re-grid { display: grid; grid-template-columns: repeat(3,1fr); flex: 1; margin-top: 9pt; background: var(--surf2); border-radius: 7pt; overflow: hidden; }
+.re-item { padding: 13pt 15pt; border-right: 0.75pt solid var(--border); }
+.re-item:last-child { border-right: none; }
+.re-item p { font-size: 9pt; color: var(--ts); line-height: 1.65; }
+.re-item strong { color: var(--tp); font-weight: 700; }
+
+.p3-footer { padding: 0 16mm; display: flex; justify-content: space-between; align-items: center; border-top: 0.75pt solid var(--border); margin-top: 6mm; }
+.sources { display: flex; gap: 5pt; flex-wrap: wrap; align-items: center; }
+.badge { font-size: 6.5pt; font-weight: 700; color: #374151; background: #E5E7EB; padding: 3pt 8pt; border-radius: 10pt; border: 0.75pt solid #D1D5DB; display: inline-block; }
+.footer-credit { font-size: 7pt; color: var(--tsu); white-space: nowrap; font-weight: 700; }
+
+</style>
+</head>
+<body>
+
+<div class="print-bar" onclick="window.print()">
+  <i class="ti ti-printer" style="font-size:14pt;"></i>
+  Imprimer → Enregistrer en PDF — Marges : Aucune · Cocher : Graphiques d'arrière-plan
+</div>
+
+<!-- ══ PAGE 1 : Intro + Composition ══ -->
+<div class="page page-1">
+
+  <div class="p1-header">
+    <!-- <p class="kicker">Présentation executive · 2026</p> -->
+    <h1 class="main-title">Le système de design agentique</h1>
+    <p class="subtitle">Une infrastructure partagée qui fait travailler nos décisions à notre place — sans jamais nous enlever le dernier mot.</p>
+  </div>
+
+  <div></div><!-- spacer -->
+
+  <div class="p1-problem">
+    <p class="page-title">Le problème commun</p>
+    <div class="problem-box">
+      <p>Nos équipes relivrent les mêmes décisions. Chaque projet repart de zéro. Une couleur change dans Figma — personne ne le sait en production. Un développeur interprète un composant différemment de l'intention du designer. Un gestionnaire demande un audit : personne ne peut répondre en moins d'une semaine. <strong>Le système de design agentique règle ça structurellement, pas manuellement.</strong></p>
+    </div>
+  </div>
+
+  <div></div><!-- spacer -->
+
+  <div class="p1-callout">
+    <p class="callout">Nos décisions de design deviennent des règles. Les règles voyagent seules. L'équipe se concentre sur ce qui compte vraiment.</p>
+  </div>
+
+  <div class="p1-comp">
+    <p class="page-title">Ce qui le compose</p>
+    <div class="comp-grid">
+      <div class="comp-card c1"><i class="ti ti-color-swatch comp-icon"></i><p class="comp-title">Design tokens</p><p class="comp-desc">Le langage commun. Nos décisions visuelles et UX en valeurs nommées, lisibles par tous les outils et toutes les équipes.</p></div>
+      <div class="comp-card c2"><i class="ti ti-components comp-icon"></i><p class="comp-title">Composants-contrats</p><p class="comp-desc">Chaque composant porte ses règles d'usage, ses variantes et ses contraintes d'accessibilité — pas juste son apparence.</p></div>
+      <div class="comp-card c3"><i class="ti ti-file-text comp-icon"></i><p class="comp-title">Documentation active</p><p class="comp-desc">Lisible par les humains et les agents. Elle se maintient avec le système, pas derrière lui.</p></div>
+      <div class="comp-card c4"><i class="ti ti-shield-check comp-icon"></i><p class="comp-title">Règles &amp; contexte</p><p class="comp-desc">Les conventions et décisions implicites deviennent explicites. Ce qui "allait de soi" est maintenant écrit.</p></div>
+      <div class="comp-card c5"><i class="ti ti-robot comp-icon"></i><p class="comp-title">Agents spécialisés</p><p class="comp-desc">Design, code, QA, documentation — chaque agent a un rôle délimité. Ils exécutent ; nous approuvons.</p></div>
+      <div class="comp-card c6"><i class="ti ti-settings comp-icon"></i><p class="comp-title">Gouvernance encodée</p><p class="comp-desc">Les flux d'approbation, niveaux de changement et audits font partie du système — pas des processus parallèles.</p></div>
+    </div>
+    <p class="comp-note">Ces six couches fonctionnent ensemble. On peut commencer avec les deux premières et progresser.</p>
+  </div>
+
+</div>
+
+<!-- ══ PAGE 2 : Rôles + début Principes ══ -->
+<div class="page page-2">
+
+  <div class="p2-header">
+    <p class="page-title">Les principes fondateurs</p>
+    <!--<p class="page-sup">Système de design agentique · 2026</p>-->
+  </div>
+
+   <div class="p2-principes">
+    <!-- <p class="slabel">Les principes fondateurs</p> -->
+    <div class="p-grid-2col">
+      <div class="principe-card pc1">
+        <p class="pn">01</p>
+        <p class="pt">Contrôle institutionnel</p>
+        <p class="pd">Nos données, nos règles, nos décisions restent les nôtres. Aucun fournisseur ne détient nos standards.</p>
+      </div>
+      <div class="principe-card pc2">
+        <p class="pn">02</p>
+        <p class="pt">Audit continu</p>
+        <p class="pd">Le système surveille sa propre cohérence. Les rapports sont produits automatiquement, sans intervention.</p>
+      </div>
+      <div class="principe-card pc3">
+          <p class="pn">03</p>
+          <p class="pt">Auto-guérison</p>
+          <p class="pd">Quand une dérive est détectée, le système propose une correction automatiquement.</p>
+        </div>
+        <div class="principe-card pc4">
+          <p class="pn">04</p>
+          <p class="pt">Dernier mot humain</p>
+          <p class="pd">Les agents exécutent et suggèrent. Toute décision stratégique appartient à l'équipe — toujours.</p>
+        </div>
+    </div>
+    <div class="col-block">
+      <p class="page-title">Aucune technologie imposée</p>
+      <div class="freedom-box">
+        <p class="freedom-title"><i class="ti ti-plug-connected"></i>Le système parle toutes les langues</p>
+        <p>Le système de design agentique ne nous enferme dans aucun outil, aucun framework, aucun fournisseur. React, Angular, Vue, systèmes hérités — il fonctionne avec ce que nous avons déjà.</p>
+        <p>Les décisions sont stockées dans un langage neutre (design tokens) que chaque technologie peut lire à sa façon. Changer d'outil dans deux ans ne signifie pas recommencer à zéro. Nos décisions restent. Seul le traducteur change.</p>
+      </div>
+    </div>
+   
+  </div>
+
+
+
+  <div></div><!-- spacer -->
+
+
+
+</div>
+
+<!-- ══ PAGE 3 : Liberté techno + Principes 03-04 + Ce qui ne change pas ══ -->
+<div class="page page-3">
+
+  <div class="p3-header">
+    <p class="page-title">Ce que ça change pour chaque rôle</p>
+    <!--<p class="page-sup">Système de design agentique · 2026</p>-->
+  </div>
+
+  <div class="p3-3col">
+    <div class="p2-audience">
+      <!-- <p class="slabel">Ce que ça change — pour chaque rôle</p> -->
+    <div class="audience-grid">
+      <div class="aud-card design">
+        <i class="ti ti-vector-triangle aud-icon"></i>
+        <p class="aud-role">Designers</p>
+        <p class="aud-heading">Notre intention arrive intacte en production</p>
+        <ul class="bl">
+          <li>Ce que nous décidons dans Figma devient une règle — pas une suggestion</li>
+          <li>Fini les allers-retours pour expliquer l'intention d'un composant</li>
+          <li>Notre expertise est encodée, transmissible, durable</li>
+          <li>Nous passons de producteurs d'écrans à architectes de décisions</li>
+        </ul>
+      </div>
+      <div class="aud-card dev">
+        <i class="ti ti-code aud-icon"></i>
+        <p class="aud-role">Développeurs</p>
+        <p class="aud-heading">Moins d'ambiguïté, plus de confiance</p>
+        <ul class="bl">
+          <li>Les composants portent leurs propres règles d'usage</li>
+          <li>Moins de réunions pour clarifier ce qu'un designer voulait dire</li>
+          <li>Le système détecte les dérives automatiquement — avant la livraison</li>
+          <li>Nous intégrons le système dans notre stack, sans changer nos outils</li>
+        </ul>
+      </div>
+      <div class="aud-card mgmt">
+        <i class="ti ti-chart-bar aud-icon"></i>
+        <p class="aud-role">Gestionnaires</p>
+        <p class="aud-heading">Gouvernance mesurable, risques réduits</p>
+        <ul class="bl">
+          <li>Les audits sont générés à la demande, sans effort manuel</li>
+          <li>La conformité et l'accessibilité sont vérifiées en continu</li>
+          <li>Moins de dette technique = moins de correctifs coûteux</li>
+          <li>Une infrastructure qui dure, indépendante des individus</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="p3-reassure">
+    <p class="page-title">Ce qui ne change pas</p>
+    <div class="re-grid">
+      <div class="re-item"><p><strong>Le système ne remplace personne.</strong> Il valorise le travail de chacun en le rendant plus durable et plus transmissible.</p></div>
+      <div class="re-item"><p><strong>Il ne s'administre pas tout seul.</strong> Les équipes gardent le contrôle des décisions importantes. L'automatisation gère les tâches répétitives.</p></div>
+      <div class="re-item"><p><strong>Il ne demande pas un système parfait pour commencer.</strong> On part de l'existant, on formalise progressivement, on gagne en maturité à chaque phase.</p></div>
+    </div>
+  </div>
+
+  <div class="p3-footer">
+    <div class="sources">
+      <span class="badge">NNGroup</span>
+      <span class="badge">Into Design Systems 2026</span>
+      <span class="badge">Romina Kavcic</span>
+      <span class="badge">Jesse Gardner — NY State</span>
+      <span class="badge">The Design System Guide</span>
+    </div>
+    <span class="footer-credit">par Guilherme Negreiros</span>
+  </div>
+
+</div>
+
+</body>
+</html>
