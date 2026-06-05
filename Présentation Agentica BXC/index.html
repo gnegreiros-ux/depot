@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L'IA qui travaille pour nous — BXC · RAMQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#0D9B8A;--brand-dark:#16201E;--brand-deep:#0D1815;
+  --brand-light:#5FE3D0;--brand-pale:#D4F5F0;
+  --accent:#ED6B86;--accent-pale:#FDEAED;--slate:#7A8C99;
+  --grad:linear-gradient(135deg,#0D9B8A,#ED6B86);
+  --off:#F2F5F4;--surface:#fff;--subtle:#E8EFED;--border:#D5E0DC;
+  --text:#111C1A;--muted:#384E48;
+  --danger:#ce2c31;--danger-bg:#feebec;
+  --success:#18794e;--success-bg:#e8f5ef;
+  --r:10px;--rl:16px;
+  --T:0.42s cubic-bezier(.4,0,.2,1);
+  font-family:'Atkinson Hyperlegible',system-ui,sans-serif;
+}
+html,body{height:100%;overflow:hidden;background:var(--brand-deep)}
+body{display:flex;flex-direction:column}
+#deck{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4vw 6vw;opacity:0;pointer-events:none;transform:translateY(28px);transition:opacity var(--T),transform var(--T);text-align:left}
+.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.slide.exit{opacity:0;transform:translateY(-28px)}
+.slide.dark{background:var(--brand-deep)}
+.slide.navy{background:var(--brand-dark)}
+.slide.light{background:var(--off)}
+.slide.white{background:var(--surface)}
+#nav{display:flex;align-items:center;gap:14px;padding:10px 22px;background:rgba(27,16,22,.97);border-top:1px solid rgba(255,255,255,.07);flex-shrink:0}
+#pb{flex:1;height:3px;background:rgba(255,255,255,0.3);border-radius:99px;overflow:hidden}
+#pf{height:100%;background:var(--accent);border-radius:99px;transition:width .4s}
+.nb{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.34);color:#fff;padding:8px 20px;border-radius:7px;cursor:pointer;font-size:15px;font-family:inherit;font-weight:400;transition:background .18s,transform .1s;user-select:none}
+.nb:hover{background:rgba(255,255,255,0.34)}.nb:active{transform:scale(.97)}.nb:disabled{opacity:.3;cursor:not-allowed}
+#sc{color:rgba(255,255,255,.75);font-size:14px;min-width:48px;text-align:center}
+#al{color:var(--brand-light);font-size:15px;letter-spacing:.07em;text-transform:uppercase;min-width:170px;text-align:right;white-space:nowrap}
+.ey{font-size:clamp(14px,1.1vw,15px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7em}
+.ey.b{color:var(--brand-light)}.ey.d{color:var(--brand)}
+h1{font-size:clamp(2.8rem,5.5vw,5rem);font-weight:700;line-height:1.08;letter-spacing:-.025em}
+h2{font-size:clamp(2rem,3.8vw,3.6rem);font-weight:700;line-height:1.12;letter-spacing:-.02em}
+h3{font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:700;line-height:1.25;letter-spacing:-.015em}
+h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
+.lead{font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.65;max-width:68ch}
+.sm{font-size:clamp(1rem,1.2vw,1.06rem);line-height:1.65;color:var(--muted)}
+.w{color:#fff}.bl{color:var(--brand-light)}.bd{color:var(--brand)}.mu{color:rgba(255,255,255,.82)}
+.cols{display:flex;gap:clamp(16px,2.5vw,40px);align-items:flex-start;width:100%;max-width:1200px}
+.col{flex:1;text-align:left}
+.card{background:#fff;border-radius:var(--r);padding:clamp(14px,1.8vw,24px);border:1px solid var(--border)}
+.dcard{background:var(--brand-dark);border:none;border-radius:var(--r);padding:clamp(14px,1.8vw,24px)}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;max-width:860px}
+.sc2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,0.3);border-radius:var(--rl);padding:26px 18px;text-align:center}
+.sn{font-size:clamp(2.8rem,4.5vw,4.2rem);font-weight:700;color:var(--brand-light);line-height:1;display:block;margin-bottom:7px}
+.sl{font-size:clamp(.96rem,1.2vw,1.02rem);color:rgba(255,255,255,0.8);line-height:1.45}
+.ss{font-size:14px;color:rgba(255,255,255,.65);margin-top:7px;display:block}
+.frow{display:flex;align-items:stretch;width:100%;max-width:1050px}
+.fcell{flex:1;padding:clamp(18px,2.2vw,32px);display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:relative}
+.fcell:not(:last-child)::after{content:'→';position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-size:1.8rem;color:rgba(255,255,255,.65);padding:4px}
+.fi{font-size:2.6rem;line-height:1}.fr{font-size:1.1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.fv{font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:700;line-height:1.1}
+.fd{font-size:clamp(.95rem,1.1vw,1rem);line-height:1.55;max-width:21ch;opacity:.65}
+.prx{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:920px}
+.pr{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,0.3);border-left:8px solid var(--brand);border-radius:var(--r);padding:18px 20px;text-align:left;display:flex;gap:14px}
+.pico{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+.pt{font-size:clamp(1.02rem,1.3vw,1.12rem);font-weight:600;color:#fff;margin-bottom:4px}
+.pd{font-size:clamp(.95rem,1.1vw,1rem);color:rgba(255,255,255,.82);line-height:1.5}
+/* Governance pipeline */
+.gflow{display:flex;align-items:flex-start;gap:0;width:100%;max-width:1100px;margin-top:.5em}
+.gstep{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px}
+.garr{flex-shrink:0;margin-top:26px;color:rgba(255,255,255,0.5);font-size:1.2rem;line-height:1;display:flex;align-items:center;justify-content:center;width:20px;height:20px}
+.gnode{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;padding:10px;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)}
+.gnode.gate{border-color:rgba(237,107,134,.6);background:rgba(237,107,134,.18)}
+.gnode.auto{border-color:rgba(13,155,138,.45);background:rgba(13,155,138,.12)}
+.glbl{font-size:clamp(.96rem,1.1vw,1.02rem);color:#fff;font-weight:500;line-height:1.35;text-align:center;max-width:88px;min-height:60px}
+.gtag{font-size:.72rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;opacity:.75}
+.gtag.a{background:rgba(13,155,138,.12);color:var(--brand-light);padding:3px 10px;height:auto;display:inline-block}
+.gtag.h{background:rgba(237,107,134,.18);color:rgba(255,255,255,.85);border:1px solid rgba(237,107,134,.35);padding:3px 10px;width:auto;height:auto;display:inline-block;text-align:center}
+/* Control grid */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:1000px}
+.ccol{border-radius:var(--rl);padding:18px 20px;text-align:left}
+.ccol.al{background:var(--success-bg);border:1px solid rgba(24,121,78,.2)}
+.ccol.dn{background:var(--danger-bg);border:1px solid rgba(206,44,49,.18)}
+.ccol h4{font-size:1.14rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:11px}
+.ccol.al h4{color:var(--success)}.ccol.dn h4{color:var(--danger)}
+.ci{font-size:clamp(.95rem,1.15vw,1.02rem);color:var(--text);line-height:1.5;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;gap:9px;align-items:flex-start}
+.ci:last-child{border-bottom:none}.ci span{flex-shrink:0;font-weight:700}
+.ci.ok span{color:var(--success)}.ci.no span{color:var(--danger)}
+/* Trust levels */
+.trow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:1050px}
+.tc{background:#fff;border-radius:var(--r);padding:18px 16px;text-align:left;border-top:8px solid var(--border)}
+.tc.l1{border-top-color:#8b9098}.tc.l2{border-top-color:var(--brand)}.tc.l3{border-top-color:var(--accent)}.tc.l4{border-top-color:var(--success)}
+.tlv{font-size:1.04rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ttt{font-size:clamp(1.05rem,1.4vw,1.18rem);font-weight:600;color:var(--text);margin-bottom:3px}
+.tsb{font-size:1.06rem;color:var(--muted);margin-bottom:9px}
+.tcan{font-size:0.85rem;color:var(--text);line-height:1.55;display:flex;gap:7px}
+.tcan::before{content:'→';color:var(--brand);flex-shrink:0}
+/* ADR */
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:1000px}
+.ac{background:#fff;border-radius:var(--r);padding:18px 20px;text-align:left;border:1px solid var(--border)}
+.an{font-size:1.16rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin-bottom:5px}
+.at{font-size:clamp(1rem,1.4vw,1.12rem);font-weight:600;color:var(--text);margin-bottom:20px}
+.ar{font-size:0.85rem;color:var(--muted);line-height:1.5;padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px}
+.ar:last-child{border-bottom:none}.ar strong{color:var(--text);min-width:118px;flex-shrink:0}
+/* Token pipeline */
+.tpipe{display:flex;flex-direction:column;gap:0;width:100%;max-width:820px}
+.tlv2{display:grid;grid-template-columns:150px 1fr 1fr;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
+.tlv2:last-child{border-bottom:none}
+.tbadge{width:27px;height:27px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin-right:8px;flex-shrink:0}
+.tcode{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:clamp(.88rem,1vw,.98rem);background:#1E141A;color:#00C9BE;padding:10px 13px;border-radius:8px;line-height:1.7;text-align:left}
+/* Agents */
+.arow{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;width:100%;max-width:1060px}
+.agc{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);text-align:left}
+.agh{padding:13px 15px;display:flex;align-items:center;gap:9px}
+.agico{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.agn{font-weight:600;font-size:1.14rem;color:var(--text)}.agr{font-size:1.04rem;color:var(--muted)}
+.agb{padding:11px 15px;border-top:1px solid var(--border)}
+.agdo{font-size:0.85rem;color:var(--muted);line-height:1.5;padding:4px 0;display:flex;gap:7px}
+.agdo::before{content:'✓';color:var(--success);flex-shrink:0;font-weight:400}
+.agno{font-size:0.85rem;color:var(--danger);background:var(--danger-bg);padding:7px 9px;border-radius:6px;line-height:1.4;margin-top:7px;display:flex;gap:6px}
+.agno::before{content:'✗';flex-shrink:0;font-weight:700}
+/* Roles */
+.rtabs{display:flex;gap:0;background:rgba(0,0,0,.05);border-radius:9px;padding:4px;margin-bottom:18px}
+.rtab{flex:1;padding:10px 8px;border:none;border-radius:7px;background:transparent;font-family:inherit;font-size:clamp(.9rem,1.1vw,.98rem);font-weight:700;cursor:pointer;transition:background .18s,color .18s;color:var(--muted)}
+.rtab.active{background:#fff;color:var(--brand-dark);box-shadow:0 1px 5px rgba(0,0,0,.1)}
+.rpanel{display:none;animation:fi .28s ease}
+.rpanel.active{display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left}
+@keyframes fi{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.rca{background:#fff;border-radius:var(--r);padding:16px 18px;border:1px solid var(--border)}
+.rca h4{color:var(--brand-dark);margin-bottom:9px;font-size:clamp(1rem,1.35vw,1.12rem);font-weight:600}
+.rp{font-size:clamp(.92rem,1.1vw,.98rem);color:var(--muted);line-height:1.5;padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px}
+.rp:last-child{border-bottom:none}.rp::before{content:'→';color:var(--brand);flex-shrink:0;font-weight:400}
+.rhl{background:var(--brand-dark);border-radius:var(--r);padding:16px 18px;color:#fff;grid-column:1/-1}
+.rhl h4{color:var(--brand-light);margin-bottom:7px;font-size:clamp(1rem,1.35vw,1.12rem);font-weight:600}
+.rhl p{font-size:clamp(.92rem,1.1vw,.98rem);color:rgba(255,255,255,.7);line-height:1.6}
+/* Use cases */
+.ucases{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;width:100%;max-width:1060px}
+.uc{background:#fff;border-radius:var(--r);padding:20px;border:1px solid var(--border);text-align:left;border-top:8px solid var(--brand-dark)}
+.uc.u2{border-top-color:var(--brand)}.uc.u3{border-top-color:var(--success)}
+.unum{font-size:1.04rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.uti{font-size:clamp(1.05rem,1.5vw,1.18rem);font-weight:600;color:var(--text);margin-bottom:8px}
+.ude{font-size:clamp(.92rem,1.1vw,.98rem);color:var(--muted);line-height:1.65;margin-bottom:11px}
+.uga{background:var(--subtle);border-radius:7px;padding:9px 12px;font-size:1.1rem;font-weight:500;color:var(--brand-dark)}
+/* Personal */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;width:100%;max-width:960px;text-align:left}
+.pl p{font-size:clamp(.94rem,1.3vw,1.05rem);line-height:1.7;color:rgba(255,255,255,.8);margin-bottom:10px}
+.pl strong{color:var(--brand-light);font-weight:700}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.bg{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:9px;padding:11px 13px}
+.bgl{font-size:1.14rem;color:rgba(255,255,255,.75);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.bgv{font-size:clamp(1.02rem,1.4vw,1.1rem);color:#fff;font-weight:500}
+/* QR */
+.qrw{background:#fff;padding:11px;border-radius:var(--r);display:inline-block;line-height:0}
+.qrl{font-size:0.85rem;color:rgba(255,255,255,.75);margin-top:7px;letter-spacing:.04em; width: 160px;}
+/* Demo */
+.dbox{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,0.38);border-radius:var(--rl);padding:26px 34px;width:100%;max-width:520px;cursor:pointer;transition:all .22s;text-align:center}
+.dbox:hover{background:rgba(255,255,255,0.3);border-color:var(--brand);transform:translateY(-3px)}
+.durl{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:clamp(1rem,1.5vw,1.15rem);color:var(--brand-light);margin:11px 0 5px;letter-spacing:.02em}
+.dhint{font-size:1.12rem;color:rgba(255,255,255,.72)}
+/* Questions */
+.qgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;width:100%;max-width:860px}
+.qc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:17px 19px;text-align:left}
+.qc::before{content:'"';font-size:2.8rem;color:var(--brand-light);line-height:.8;display:block;margin-bottom:8px;font-family:Georgia,serif}
+.qc p{font-size:clamp(.98rem,1.3vw,1.06rem);color:rgba(255,255,255,.7);line-height:1.6}
+/* Agenda */
+.agrow{display:flex;gap:0;width:100%;max-width:1060px;position:relative}
+.agrow::before{content:'';position:absolute;top:40px;left:5%;right:5%;height:1px;background:rgba(255,255,255,.25);z-index:0}
+.agi{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.agd{width:80px;height:80px;border-radius:50%;background:#19403b;border:2px solid rgba(255,255,255,0.34);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.agt{font-size:1.16rem;color:var(--brand-light);font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.agl{font-size:clamp(.88rem,1vw,.96rem);color:rgba(255,255,255,0.8);text-align:center;max-width:96px;line-height:1.4}
+.abg{position:absolute;right:5vw;bottom:-2vw;font-size:clamp(6rem,13vw,14rem);font-weight:700;color:rgba(255,255,255,.04);pointer-events:none;user-select:none}
+.fu{animation:fup .48s ease both}
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+[data-d="1"]{animation-delay:.1s}[data-d="2"]{animation-delay:.22s}[data-d="3"]{animation-delay:.34s}
+[data-d="4"]{animation-delay:.46s}[data-d="5"]{animation-delay:.58s}
+.kh{position:fixed;bottom:62px;right:20px;background:rgba(27,16,22,.9);color:rgba(255,255,255,.72);font-size:14px;padding:5px 9px;border-radius:5px;pointer-events:none;transition:opacity 1s}
+.kh.hidden{opacity:0}
+
+.ab-row{font-size:clamp(.98rem,1.2vw,1.06rem);line-height:1.5;padding:11px 24px;border-bottom:1px solid var(--border);display:flex;gap:11px;align-items:flex-start}
+.ab-row:last-child{border-bottom:none}
+.ab-old::before{content:'→';color:var(--danger);flex-shrink:0;font-weight:400;margin-top:1px}
+.ab-new::before{content:'→';color:var(--brand);flex-shrink:0;font-weight:400;margin-top:1px}
+.ab-old{color:var(--muted)}
+.ab-new{color:var(--text);font-weight:400}
+
+/* ── LOGO CORNER ── */
+:root{
+  --logo-dark:url('data:image/png;base64,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');
+  --logo-light:url('data:image/png;base64,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');
+}
+.slide-logo{
+  position:absolute;top:20px;right:24px;
+  width:40px;height:40px;
+  background-size:contain;background-repeat:no-repeat;background-position:center;
+  opacity:.9;z-index:10;border-radius:10px;
+  pointer-events:none;
+}
+.slide.dark .slide-logo,
+.slide.navy .slide-logo{background-image:var(--logo-dark)}
+.slide.light .slide-logo,
+.slide.white .slide-logo{background-image:var(--logo-light)}
+/* Nav logo */
+#nav-logo{
+  width:28px;height:28px;flex-shrink:0;
+  background-image:var(--logo-dark);
+  background-size:contain;background-repeat:no-repeat;background-position:center;
+  border-radius:7px;opacity:.85;
+}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 1 TITRE -->
+<section class="slide dark active" data-act="Introduction">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">0</div>
+<div class="ey b fu">Bureau d'expérience client · RAMQ · 2026</div>
+<h1 class="w fu" data-d="2" style="max-width:13ch;margin:.5em  0">L'IA qui<br><span class="bl">travaille</span><br>pour nous.</h1>
+<p class="lead mu fu" data-d="3" style="margin-top:1em">Ce que j'ai appris en construisant un système de design agentique<br>— seul, dans mon temps libre.</p>
+<p class="fu" data-d="5" style="margin-top:2.2em;font-size:1.14rem;color:rgba(255,255,255,.62);letter-spacing:.04em">Guilherme Negreiros · UX Designer · BXC</p>
+<p class="fu" data-d="5" style="margin-top:.5em;font-size:.82rem;color:rgba(255,255,255,.18);letter-spacing:.06em;font-family:'JetBrains Mono',monospace">Agentica v1.0.0</p>
+</section>
+
+<!-- 2 AGENDA -->
+<section class="slide dark" data-act="Introduction">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Ce qu'on va couvrir</div>
+<h2 class="w fu" data-d="1" style="margin-bottom:1.6em">30 minutes. 6 idées.</h2>
+<div class="agrow fu" data-d="2">
+<div class="agi"><div class="agd">😤</div><div class="agt">5 min</div><div class="agl">Le coût du désalignement</div></div>
+<div class="agi"><div class="agd">🧠</div><div class="agt">5 min</div><div class="agl">L'IA utile, pas gadget</div></div>
+<div class="agi"><div class="agd">🔬</div><div class="agt">8 min</div><div class="agl">Agentica en action</div></div>
+<div class="agi"><div class="agd">👤</div><div class="agt">5 min</div><div class="agl">Ce que ça change</div></div>
+<div class="agi"><div class="agd">🏥</div><div class="agt">4 min</div><div class="agl">Imaginez à la RAMQ</div></div>
+<div class="agi"><div class="agd">💬</div><div class="agt">Q&amp;A</div><div class="agl">Votre tour</div></div>
+</div>
+</section>
+
+<!-- 3 ACT1 -->
+<section class="slide navy" data-act="Acte 1 — Le problème">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">1</div>
+<div class="ey b fu">Acte 1</div>
+<h2 class="w fu" data-d="2" style="max-width:16ch;margin:.4em  0">Le coût invisible du<br><span class="bl">désalignement</span></h2>
+<p class="lead mu fu" data-d="3" style="margin-top:1em">Ce qu'on ne mesure pas, on continue à le payer.</p>
+</section>
+
+<!-- 4 PROBLÈMES -->
+<section class="slide light" data-act="Acte 1 — Le problème">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Reconnaissez-vous ces situations?</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:25ch">Ce qu'on fait encore manuellement</h3>
+<div class="cols fu" data-d="2">
+<div class="col">
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔁 Le bouton qui change de couleur</p><p class="sm">Deux équipes, deux versions du même composant. Laquelle est la bonne? On ne sait plus.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">📋 La doc qui devient périmée</p><p class="sm">Le guide a été mis à jour… en Confluence… il y a 8 mois. Peut-être.</p></div>
+<div class="card" style="text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔍 L'audit d'accessibilité manuel</p><p class="sm">On sort l'outil, on documente dans un Excel, on envoie un rapport. La prochaine fois, on recommence.</p></div>
+</div>
+<div class="col">
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">📐 La décision qu'on re-prend</p><p class="sm">Pourquoi ce formulaire est à 3 colonnes? Personne ne s'en souvient. On refait la discussion.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔗 Le design qui ne survit pas au dev</p><p class="sm">La maquette était exacte. L'intégration ajoute ses propres interprétations. On découvre en UAT.</p><p class="sm" style="font-size:.82rem;color:var(--muted);margin-top:6px;font-style:italic">UAT — tests d'acceptation utilisateur, la dernière validation avant la mise en production.</p></div>
+<div class="card" style="text-align:left;border-left:8px solid var(--brand);background:#fff"><p style="font-weight:600;color:var(--brand);margin-bottom:6px">💡 Et si tout ça se gérait automatiquement?</p><p class="sm">Pas en remplaçant les humains. En leur retirant le travail répétitif et sans valeur ajoutée.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 5 STATS -->
+<section class="slide dark" data-act="Acte 1 — Le problème">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Systèmes de design — sans IA</div>
+<h3 class="w fu" data-d="1" style="margin-bottom:1.4em">Un système de design seul améliore déjà tout ça</h3>
+<div class="stat-grid fu" data-d="2">
+<div class="sc2"><span class="sn">2×</span><span class="sl">Livraisons plus fréquentes pour les équipes avec un système de design mature</span><span class="ss">Sparkbox Design Systems Survey 2024</span></div>
+<div class="sc2"><span class="sn">80%</span><span class="sl">Réduction des violations d'accessibilité avec des composants WCAG AA natifs</span><span class="ss">IBM Carbon Case Study</span></div>
+<div class="sc2"><span class="sn">34%</span><span class="sl">Plus de chances de respecter les délais de livraison avec un système de design</span><span class="ss">Sparkbox Design Systems Survey 2024</span></div>
+</div>
+<p class="fu" data-d="4" style="margin-top:1.8em;font-size:1.04rem;color:rgba(255,255,255,.68)">Et ça, c'est sans l'IA. Imaginez la prochaine étape.</p>
+</section>
+
+<!-- 6 ACT2 -->
+<section class="slide navy" data-act="Acte 2 — L'IA utile">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">2</div>
+<div class="ey b fu">Acte 2</div>
+<h2 class="w fu" data-d="2" style="margin:.4em 0;text-align:center">L'IA utile × l'IA <span class="bl">gadget</span></h2>
+<p class="lead mu fu" data-d="3" style="margin-top:1em">La vraie question n'est pas «&nbsp;l'IA va-t-elle me remplacer?&nbsp;»<br>C'est «&nbsp;à quoi je préfère passer mon temps?&nbsp;»</p>
+</section>
+
+<!-- 7 IA UTILE VS GADGET -->
+<section class="slide white" data-act="Acte 2 — L'IA utile">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Parlons clairement</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:26ch">Ce n'est pas ChatGPT. C'est quelque chose de plus précis.</h3>
+<div class="cols fu" data-d="2">
+<div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--danger);height:100%">
+<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px">❌ L'IA gadget</p>
+<div class="rp">Un assistant qui génère du contenu sans règles ni contraintes</div>
+<div class="rp">Imprévisible — chaque résultat est différent</div>
+<div class="rp">Aucune traçabilité des décisions</div>
+<div class="rp">Dépendant d'une plateforme externe</div>
+<div class="rp">Le dernier mot n'appartient à personne</div>
+</div></div>
+<div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--success);height:100%">
+<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px">✅ L'IA utile</p>
+<div class="rp">Un agent qui exécute des règles définies par des humains</div>
+<div class="rp">Prévisible — les règles sont encodées, les résultats vérifiables</div>
+<div class="rp">Chaque décision documentée, versionnée, traçable</div>
+<div class="rp">Sous contrôle organisationnel — données et outils chez nous</div>
+<div class="rp"><strong>Le dernier mot est toujours humain</strong></div>
+</div></div>
+</div>
+</section>
+
+<!-- 8 FORMULE -->
+<section class="slide dark" data-act="Acte 2 — L'IA utile">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Le principe fondamental</div>
+<div class="frow fu" data-d="2" style="margin-top:1.2em">
+<div class="fcell" style="background:rgba(59,43,50,.4);border-radius:var(--rl) 0 0 var(--rl);border:1px solid rgba(13,155,138,.18);border-right:none">
+<div class="fi">🧑‍💼</div><div class="fr">Humains</div><div class="fv w">Décident</div><div class="fd mu">L'intention, les valeurs, les règles, les exceptions</div>
+</div>
+<div class="fcell" style="background:rgba(13,155,138,.2);border:1px solid rgba(95,227,208,.22);border-left:none;border-right:none">
+<div class="fi">🤖</div><div class="fr">Agents IA</div><div class="fv bl">Exécutent</div><div class="fd mu">Les tâches répétitives, les vérifications, la documentation</div>
+</div>
+<div class="fcell" style="background:rgba(24,121,78,.2);border-radius:0 var(--rl) var(--rl) 0;border:1px solid rgba(24,121,78,.3);border-left:none">
+<div class="fi">🛡️</div><div class="fr">Le système</div><div class="fv" style="color:#6ee7b7">Garantit</div><div class="fd mu">La cohérence, la conformité, la traçabilité</div>
+</div>
+</div>
+<p class="fu" data-d="4" style="margin-top:1.8em;font-size:1.14rem;color:rgba(255,255,255,.70)">L'IA amplifie l'expertise humaine. Elle ne la remplace pas.</p>
+</section>
+
+<!-- 9 PRINCIPES -->
+<section class="slide dark" data-act="Acte 2 — L'IA utile">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Valeurs non négociables dans Agentica</div>
+<h3 class="w fu" data-d="1" style="margin-bottom:1em">4 principes. Aucune exception.</h3>
+<div class="prx fu" data-d="2">
+<div class="pr"><div class="pico">🏛️</div><div><div class="pt">Souveraineté numérique</div><div class="pd">Les données, les décisions et les outils restent sous notre contrôle. Aucune dépendance externe non maîtrisée.</div></div></div>
+<div class="pr"><div class="pico">♿</div><div><div class="pt">Accessibilité d'abord</div><div class="pd">WCAG 2.1 AA, minimum. Non contournable. Vérifiée automatiquement à chaque changement.</div></div></div>
+<div class="pr"><div class="pico">🔍</div><div><div class="pt">Auditabilité totale</div><div class="pd">Chaque décision est traçable, versionnée, justifiée. On peut répondre à "pourquoi" à n'importe quel moment.</div></div></div>
+<div class="pr"><div class="pico">✋</div><div><div class="pt">Le dernier mot est humain</div><div class="pd">Les agents proposent. Les humains approuvent. Toujours. Sans exception. C'est inscrit dans le code.</div></div></div>
+</div>
+</section>
+
+<!-- 10 PIPELINE GOUVERNANCE -->
+<section class="slide dark" data-act="Acte 2 — L'IA utile">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Méthodologie</div>
+<h3 class="w fu" data-d="1" style="margin-bottom:.5em">Le pipeline de gouvernance</h3>
+<p class="lead mu fu" data-d="2" style="margin-bottom:1.3em;font-size:clamp(.82rem,1.2vw,.96rem)">Chaque étape a un rôle précis. Les portes humaines ✋ ne peuvent pas être contournées.</p>
+<div class="gflow fu" data-d="3">
+<div class="gstep"><div class="gnode gate">📐</div><div class="glbl">Décision UX</div><div class="gtag h">✋ Humain</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode auto">🔢</div><div class="glbl">Encodage tokens</div><div class="gtag a">Auto</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode auto">🎨</div><div class="glbl">Sync Figma</div><div class="gtag a">Auto</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode auto">💻</div><div class="glbl">Génération code</div><div class="gtag a">Auto</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode auto">🧪</div><div class="glbl">Tests WCAG + régression</div><div class="gtag a">Auto</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode gate">👁️</div><div class="glbl">Révision PR</div><div class="gtag h">✋ Humain</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode auto">📝</div><div class="glbl">Docs générée</div><div class="gtag a">Auto</div></div>
+<div class="garr">→</div>
+<div class="gstep"><div class="gnode gate">🚀</div><div class="glbl">Déploiement</div><div class="gtag h">✋ Humain</div></div>
+</div>
+<div class="fu" data-d="4" style="margin-top:1.5em;display:flex;gap:20px;justify-content:center">
+<div style="display:flex;align-items:center;gap:8px;font-size:1.1rem;color:rgba(255,255,255,0.7)"><div style="width:13px;height:13px;border-radius:50%;background:rgba(13,155,138,.16);border:1px solid rgba(0,169,156,.35)"></div>Automatisé par les agents</div>
+<div style="display:flex;align-items:center;gap:8px;font-size:1.1rem;color:rgba(255,255,255,0.7)"><div style="width:13px;height:13px;border-radius:50%;background:rgba(237,107,134,.25);border:1px solid var(--accent)"></div>Porte humaine obligatoire</div>
+</div>
+</section>
+
+<!-- 11 ACT3 -->
+<section class="slide navy" data-act="Acte 3 — Agentica">
+<div class="abg">3</div>
+<div class="ey b fu" data-d="1" style="margin-bottom:.7em;max-width:720px;width:100%;padding-left:88px">Acte 3</div>
+<div style="display:flex;gap:20px;max-width:720px;width:100%;align-items:flex-start">
+  <img src="data:image/png;base64,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" alt="Agentica" style="width:68px;height:68px;flex-shrink:0;border-radius:16px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <h2 class="w fu" data-d="2" style="margin:0 0 .5em"><span class="bl">Agentica</span><br>La preuve vivante</h2>
+    <p class="lead mu fu" data-d="3" style="margin-bottom:1em">Un système de design conçu pour les humains et exécutable par des agents IA.</p>
+    <p class="fu" data-d="4" style="font-size:1rem;color:rgba(255,255,255,.65);margin-top:2em">Construit seul, dans mon temps libre.</p>
+  </div>
+</div>
+</section>
+
+<!-- 12 AGENTICA VUE ENSEMBLE -->
+<section class="slide light" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Vue d'ensemble</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.1em;max-width:24ch">Qu'est-ce qu'un système de design agentique?</h3>
+<div class="cols fu" data-d="2" style="align-items:stretch">
+<div class="col" style="flex:1.2"><div class="card" style="height:100%;text-align:left">
+<p style="font-weight:600;color:var(--brand-dark);font-size:1.06rem;margin-bottom:11px">Un système traditionnel, c'est :</p>
+<div class="rp">Une bibliothèque de composants visuels</div>
+<div class="rp">Un guide de style dans Figma</div>
+<div class="rp">Des règles dans un document</div>
+<div class="rp">Une équipe qui maintient tout manuellement</div>
+<p style="font-weight:600;color:var(--brand-dark);font-size:1.06rem;margin:16px 0 9px">Un système agentique, c'est tout ça, plus :</p>
+<div class="rp"><strong>Les décisions encodées</strong> — inscrites dans le code, pas seulement dans un doc</div>
+<div class="rp"><strong>Les dérives détectées automatiquement</strong> — le système se surveille lui-même</div>
+<div class="rp"><strong>La documentation qui se maintient</strong> — générée, pas écrite manuellement</div>
+<div class="rp"><strong>Les audits en continu</strong> — accessibilité, conformité, cohérence</div>
+</div></div>
+<div class="col"><div class="dcard" style="height:100%;text-align:left">
+<p style="font-weight:600;color:var(--brand-light);font-size:1.04rem;margin-bottom:13px">Agentica en chiffres</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px">
+<div style="background:rgba(255,255,255,.07);border-radius:8px;padding:13px 7px"><div style="font-size:1.8rem;font-weight:700;color:var(--brand-light)">649</div><div style="font-size:1.05rem;color:rgba(255,255,255,.82)">Tokens au total</div></div>
+<div style="background:rgba(255,255,255,.07);border-radius:8px;padding:13px 7px"><div style="font-size:1.8rem;font-weight:700;color:var(--brand-light)">42</div><div style="font-size:1.05rem;color:rgba(255,255,255,.82)">Décisions (ADRs)</div></div>
+<div style="background:rgba(255,255,255,.07);border-radius:8px;padding:13px 7px"><div style="font-size:1.8rem;font-weight:700;color:var(--brand-light)">3</div><div style="font-size:1.05rem;color:rgba(255,255,255,.82)">Niveaux de tokens</div></div>
+<div style="background:rgba(255,255,255,.07);border-radius:8px;padding:13px 7px"><div style="font-size:1.8rem;font-weight:700;color:var(--brand-light)">AA</div><div style="font-size:1.05rem;color:rgba(255,255,255,.82)">WCAG 2.1 garanti</div></div>
+</div>
+<div style="background:rgba(13,155,138,.1);border-radius:8px;padding:11px 13px;border:1px solid rgba(13,155,138,.18)"><p style="font-size:1.08rem;color:rgba(255,255,255,.7);line-height:1.6">Construit avec Claude Code. Hébergé sur GitHub. Zéro vendor lock-in. Code source 100% public.</p></div>
+</div></div>
+</div>
+</section>
+
+<!-- 13 TOKEN PIPELINE -->
+<section class="slide white" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Architecture à 3 niveaux</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em;max-width:30ch">Les décisions circulent en 3 niveaux — comme une recette de cuisine</h3>
+<div style="display:flex;gap:16px;width:100%;max-width:820px" class="fu" data-d="2">
+<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding:20px 0 4px">
+  <div style="flex:1;width:2px;background:linear-gradient(to bottom,var(--brand-pale),var(--brand),var(--success))"></div>
+  <div style="color:var(--success);font-size:1.1rem;margin-top:2px">▼</div>
+</div>
+<div class="tpipe">
+<div class="tlv2">
+<div style="display:flex;align-items:center"><div class="tbadge" style="background:var(--brand-pale);color:var(--brand-dark)">1</div><div><div style="font-weight:700;font-size:clamp(.86rem,1.3vw,1rem);color:var(--brand-dark)">Primitif</div><div style="font-size:1.05rem;color:var(--muted)">Les ingrédients bruts</div></div></div>
+<div class="sm">Les valeurs physiques — couleurs, espacements, tailles. Très stables. <strong>Jamais utilisées directement.</strong></div>
+<div class="tcode">primitive.color.blue.11<br>→ #0d74ce</div>
+</div>
+<div class="tlv2">
+<div style="display:flex;align-items:center"><div class="tbadge" style="background:rgba(13,155,138,.1);color:var(--brand)">2</div><div><div style="font-weight:700;font-size:clamp(.86rem,1.3vw,1rem);color:var(--brand)">Sémantique</div><div style="font-size:1.05rem;color:var(--muted)">La recette</div></div></div>
+<div class="sm">Traduction en langage métier. Répond à «&nbsp;à quoi ça sert?&nbsp;». <strong>Ce que les agents comprennent.</strong></div>
+<div class="tcode">color.action.primary<br>→ primitive.color.blue.11</div>
+</div>
+<div class="tlv2" style="border-bottom:none">
+<div style="display:flex;align-items:center"><div class="tbadge" style="background:var(--success-bg);color:var(--success)">3</div><div><div style="font-weight:700;font-size:clamp(.86rem,1.3vw,1rem);color:var(--success)">Composant</div><div style="font-size:1.05rem;color:var(--muted)">Le plat servi</div></div></div>
+<div class="sm">Contrats UI exécutables. <strong>Toute modification requiert une approbation humaine explicite.</strong></div>
+<div class="tcode">button.primary.background<br>→ color.action.primary</div>
+</div>
+</div>
+</div>
+<p class="fu" data-d="4" style="margin-top:1em;font-size:1.12rem;color:var(--muted)">Un changement au niveau primitif se propage automatiquement. Les agents détectent toute déviation.</p>
+</section>
+
+<!-- 14 CONTRÔLES -->
+<section class="slide white" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Contrôles &amp; validations</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em;max-width:28ch">Ce que les agents peuvent faire — et ce qui leur est interdit</h3>
+<div class="cgrid fu" data-d="2">
+<div class="ccol al">
+<h4>✅ Autorisé — exécution autonome</h4>
+<div class="ci ok"><span>✓</span>Lire tous les fichiers du dépôt et de Figma</div>
+<div class="ci ok"><span>✓</span>Générer du code respectant les contrats de tokens</div>
+<div class="ci ok"><span>✓</span>Détecter les dérives et les valeurs codées en dur</div>
+<div class="ci ok"><span>✓</span>Exécuter les tests WCAG et de régression visuelle</div>
+<div class="ci ok"><span>✓</span>Créer une branche <code>fix/</code> ou <code>docs/</code></div>
+<div class="ci ok"><span>✓</span>Ouvrir une demande de révision avec description complète</div>
+<div class="ci ok"><span>✓</span>Générer changelogs et guides de migration</div>
+</div>
+<div class="ccol dn">
+<h4>✗ Interdit — porte humaine obligatoire</h4>
+<div class="ci no"><span>✗</span>Fusionner une révision sans approbation humaine</div>
+<div class="ci no"><span>✗</span>Pousser directement sur <code>main</code> ou <code>develop</code></div>
+<div class="ci no"><span>✗</span>Modifier les tokens de composant sans approbation explicite</div>
+<div class="ci no"><span>✗</span>Inventer des variantes ou des tokens non définis</div>
+<div class="ci no"><span>✗</span>Utiliser des valeurs en dur (hex, px, etc.) dans le code</div>
+<div class="ci no"><span>✗</span>Ignorer ou contourner les règles d'accessibilité</div>
+<div class="ci no"><span>✗</span>Déployer en production sans validation humaine</div>
+</div>
+</div>
+<p class="fu" data-d="4" style="margin-top:.9em;font-size:1.1rem;color:var(--muted)">Ces règles sont inscrites dans <code>AGENTS.md</code> — le premier fichier que tout agent doit lire avant d'agir dans le dépôt.</p>
+</section>
+
+<!-- 15 NIVEAUX DE CONFIANCE -->
+<section class="slide light" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Gouvernance progressive</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:.9em;max-width:28ch">Les 4 niveaux de confiance des agents</h3>
+<p class="sm fu" data-d="2" style="margin-bottom:1.1em;max-width:80ch">L'autonomie accordée à un agent évolue selon la nature de la tâche et l'historique de fiabilité.</p>
+<div class="trow fu" data-d="3">
+<div class="tc l1"><div class="tlv">Niveau 1</div><div class="ttt">Propose</div><div class="tsb">Profil : stagiaire</div><div class="tcan">Suggère des corrections, génère des rapports. Aucune modification sans approbation humaine.</div></div>
+<div class="tc l2"><div class="tlv">Niveau 2</div><div class="ttt">Corrige</div><div class="tsb">Profil : junior</div><div class="tcan">Peut corriger des erreurs simples — tokens dépréciés, nommage non conforme.</div></div>
+<div class="tc l3"><div class="tlv">Niveau 3</div><div class="ttt">Soumet</div><div class="tsb">Profil : intermédiaire</div><div class="tcan">Crée des demandes de révision. Un humain révise et approuve avant le merge.</div></div>
+<div class="tc l4"><div class="tlv">Niveau 4</div><div class="ttt">Déploie</div><div class="tsb">Profil : senior (rare)</div><div class="tcan">Auto-merge dans des cas très limités — documentation et changelogs uniquement.</div></div>
+</div>
+<div class="fu" data-d="4" style="margin-top:1.1em;background:rgba(13,155,138,.07);border:1px solid rgba(13,155,138,.2);border-radius:var(--r);padding:11px 16px;max-width:900px;text-align:left">
+<p style="font-size:1.12rem;color:var(--brand-dark);line-height:1.6"><strong>Règle d'escalade automatique :</strong> Toute modification touchant les tokens sémantiques ou de composant déclenche automatiquement une escalade vers un humain. Les agents ne peuvent pas approuver leurs propres modifications.</p>
+</div>
+</section>
+
+<!-- 16 ADRs -->
+<section class="slide white" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Mémoire institutionnelle</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:.7em;max-width:28ch">ADRs — Les décisions qui ne se perdent plus</h3>
+<p class="sm fu" data-d="2" style="margin-bottom:1em;max-width:88ch">Un système accumule des décisions invisibles : pourquoi ce token est nommé ainsi, pourquoi cette variante a été rejetée. Les ADRs les rendent visibles, traçables et auditables — par les humains comme par les agents.</p>
+<div class="agrid fu" data-d="3">
+<div class="ac"><div class="an">ADR-001 (exemple)</div><div class="at">Architecture à 3 niveaux de tokens</div>
+<div class="ar"><strong>Quoi</strong>Séparation primitif → sémantique → composant</div>
+<div class="ar"><strong>Pourquoi</strong>Découpler les valeurs des intentions UX</div>
+<div class="ar"><strong>Rejeté</strong>Tokens à niveau unique (trop couplé)</div>
+<div class="ar"><strong>Statut</strong>✅ Actif</div></div>
+<div class="ac"><div class="an">Format de chaque ADR</div><div class="at">Chaque ADR répond à :</div>
+<div class="ar"><strong>Quoi</strong>La décision prise</div>
+<div class="ar"><strong>Pourquoi</strong>Le contexte et la justification</div>
+<div class="ar"><strong>Alternatives</strong>Ce qui a été rejeté et pourquoi</div>
+<div class="ar"><strong>Conséquences</strong>L'impact sur le système</div></div>
+<div class="ac"><div class="an">Règles immuables</div><div class="at">L'historique est inaltérable</div>
+<div class="ar"><strong>Versionnés</strong>Fichier .md dans le dépôt Git</div>
+<div class="ar"><strong>Jamais supprimés</strong>Marqués "remplacé" ou "déprécié"</div>
+<div class="ar"><strong>Lisibles par l'IA</strong>Les agents lisent le "pourquoi"</div>
+<div class="ar"><strong>Agentica</strong>42 ADRs actifs documentés</div></div>
+</div>
+<div style="margin-top:1em;background:var(--subtle);border-left:4px solid var(--brand);border-radius:0 var(--r) var(--r) 0;padding:12px 18px;width:100%;max-width:1000px;text-align:left;white-space:nowrap">
+<p style="margin:0;color:var(--text);font-size:1rem"><strong>ADR</strong> — Architecture Decision Record — décision prise, pourquoi, alternatives rejetées, conséquences.</p>
+</div>
+</section>
+
+<!-- 17 4 AGENTS -->
+<section class="slide light" data-act="Acte 3 — Agentica">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">L'équipe invisible</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em">Les 4 agents au travail</h3>
+<div class="arow fu" data-d="2">
+<div class="agc"><div class="agh"><div class="agico" style="background:rgba(13,155,138,.12)">🎨</div><div><div class="agn">Agent Design</div><div class="agr">Surveille Figma</div></div></div>
+<div class="agb"><div class="agdo">Détecte les composants détachés du système</div><div class="agdo">Repère les espacements non conformes</div><div class="agdo">Identifie les tokens manquants</div><div class="agno">Ne modifie jamais Figma sans approbation</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:#e8f0ff">💻</div><div><div class="agn">Agent Code</div><div class="agr">Surveille le code</div></div></div>
+<div class="agb"><div class="agdo">Détecte les valeurs codées en dur</div><div class="agdo">Génère des correctifs et ouvre des révisions</div><div class="agdo">Vérifie la conformité des tokens</div><div class="agno">Ne fusionne jamais sans approbation humaine</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:var(--success-bg)">🧪</div><div><div class="agn">Agent QA</div><div class="agr">Vérifie avant livraison</div></div></div>
+<div class="agb"><div class="agdo">Tests WCAG automatiques à chaque changement</div><div class="agdo">Détecte les régressions visuelles</div><div class="agdo">Bloque tout changement non conforme</div><div class="agno">Ne déploie jamais sans validation humaine</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:#f3eeff">📝</div><div><div class="agn">Agent Docs</div><div class="agr">Maintient la doc</div></div></div>
+<div class="agb"><div class="agdo">Génère les notes de mise à jour</div><div class="agdo">Produit les guides de migration</div><div class="agdo">Maintient la doc à jour sans intervention</div><div class="agno">Ne publie rien sans révision humaine</div></div></div>
+</div>
+</section>
+
+<!-- 18 LIVE DEMO + QR -->
+<section class="slide dark" data-act="Acte 3 — Agentica">
+<div class="ey b fu" data-d="1" style="margin-bottom:.7em;max-width:820px;width:100%;padding-left:78px">Démonstration en direct</div>
+<div style="display:flex;gap:18px;max-width:820px;width:100%;align-items:flex-start;margin-bottom:1.2em">
+  <img src="data:image/png;base64,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" alt="Agentica" style="width:60px;height:60px;flex-shrink:0;border-radius:14px">
+  <div style="flex:1;min-width:0;text-align:left">
+    <h2 class="w fu" data-d="2" style="margin:0">Voyons le système en action</h2>
+  </div>
+</div>
+<div style="display:flex;gap:32px;align-items:center;justify-content:center" class="fu" data-d="2">
+<div>
+<div class="dbox" onclick="window.open('https://designsystem.gnegreiros.com','_blank')">
+<div style="font-size:2.3rem;margin-bottom:9px">🔗</div>
+<div class="durl">designsystem.gnegreiros.com</div>
+<div class="dhint">Cliquez pour ouvrir dans un nouvel onglet</div>
+</div>
+<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;justify-content:center">
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">📐 Fondations</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">🧩 Composants</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">📋 37 Décisions</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">🤖 Pour les agents</div>
+</div>
+</div>
+<div >
+<div class="qrw" id="qr1"></div>
+<div class="qrl">Scanner pour ouvrir Agentica</div>
+</div>
+</div>
+
+
+</section>
+
+<!-- 19 ACT4 -->
+<section class="slide navy" data-act="Acte 4 — Pour vous">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">4</div>
+<div class="ey b fu">Acte 4</div>
+<h2 class="w fu" data-d="2" style="max-width:18ch;margin:.4em  0">Ce que ça change<br>pour <span class="bl">vous</span></h2>
+<p class="lead mu fu" data-d="3" style="margin-top:1em">Chaque rôle a une raison différente de s'y intéresser.</p>
+</section>
+
+<!-- 20 AVANT APRÈS -->
+<section class="slide white" data-act="Acte 4 — Pour vous">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Ce que ça change concrètement</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.3em;max-width:32ch">Quel que soit votre rôle, le changement est le même</h3>
+<div class="fu" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;max-width:960px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border)">
+
+  <div style="background:var(--subtle);padding:0">
+    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+      <span style="font-size:1rem">⏳</span>
+      <span style="font-weight:600;font-size:1.05rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">Aujourd'hui</span>
+    </div>
+    <div style="padding:8px 0">
+      <div class="ab-row ab-old">Vérification manuelle de la conformité</div>
+      <div class="ab-row ab-old">Connaissance qui reste dans la tête des gens</div>
+      <div class="ab-row ab-old">Dérives découvertes en fin de projet, souvent en UAT</div>
+      <div class="ab-row ab-old">Documentation périmée dès qu'une décision change</div>
+      <div class="ab-row ab-old">Audits ponctuels, coûteux, souvent trop tardifs</div>
+      <div class="ab-row ab-old">Règles réexpliquées à chaque nouveau collaborateur</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;padding:0;border-left:1px solid var(--border)">
+    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(13,155,138,.06),rgba(237,107,134,.04))">
+      <span style="font-size:1rem">✦</span>
+      <span style="font-weight:600;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-dark);font-weight:600">Avec un système agentique</span>
+    </div>
+    <div style="padding:8px 0">
+      <div class="ab-row ab-new">Surveillance continue, automatisée, sans intervention</div>
+      <div class="ab-row ab-new">Connaissance encodée dans le système — transmissible</div>
+      <div class="ab-row ab-new">Anomalies signalées en temps réel, avant la livraison</div>
+      <div class="ab-row ab-new">Documentation générée et maintenue automatiquement</div>
+      <div class="ab-row ab-new">Conformité garantie en continu, traçable à tout moment</div>
+      <div class="ab-row ab-new">Les règles s'expliquent elles-mêmes — toujours à jour</div>
+    </div>
+  </div>
+
+</div>
+<div class="fu" data-d="4" style="margin-top:1.2em;background:linear-gradient(135deg,rgba(13,155,138,.07),rgba(237,107,134,.05));border:1px solid rgba(13,155,138,.18);border-radius:var(--r);padding:12px 20px;max-width:960px;text-align:left">
+  <p style="font-size:1.04rem;color:var(--text);line-height:1.65"><strong>Le principe :</strong> vous continuez à prendre les décisions importantes. Le système s'assure qu'elles sont respectées — automatiquement, en permanence, et de façon traçable.</p>
+</div>
+</section>
+
+
+<!-- 21 ACT5 -->
+<section class="slide navy" data-act="Acte 5 — À la RAMQ">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">5</div>
+<div class="ey b fu">Acte 5</div>
+<h2 class="w fu" data-d="2" style="max-width:18ch;margin:.4em  0">Imaginez<br>à la <span class="bl">RAMQ</span></h2>
+<p class="lead mu fu" data-d="3" style="margin-top:1em">Trois cas concrets. Pas de jargon. Juste des problèmes réels résolus différemment.</p>
+</section>
+
+<!-- 22 CAS D'USAGE -->
+<section class="slide light" data-act="Acte 5 — À la RAMQ">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey d fu">Cas d'usage concrets pour notre contexte</div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em">Ce qui est possible avec une bonne architecture</h3>
+<div class="ucases fu" data-d="2">
+<div class="uc" style="border-top-color:var(--brand-dark)"><div class="unum">Cas 01</div><div class="uti">Cohérence automatique entre équipes</div><div class="ude">Quand une équipe utilise une variante incorrecte dans une interface citoyenne, le système le détecte et propose la correction — avant la livraison en production.</div><div class="uga">⚡ Moins de révisions en fin de projet. Moins de friction.</div></div>
+<div class="uc u2"><div class="unum">Cas 02</div><div class="uti">Conformité WCAG sans audit manuel</div><div class="ude">Chaque composant embarque ses règles d'accessibilité. Avant toute livraison, l'agent QA vérifie la conformité WCAG 2.1 AA automatiquement et bloque si ça ne passe pas.</div><div class="uga">♿ L'accessibilité n'est plus une case à cocher — c'est une propriété du système.</div></div>
+<div class="uc u3"><div class="unum">Cas 03</div><div class="uti">Documentation institutionnelle vivante</div><div class="ude">Quand une décision change — un libellé, un formulaire, une politique — la documentation se met à jour automatiquement. La connaissance ne dépend plus d'une seule personne.</div><div class="uga">🧠 La mémoire institutionnelle devient une infrastructure.</div></div>
+</div>
+<p class="fu" data-d="4" style="margin-top:1em;font-size:1.12rem;color:var(--muted)">Ce ne sont pas des vœux pieux. C'est ce qu'Agentica fait déjà, à petite échelle.</p>
+</section>
+
+<!-- 23 NOTE PERSONNELLE -->
+<section class="slide dark" data-act="Acte 5 — À la RAMQ">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Une note personnelle</div>
+<div class="pgrid fu" data-d="2" style="margin-top:2em">
+<div class="pl">
+<p>J'ai construit Agentica <strong>seul</strong>.</p>
+<p>Dans mon <strong>temps libre</strong>. En soirée, les fins de semaine.</p>
+<p>Sans budget. Sans équipe. Sans formation spécialisée en IA.</p>
+<p>En apprenant chemin faisant, avec les outils disponibles à tous.</p>
+<p>Si j'ai pu faire ça <strong>seul</strong>, imaginez ce qu'une équipe comme la nôtre pourrait faire <strong>ensemble</strong>, avec du temps dédié et les bonnes priorités.</p>
+<p style="color:var(--brand-light);font-weight:600;font-size:1.02rem">L'IA utile n'est pas réservée aux géants technologiques.</p>
+</div>
+<div>
+<div class="bgrid">
+<div class="bg"><div class="bgl">Développé avec</div><div class="bgv">Claude Code (IA)</div></div>
+<div class="bg"><div class="bgl">Budget</div><div class="bgv">Zéro $ externe</div></div>
+<div class="bg"><div class="bgl">Équipe</div><div class="bgv">1 personne</div></div>
+<div class="bg"><div class="bgl">Temps</div><div class="bgv">Temps libre</div></div>
+<div class="bg"><div class="bgl">Code source</div><div class="bgv">100% public</div></div>
+<div class="bg"><div class="bgl">Vendor lock-in</div><div class="bgv">Aucun</div></div>
+</div>
+<div style="margin-top:13px;background:rgba(13,155,138,.1);border:1px solid rgba(13,155,138,.22);border-radius:var(--r);padding:13px 15px">
+<p style="font-size:1.12rem;color:rgba(255,255,255,.7);line-height:1.65">Vous avez toutes les compétences pour faire de même dans vos domaines. L'IA utile n'est pas une question de diplôme — c'est une question de méthode.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 24 CONVERSATION -->
+<section class="slide navy" data-act="Acte 6 — Discussion">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="abg">6</div>
+<div class="ey b fu">Votre tour</div>
+<h2 class="w fu" data-d="1" style="margin-bottom:.9em;max-width:22ch">Et dans <em>votre</em> domaine,<br>qu'est-ce qui vous vient?</h2>
+<div class="qgrid fu" data-d="2">
+<div class="qc"><p>Quelle tâche répétitive dans mon travail pourrait être surveillée ou exécutée automatiquement?</p></div>
+<div class="qc"><p>Quelles décisions que je prends régulièrement mériteraient d'être mieux documentées et transmissibles?</p></div>
+<div class="qc"><p>Où dans nos processus perd-on de la connaissance parce qu'elle est dans la tête des gens — pas dans le système?</p></div>
+<div class="qc"><p>Quelle règle qu'on vérifie manuellement aujourd'hui pourrait être vérifiée automatiquement demain?</p></div>
+</div>
+</section>
+
+<!-- 25 FINALE -->
+<section class="slide dark" data-act="Fin">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Merci</div>
+<h1 class="w fu" data-d="1" style="max-width:16ch;margin:.3em  0;font-size:clamp(1.8rem,4.2vw,3.8rem)">Les humains <span class="bl">décident</span>.<br>Les agents exécutent.<br>Le système garantit.</h1>
+<div class="fu" data-d="3" style="margin-top:1.7em;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
+<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Le projet</div>
+<div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.04rem;color:var(--brand-light)">designsystem.gnegreiros.com</div>
+</div>
+<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
+<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Code source</div>
+<div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.08rem;color:var(--brand-light)">github.com/gnegreiros-ux/agentic-design-system</div>
+</div>
+<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
+<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Présenté par</div>
+<div style="font-size:1.04rem;color:#fff;font-weight:600">Guilherme Negreiros · BXC · RAMQ</div>
+</div>
+</div>
+<div >
+<div class="qrw" id="qr2"></div>
+<div class="qrl">Scanner pour explorer Agentica</div>
+</div>
+</div>
+<p class="fu" data-d="5" style="margin-top:1.8em;font-size:.76rem;color:rgba(255,255,255,0.38)">Bureau d'expérience client · RAMQ · 2026</p>
+</section>
+
+</div><!-- /deck -->
+
+<div id="nav"><div id="nav-logo" aria-hidden="true"></div>
+<button class="nb" id="bp" onclick="go(-1)" disabled>← Précédent</button>
+<div id="pb"><div id="pf"></div></div>
+<span id="sc">1 / 25</span>
+<button class="nb" id="bn" onclick="go(1)">Suivant →</button>
+<span id="al">Introduction</span>
+</div>
+<div class="kh" id="kh">← → pour naviguer · Échap pour revenir au début</div>
+
+<script>
+const slides=document.querySelectorAll('.slide'),pf=document.getElementById('pf'),sc=document.getElementById('sc'),al=document.getElementById('al'),bp=document.getElementById('bp'),bn=document.getElementById('bn'),total=slides.length;
+let cur=0;
+function go(d){
+  const n=cur+d;if(n<0||n>=total)return;
+  slides[cur].classList.remove('active');slides[cur].classList.add('exit');
+  setTimeout(()=>slides[cur].classList.remove('exit'),500);
+  cur=n;slides[cur].classList.add('active');upd();
+}
+function upd(){
+  sc.textContent=(cur+1)+' / '+total;
+  pf.style.width=((cur+1)/total*100)+'%';
+  bp.disabled=cur===0;bn.disabled=cur===total-1;
+  al.textContent=slides[cur].dataset.act||'';
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+  if(e.key==='Escape'){slides[cur].classList.remove('active');cur=0;slides[0].classList.add('active');upd();}
+});
+function showRole(e,id){
+  document.querySelectorAll('.rpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('r-'+id).classList.add('active');
+  e.target.classList.add('active');
+}
+setTimeout(()=>document.getElementById('kh').classList.add('hidden'),4500);
+window.addEventListener('load',()=>{
+  const o={width:140,height:140,colorDark:'#3B2B32',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M};
+  new QRCode(document.getElementById('qr1'),Object.assign({},o,{text:'https://designsystem.gnegreiros.com'}));
+  new QRCode(document.getElementById('qr2'),Object.assign({},o,{text:'https://designsystem.gnegreiros.com'}));
+});
+upd();
+</script>
+</body>
+</html>
