@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline de construction — Agentica</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#0D9B8A;--brand-dark:#16201E;--brand-deep:#0D1815;
+  --brand-light:#5FE3D0;--brand-pale:#D4F5F0;
+  --accent:#ED6B86;--accent-pale:#FDEAED;--slate:#7A8C99;
+  --off:#F2F5F4;--surface:#fff;--subtle:#E8EFED;--border:#D5E0DC;
+  --text:#111C1A;--muted:#384E48;
+  --danger:#ce2c31;--danger-bg:#feebec;
+  --success:#18794e;--success-bg:#e8f5ef;
+  --r:10px;--rl:16px;
+  font-family:'Atkinson Hyperlegible',system-ui,sans-serif;
+  color:var(--text);
+}
+body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
+.page{max-width:1200px;margin:0 auto}
+
+/* Header */
+.header{text-align:center;margin-bottom:56px}
+.header .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brand-light);margin-bottom:12px}
+.header h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.header .sub{font-size:1.06rem;color:rgba(255,255,255,.55);max-width:60ch;margin:0 auto}
+
+/* Phase label */
+.phase-label{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:99px;display:inline-block;margin-bottom:14px}
+.ph-found{background:rgba(13,155,138,.15);color:var(--brand-light);border:1px solid rgba(13,155,138,.3)}
+.ph-build{background:rgba(95,227,208,.1);color:#7ee8d8;border:1px solid rgba(95,227,208,.25)}
+.ph-ops{background:rgba(237,107,134,.12);color:#f4a4b5;border:1px solid rgba(237,107,134,.3)}
+.ph-scale{background:rgba(24,121,78,.15);color:#6ee7b7;border:1px solid rgba(24,121,78,.3)}
+
+/* Section */
+.section{margin-bottom:48px}
+.section-title{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:6px}
+.section-desc{font-size:.98rem;color:rgba(255,255,255,.5);margin-bottom:20px;max-width:72ch}
+
+/* Cards grid */
+.cards{display:grid;gap:14px}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+
+.card{border-radius:var(--rl);padding:20px 22px;text-align:left;position:relative;overflow:hidden}
+.card.dark{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.card.green{background:rgba(13,155,138,.1);border:1px solid rgba(13,155,138,.2)}
+.card.pink{background:rgba(237,107,134,.1);border:1px solid rgba(237,107,134,.2)}
+.card.emerald{background:rgba(24,121,78,.1);border:1px solid rgba(24,121,78,.2)}
+.card.slate{background:rgba(122,140,153,.08);border:1px solid rgba(122,140,153,.2)}
+.card.white{background:#fff;color:var(--text)}
+
+.card-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.card-title{font-size:1.06rem;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3}
+.card.white .card-title{color:var(--brand-dark)}
+.card-body{font-size:.9rem;color:rgba(255,255,255,.62);line-height:1.6}
+.card.white .card-body{color:var(--muted)}
+.card-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:11px;display:inline-block;padding:3px 9px;border-radius:99px}
+.tag-auto{background:rgba(13,155,138,.18);color:var(--brand-light)}
+.tag-human{background:rgba(237,107,134,.18);color:#f4a4b5;border:1px solid rgba(237,107,134,.3)}
+.tag-gate{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+
+/* Arrow connector */
+.arrow{display:flex;align-items:center;justify-content:center;padding:8px 0;color:rgba(255,255,255,.25);font-size:1.4rem}
+
+/* Pipeline flow */
+.pipeline{display:flex;align-items:stretch;gap:0;width:100%;border-radius:var(--rl);overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.pipe-step{flex:1;padding:18px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.08);position:relative;display:flex;flex-direction:column;align-items:center;gap:7px}
+.pipe-step:last-child{border-right:none}
+.pipe-step.human{background:rgba(237,107,134,.1)}
+.pipe-step.auto{background:rgba(13,155,138,.06)}
+.pipe-icon{font-size:1.5rem}
+.pipe-label{font-size:.82rem;font-weight:600;color:#fff;line-height:1.3}
+.pipe-tag{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
+.pipe-tag.h{background:rgba(237,107,134,.2);color:#f4a4b5}
+.pipe-tag.a{background:rgba(13,155,138,.2);color:var(--brand-light)}
+
+/* Token levels */
+.token-flow{display:flex;flex-direction:column;gap:0;border-radius:var(--rl);overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.token-row{display:grid;grid-template-columns:140px 1fr 1fr;gap:0;border-bottom:1px solid rgba(255,255,255,.07);padding:16px 20px;align-items:center;gap:16px}
+.token-row:last-child{border-bottom:none}
+.token-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.token-label-wrap{display:flex;align-items:center;gap:10px}
+.token-name{font-weight:700;font-size:.95rem;color:#fff}
+.token-sub{font-size:.82rem;color:rgba(255,255,255,.45);margin-top:1px}
+.token-desc{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.5}
+.token-example{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:rgba(0,0,0,.3);color:#00c9be;padding:7px 11px;border-radius:7px;line-height:1.7}
+
+/* Trust levels */
+.trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.trust-card{border-radius:var(--r);padding:16px;border-top:5px solid;text-align:left}
+.trust-card.l1{background:rgba(255,255,255,.05);border-top-color:#8b9098}
+.trust-card.l2{background:rgba(13,155,138,.08);border-top-color:var(--brand)}
+.trust-card.l3{background:rgba(237,107,134,.08);border-top-color:var(--accent)}
+.trust-card.l4{background:rgba(24,121,78,.1);border-top-color:var(--success)}
+.trust-level{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.trust-name{font-size:1.08rem;font-weight:700;color:#fff;margin-bottom:3px}
+.trust-profile{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:8px}
+.trust-desc{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.5}
+
+/* Divider */
+.divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:40px 0}
+
+/* Big arrow between phases */
+.phase-arrow{text-align:center;padding:16px 0;font-size:1.8rem;color:rgba(255,255,255,.15)}
+
+/* Legend */
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:.84rem;color:rgba(255,255,255,.55)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Footer */
+.footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer p{font-size:.82rem;color:rgba(255,255,255,.28);letter-spacing:.04em}
+
+/* Highlight box */
+.highlight{background:rgba(13,155,138,.08);border:1px solid rgba(13,155,138,.18);border-radius:var(--r);padding:16px 20px;margin-top:16px}
+.highlight p{font-size:.95rem;color:rgba(255,255,255,.7);line-height:1.65}
+.highlight strong{color:var(--brand-light)}
+
+/* Checklist */
+.checklist{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.checklist li{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.5;display:flex;gap:9px}
+.checklist li::before{content:'→';color:var(--brand-light);flex-shrink:0;font-weight:700}
+
+@media(max-width:900px){
+  .cards.c3,.cards.c4{grid-template-columns:repeat(2,1fr)}
+  .trust-row{grid-template-columns:repeat(2,1fr)}
+  .token-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .cards.c2,.cards.c3,.cards.c4{grid-template-columns:1fr}
+  .trust-row{grid-template-columns:1fr}
+  .pipeline{flex-direction:column}
+  .pipe-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  body{padding:28px 18px 60px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="eyebrow">Agentica · Comment c'est construit</div>
+  <h1>Le pipeline de construction<br>d'un système de design agentique</h1>
+  <p class="sub">Par où commencer, quoi mettre en place, comment avancer — qualité, documentation, automatisation et scalabilité.</p>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PHASE 1 — FONDATIONS
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-found">Phase 1 — Fondations</div>
+  <div class="section-title">Par où j'ai commencé</div>
+  <div class="section-desc">Avant d'écrire la moindre ligne de code, il faut poser les décisions irréversibles. C'est ce qui rend tout le reste cohérent.</div>
+
+  <div class="cards c3">
+    <div class="card dark">
+      <span class="card-icon">🧭</span>
+      <div class="card-title">Principes non négociables</div>
+      <div class="card-body">Définir 4 valeurs avant tout : souveraineté numérique, accessibilité WCAG 2.1 AA, auditabilité totale, dernier mot humain. Ces principes ne changent jamais.</div>
+    </div>
+    <div class="card green">
+      <span class="card-icon">📐</span>
+      <div class="card-title">Architecture à 3 niveaux de tokens</div>
+      <div class="card-body">Primitif → Sémantique → Composant. La décision la plus structurante : découpler les valeurs physiques des intentions UX. Codifiée dans ADR-001.</div>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">📋</span>
+      <div class="card-title">Premier ADR</div>
+      <div class="card-body">Documenter la première décision de design dans un fichier versionné. Ce fichier devient la mémoire du système. Tout commence ici.</div>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:14px">
+    <p><strong>Règle fondatrice :</strong> aucun token n'est utilisé directement sans passer par la couche sémantique. Cette contrainte force la cohérence à grande échelle et permet aux agents de comprendre le "pourquoi" de chaque décision.</p>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     TOKEN PIPELINE
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-found">Architecture · Tokens</div>
+  <div class="section-title">Les décisions circulent en 3 niveaux</div>
+  <div class="section-desc">Chaque changement se propage du bas vers le haut. Un changement primitif affecte automatiquement tout le système.</div>
+
+  <div class="token-flow">
+    <div class="token-row" style="background:rgba(13,155,138,.06)">
+      <div class="token-label-wrap">
+        <div class="token-badge" style="background:var(--brand-pale);color:var(--brand-dark)">1</div>
+        <div><div class="token-name">Primitif</div><div class="token-sub">Les ingrédients bruts</div></div>
+      </div>
+      <div class="token-desc">Valeurs physiques — couleurs hex, espacements en px, tailles de police. <strong style="color:#fff">Jamais utilisées directement dans le code.</strong> Très stables.</div>
+      <div class="token-example">primitive.color.blue.11<br>→ #0d74ce</div>
+    </div>
+    <div class="token-row" style="background:rgba(13,155,138,.04)">
+      <div class="token-label-wrap">
+        <div class="token-badge" style="background:rgba(13,155,138,.15);color:var(--brand-light)">2</div>
+        <div><div class="token-name" style="color:var(--brand-light)">Sémantique</div><div class="token-sub">La recette</div></div>
+      </div>
+      <div class="token-desc">Traduction en langage métier. Répond à "à quoi ça sert?". <strong style="color:#fff">Ce que les agents IA lisent et comprennent.</strong></div>
+      <div class="token-example">color.action.primary<br>→ primitive.color.blue.11</div>
+    </div>
+    <div class="token-row" style="background:rgba(13,155,138,.02)">
+      <div class="token-label-wrap">
+        <div class="token-badge" style="background:var(--success-bg);color:var(--success)">3</div>
+        <div><div class="token-name" style="color:#6ee7b7">Composant</div><div class="token-sub">Le plat servi</div></div>
+      </div>
+      <div class="token-desc">Contrats UI exécutables. <strong style="color:#fff">Toute modification déclenche une révision humaine obligatoire.</strong></div>
+      <div class="token-example">button.primary.background<br>→ color.action.primary</div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     PHASE 2 — CONSTRUCTION
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-build">Phase 2 — Construction</div>
+  <div class="section-title">Ce qu'il a fallu mettre en place</div>
+  <div class="section-desc">Les 4 piliers qui permettent au système de fonctionner de façon autonome tout en restant sous contrôle humain.</div>
+
+  <div class="cards c2">
+    <div class="card white">
+      <span class="card-icon">🧠</span>
+      <div class="card-title">ADRs — Mémoire institutionnelle</div>
+      <div class="card-body">Architecture Decision Records : chaque décision documentée (quoi, pourquoi, alternatives rejetées, conséquences). Les agents lisent les ADRs avant d'agir. Aujourd'hui : <strong>58 ADRs actifs</strong>.</div>
+      <ul class="checklist" style="--brand-light:#0D9B8A">
+        <li style="color:var(--muted)">Versionnés dans Git — jamais supprimés</li>
+        <li style="color:var(--muted)">Marqués "remplacé" si dépassés</li>
+        <li style="color:var(--muted)">Format structuré lisible par les humains et les agents</li>
+      </ul>
+    </div>
+    <div class="card white">
+      <span class="card-icon">📄</span>
+      <div class="card-title">AGENTS.md — La constitution des agents</div>
+      <div class="card-body">Le premier fichier que tout agent doit lire avant d'agir dans le dépôt. Définit ce qui est autorisé, ce qui est interdit, comment escalader, et comment demander une révision humaine.</div>
+      <ul class="checklist" style="--brand-light:#0D9B8A">
+        <li style="color:var(--muted)">Règles immuables inscrites dans le code</li>
+        <li style="color:var(--muted)">Pas de contournement possible</li>
+        <li style="color:var(--muted)">Mis à jour uniquement via PR approuvée par un humain</li>
+      </ul>
+    </div>
+    <div class="card white">
+      <span class="card-icon">🎨</span>
+      <div class="card-title">Figma synchronisé avec les tokens</div>
+      <div class="card-body">Les tokens sont la source de vérité. Figma est un miroir — pas l'inverse. Toute dérive visuelle dans Figma est détectée automatiquement par l'Agent Design.</div>
+      <ul class="checklist" style="--brand-light:#0D9B8A">
+        <li style="color:var(--muted)">36 échelles de couleur synchronisées</li>
+        <li style="color:var(--muted)">Composants liés aux tokens sémantiques</li>
+        <li style="color:var(--muted)">Détection automatique des détachements</li>
+      </ul>
+    </div>
+    <div class="card white">
+      <span class="card-icon">🔗</span>
+      <div class="card-title">Pipeline CI/CD avec portes humaines</div>
+      <div class="card-body">Chaque PR passe par des vérifications automatiques. Aucune modification ne peut atteindre la branche principale sans approbation humaine explicite.</div>
+      <ul class="checklist" style="--brand-light:#0D9B8A">
+        <li style="color:var(--muted)">Tests WCAG 2.1 AA automatiques</li>
+        <li style="color:var(--muted)">Régression visuelle bloquante</li>
+        <li style="color:var(--muted)">Lint de tokens (aucune valeur en dur)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     PIPELINE DE GOUVERNANCE
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-build">Architecture · Pipeline</div>
+  <div class="section-title">Comment ça avance — le pipeline de gouvernance</div>
+  <div class="section-desc">Chaque changement suit ce chemin. Les portes ✋ ne peuvent pas être contournées.</div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(13,155,138,.6)"></div>Automatisé par les agents</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(237,107,134,.7)"></div>Porte humaine obligatoire</div>
+  </div>
+
+  <div class="pipeline">
+    <div class="pipe-step human">
+      <div class="pipe-icon">📐</div>
+      <div class="pipe-label">Décision UX</div>
+      <div class="pipe-tag h">✋ Humain</div>
+    </div>
+    <div class="pipe-step auto">
+      <div class="pipe-icon">🔢</div>
+      <div class="pipe-label">Encodage tokens</div>
+      <div class="pipe-tag a">Auto</div>
+    </div>
+    <div class="pipe-step auto">
+      <div class="pipe-icon">🎨</div>
+      <div class="pipe-label">Sync Figma</div>
+      <div class="pipe-tag a">Auto</div>
+    </div>
+    <div class="pipe-step auto">
+      <div class="pipe-icon">💻</div>
+      <div class="pipe-label">Génération code</div>
+      <div class="pipe-tag a">Auto</div>
+    </div>
+    <div class="pipe-step auto">
+      <div class="pipe-icon">🧪</div>
+      <div class="pipe-label">Tests WCAG</div>
+      <div class="pipe-tag a">Auto</div>
+    </div>
+    <div class="pipe-step human">
+      <div class="pipe-icon">👁️</div>
+      <div class="pipe-label">Révision PR</div>
+      <div class="pipe-tag h">✋ Humain</div>
+    </div>
+    <div class="pipe-step auto">
+      <div class="pipe-icon">📝</div>
+      <div class="pipe-label">Docs générée</div>
+      <div class="pipe-tag a">Auto</div>
+    </div>
+    <div class="pipe-step human">
+      <div class="pipe-icon">🚀</div>
+      <div class="pipe-label">Déploiement</div>
+      <div class="pipe-tag h">✋ Humain</div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     PHASE 3 — OPÉRATIONS (4 AGENTS)
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-ops">Phase 3 — Opérations</div>
+  <div class="section-title">Les 4 agents au travail</div>
+  <div class="section-desc">Chaque agent a un rôle précis, des permissions explicites et une limite infranchissable : aucun ne peut approuver ses propres modifications.</div>
+
+  <div class="cards c4">
+    <div class="card dark" style="border-top:4px solid var(--brand)">
+      <span class="card-icon">🎨</span>
+      <div class="card-title">Agent Design</div>
+      <div class="card-body">Surveille Figma en continu. Détecte les composants détachés du système, les tokens manquants, les espacements non conformes.</div>
+      <span class="card-tag tag-auto">Surveille</span>
+    </div>
+    <div class="card dark" style="border-top:4px solid #7aa3f0">
+      <span class="card-icon">💻</span>
+      <div class="card-title">Agent Code</div>
+      <div class="card-body">Détecte les valeurs codées en dur dans le code. Génère des correctifs, ouvre des PR avec description complète.</div>
+      <span class="card-tag tag-auto">Corrige</span>
+    </div>
+    <div class="card dark" style="border-top:4px solid var(--success)">
+      <span class="card-icon">🧪</span>
+      <div class="card-title">Agent QA</div>
+      <div class="card-body">Tests WCAG 2.1 AA automatiques à chaque changement. Détecte les régressions visuelles. Bloque tout changement non conforme.</div>
+      <span class="card-tag tag-auto">Bloque</span>
+    </div>
+    <div class="card dark" style="border-top:4px solid #a78bfa">
+      <span class="card-icon">📝</span>
+      <div class="card-title">Agent Docs</div>
+      <div class="card-body">Génère automatiquement les notes de mise à jour, guides de migration, et maintient la documentation synchronisée avec le code.</div>
+      <span class="card-tag tag-auto">Génère</span>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:14px">
+    <p><strong>Règle absolue :</strong> aucun agent ne peut fusionner ses propres modifications sur la branche principale. Toute modification touchant les tokens sémantiques ou de composant déclenche automatiquement une escalade vers un humain.</p>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     QUALITÉ
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-ops">Qualité continue</div>
+  <div class="section-title">Comment s'assurer de la qualité</div>
+  <div class="section-desc">La qualité n'est pas une étape finale — c'est une propriété structurelle du système, vérifiée à chaque changement.</div>
+
+  <div class="cards c3">
+    <div class="card green">
+      <span class="card-icon">♿</span>
+      <div class="card-title">Accessibilité par construction</div>
+      <div class="card-body">Chaque composant embarque ses règles WCAG 2.1 AA. 21 critères vérifiés automatiquement avant toute livraison. Aucun contournement possible.</div>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">🔍</span>
+      <div class="card-title">Régression visuelle bloquante</div>
+      <div class="card-body">Les captures visuelles sont comparées à chaque PR. Toute déviation non intentionnelle bloque la fusion. L'historique visuel est versionnée.</div>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">🚫</span>
+      <div class="card-title">Zéro valeur codée en dur</div>
+      <div class="card-body">Le lint de tokens détecte toute couleur hex, espacement px ou taille en dur dans le code. Ces erreurs bloquent la PR — sans exception.</div>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">📊</span>
+      <div class="card-title">Traçabilité complète</div>
+      <div class="card-body">Chaque décision, correction et déploiement est versionnée dans Git. On peut répondre à "pourquoi" pour n'importe quel état du système.</div>
+    </div>
+    <div class="card green">
+      <span class="card-icon">🔄</span>
+      <div class="card-title">Propagation automatique</div>
+      <div class="card-body">Un changement primitif se propage automatiquement vers le sémantique et le composant. Les dérives sont signalées en temps réel, pas découvertes en UAT.</div>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">✋</span>
+      <div class="card-title">Portes humaines immuables</div>
+      <div class="card-body">3 points de contrôle humain dans le pipeline. Décision UX, révision PR, déploiement. Ces portes sont inscrites dans le code — pas dans une politique.</div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     DOCUMENTATION
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-ops">Documentation vivante</div>
+  <div class="section-title">Comment la documentation se maintient</div>
+  <div class="section-desc">La documentation n'est pas écrite — elle est générée. Elle reflète toujours l'état réel du système.</div>
+
+  <div class="cards c2">
+    <div class="card dark">
+      <span class="card-icon">📋</span>
+      <div class="card-title">ADRs — Décisions permanentes</div>
+      <div class="card-body">58 décisions documentées, versionnées, jamais supprimées. L'historique architectural est complet et auditable à tout moment par les humains et les agents.</div>
+      <span class="card-tag tag-gate">58 actifs · versionné Git</span>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">🔖</span>
+      <div class="card-title">Changelogs générés automatiquement</div>
+      <div class="card-body">L'Agent Docs génère les notes de version à chaque fusion. Aucune rédaction manuelle. Le format est standardisé et lisible par les agents suivants.</div>
+      <span class="card-tag tag-auto">Agent Docs · Auto</span>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">🗺️</span>
+      <div class="card-title">Guides de migration auto-générés</div>
+      <div class="card-body">Quand un token change de nom ou de valeur, le guide de migration est produit automatiquement. Les équipes consommatrices savent quoi faire sans intervention manuelle.</div>
+      <span class="card-tag tag-auto">Agent Docs · Auto</span>
+    </div>
+    <div class="card dark">
+      <span class="card-icon">🌐</span>
+      <div class="card-title">Site public · designsystem.gnegreiros.com</div>
+      <div class="card-body">Le site est généré depuis les tokens et les ADRs. La documentation web est toujours synchronisée avec le code source. Ce que vous voyez est ce qui est déployé.</div>
+      <span class="card-tag tag-auto">Déployé · GitHub Pages</span>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     NIVEAUX DE CONFIANCE (AUTONOMIE PROGRESSIVE)
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-build">Gouvernance · Autonomie progressive</div>
+  <div class="section-title">Les 4 niveaux de confiance des agents</div>
+  <div class="section-desc">L'autonomie évolue selon la nature de la tâche. La porte humaine reste toujours disponible — et toujours prioritaire.</div>
+
+  <div class="trust-row">
+    <div class="trust-card l1">
+      <div class="trust-level">Niveau 1</div>
+      <div class="trust-name">Propose</div>
+      <div class="trust-profile">Profil : stagiaire supervisé</div>
+      <div class="trust-desc">Suggère des corrections, génère des rapports. Rien ne se produit sans approbation humaine explicite.</div>
+    </div>
+    <div class="trust-card l2">
+      <div class="trust-level">Niveau 2</div>
+      <div class="trust-name">Corrige</div>
+      <div class="trust-profile">Profil : junior encadré</div>
+      <div class="trust-desc">Applique des corrections mineures préapprouvées — tokens dépréciés, nommage non conforme. L'humain révise après.</div>
+    </div>
+    <div class="trust-card l3">
+      <div class="trust-level">Niveau 3</div>
+      <div class="trust-name">Soumet</div>
+      <div class="trust-profile">Profil : intermédiaire</div>
+      <div class="trust-desc">Crée des demandes de révision complètes. Un humain valide et approuve avant toute intégration.</div>
+    </div>
+    <div class="trust-card l4">
+      <div class="trust-level">Niveau 4</div>
+      <div class="trust-name">Déploie</div>
+      <div class="trust-profile">Profil : senior — cas très limités</div>
+      <div class="trust-desc">Autonomie maximale uniquement pour la documentation et les changelogs. Jamais pour les tokens ou les composants.</div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-arrow">↓</div>
+
+<!-- ══════════════════════════════════════════════
+     PHASE 4 — SCALABILITÉ
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="phase-label ph-scale">Phase 4 — Scalabilité</div>
+  <div class="section-title">Comment ça peut grandir</div>
+  <div class="section-desc">Le système est conçu pour scaler sans fragilité — plus d'équipes, plus de composants, plus d'agents — sans perdre la cohérence ni le contrôle.</div>
+
+  <div class="cards c3">
+    <div class="card emerald">
+      <span class="card-icon">🧩</span>
+      <div class="card-title">Nouveaux composants sans règles nouvelles</div>
+      <div class="card-body">Tout nouveau composant hérite automatiquement des tokens et des règles existantes. Pas besoin de redéfinir les principes — ils s'appliquent par construction.</div>
+    </div>
+    <div class="card emerald">
+      <span class="card-icon">👥</span>
+      <div class="card-title">Nouvelles équipes sans formation longue</div>
+      <div class="card-body">Les ADRs expliquent le "pourquoi". AGENTS.md explique les règles. Une nouvelle équipe peut contribuer en lisant le système — pas en demandant aux experts.</div>
+    </div>
+    <div class="card emerald">
+      <span class="card-icon">🤖</span>
+      <div class="card-title">Nouveaux agents sans réécriture</div>
+      <div class="card-body">L'architecture de rôles permet d'ajouter des agents spécialisés (i18n, performance, sécurité) sans modifier les agents existants ni les tokens.</div>
+    </div>
+    <div class="card emerald">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">Multi-produit depuis une seule source</div>
+      <div class="card-body">Les tokens sémantiques peuvent alimenter plusieurs produits simultanément. Un changement de marque se propage dans tous les produits en une seule PR.</div>
+    </div>
+    <div class="card emerald">
+      <span class="card-icon">🔒</span>
+      <div class="card-title">Zéro vendor lock-in</div>
+      <div class="card-body">Code source public, hébergé sur GitHub, aucune dépendance propriétaire non maîtrisée. Le système reste sous contrôle organisationnel complet.</div>
+    </div>
+    <div class="card emerald">
+      <span class="card-icon">📈</span>
+      <div class="card-title">Métriques qui évoluent avec le système</div>
+      <div class="card-body">714 tokens, 58 ADRs, 36 échelles, 21 critères WCAG — ces chiffres croissent avec le système. Chaque ajout est tracé, documenté, et versionnée.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════
+     RÉSUMÉ EN UN COUP D'ŒIL
+════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">En un coup d'œil</div>
+  <div class="section-desc">De la première décision au système qui s'auto-maintient.</div>
+
+  <div class="cards c4">
+    <div class="card slate" style="text-align:center">
+      <div style="font-size:2.4rem;font-weight:700;color:var(--brand-light);margin-bottom:4px">714</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Tokens structurés en 3 niveaux</div>
+    </div>
+    <div class="card slate" style="text-align:center">
+      <div style="font-size:2.4rem;font-weight:700;color:var(--brand-light);margin-bottom:4px">58</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Décisions documentées (ADRs)</div>
+    </div>
+    <div class="card slate" style="text-align:center">
+      <div style="font-size:2.4rem;font-weight:700;color:var(--brand-light);margin-bottom:4px">4</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Agents autonomes avec limites inscrites</div>
+    </div>
+    <div class="card slate" style="text-align:center">
+      <div style="font-size:2.4rem;font-weight:700;color:var(--brand-light);margin-bottom:4px">3</div>
+      <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Portes humaines immuables dans le pipeline</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <p>Agentica · designsystem.gnegreiros.com · Guilherme Negreiros · BXC · RAMQ · 2026</p>
+</div>
+
+</div>
+</body>
+</html>
