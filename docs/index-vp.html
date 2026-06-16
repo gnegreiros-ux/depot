@@ -6,6 +6,7 @@
 <title>L'IA qui travaille pour nous — VPTNEC · RAMQ</title>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -209,6 +210,15 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
   background-size:contain;background-repeat:no-repeat;background-position:center;
   border-radius:7px;opacity:.85;
 }
+/* Lucide icons */
+i[data-lucide]{display:inline-flex;align-items:center;justify-content:center}
+svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle}
+.agd svg.lucide{width:36px;height:36px}
+.gnode svg.lucide{width:28px;height:28px}
+.gnode.gate svg.lucide{color:rgba(237,107,134,.9)}
+.agico svg.lucide{width:20px;height:20px}
+.pico svg.lucide{width:26px;height:26px;color:rgba(255,255,255,.85)}
+.fi svg.lucide{width:40px;height:40px}
 </style>
 </head>
 <body>
@@ -231,12 +241,12 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ey b fu">Ce qu'on va couvrir</div>
 <h2 class="w fu" data-d="1" style="margin-bottom:1.6em">30 minutes. 6 idées.</h2>
 <div class="agrow fu" data-d="2">
-<div class="agi"><div class="agd">😤</div><div class="agt">5 min</div><div class="agl">Le coût du désalignement</div></div>
-<div class="agi"><div class="agd">🧠</div><div class="agt">5 min</div><div class="agl">L'IA utile, pas gadget</div></div>
-<div class="agi"><div class="agd">🔬</div><div class="agt">8 min</div><div class="agl">Agentica en action</div></div>
-<div class="agi"><div class="agd">👤</div><div class="agt">5 min</div><div class="agl">Ce que ça change</div></div>
-<div class="agi"><div class="agd">🏥</div><div class="agt">4 min</div><div class="agl">Imaginez à la RAMQ</div></div>
-<div class="agi"><div class="agd">💬</div><div class="agt">Q&amp;A</div><div class="agl">Notre tour</div></div>
+<div class="agi"><div class="agd"><i data-lucide="frown"></i></div><div class="agt">5 min</div><div class="agl">Le coût du désalignement</div></div>
+<div class="agi"><div class="agd"><i data-lucide="brain"></i></div><div class="agt">5 min</div><div class="agl">L'IA utile, pas gadget</div></div>
+<div class="agi"><div class="agd"><i data-lucide="microscope"></i></div><div class="agt">8 min</div><div class="agl">Agentica en action</div></div>
+<div class="agi"><div class="agd"><i data-lucide="user"></i></div><div class="agt">5 min</div><div class="agl">Ce que ça change</div></div>
+<div class="agi"><div class="agd"><i data-lucide="building-2"></i></div><div class="agt">4 min</div><div class="agl">Imaginez à la RAMQ</div></div>
+<div class="agi"><div class="agd"><i data-lucide="message-circle"></i></div><div class="agt">Q&amp;A</div><div class="agl">Notre tour</div></div>
 </div>
 </section>
 
@@ -256,14 +266,14 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:25ch">Ce qu'on fait encore manuellement</h3>
 <div class="cols fu" data-d="2">
 <div class="col">
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔁 Le bouton qui change de couleur</p><p class="sm">Deux équipes, deux versions du même composant. Laquelle est la bonne? On ne sait plus.</p></div>
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">📋 La doc qui devient périmée</p><p class="sm">Le guide a été mis à jour… en Confluence… il y a 8 mois. Peut-être.</p></div>
-<div class="card" style="text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔍 L'audit d'accessibilité manuel</p><p class="sm">On sort l'outil, on documente dans un Excel, on envoie un rapport. La prochaine fois, on recommence.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="refresh-cw" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Le bouton qui change de couleur</p><p class="sm">Deux équipes, deux versions du même composant. Laquelle est la bonne? On ne sait plus.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="clipboard-list" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> La doc qui devient périmée</p><p class="sm">Le guide a été mis à jour… en Confluence… il y a 8 mois. Peut-être.</p></div>
+<div class="card" style="text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="search" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'audit d'accessibilité manuel</p><p class="sm">On sort l'outil, on documente dans un Excel, on envoie un rapport. La prochaine fois, on recommence.</p></div>
 </div>
 <div class="col">
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">📐 La décision qu'on re-prend</p><p class="sm">Pourquoi ce formulaire est à 3 colonnes? Personne ne s'en souvient. On refait la discussion.</p></div>
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px">🔗 Le design qui ne survit pas au dev</p><p class="sm">La maquette était exacte. L'intégration ajoute ses propres interprétations. On découvre en UAT.</p><p class="sm" style="font-size:.82rem;color:var(--muted);margin-top:6px;font-style:italic">UAT — tests d'acceptation utilisateur, la dernière validation avant la mise en production.</p></div>
-<div class="card" style="text-align:left;border-left:8px solid var(--brand);background:#fff"><p style="font-weight:600;color:var(--brand);margin-bottom:6px">💡 Et si tout ça se gérait automatiquement?</p><p class="sm">Pas en remplaçant les humains. En leur retirant le travail répétitif et sans valeur ajoutée.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="ruler" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> La décision qu'on re-prend</p><p class="sm">Pourquoi ce formulaire est à 3 colonnes? Personne ne s'en souvient. On refait la discussion.</p></div>
+<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="link" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Le design qui ne survit pas au dev</p><p class="sm">La maquette était exacte. L'intégration ajoute ses propres interprétations. On découvre en UAT.</p><p class="sm" style="font-size:.82rem;color:var(--muted);margin-top:6px;font-style:italic">UAT — tests d'acceptation utilisateur, la dernière validation avant la mise en production.</p></div>
+<div class="card" style="text-align:left;border-left:8px solid var(--brand);background:#fff"><p style="font-weight:600;color:var(--brand);margin-bottom:6px"><i data-lucide="lightbulb" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Et si tout ça se gérait automatiquement?</p><p class="sm">Pas en remplaçant les humains. En leur retirant le travail répétitif et sans valeur ajoutée.</p></div>
 </div>
 </div>
 </section>
@@ -298,7 +308,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:26ch">Ce n'est pas ChatGPT. C'est quelque chose de plus précis.</h3>
 <div class="cols fu" data-d="2">
 <div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--danger);height:100%">
-<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px">❌ L'IA gadget</p>
+<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px"><i data-lucide="x-circle" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'IA gadget</p>
 <div class="rp">Un assistant qui génère du contenu sans règles ni contraintes</div>
 <div class="rp">Imprévisible — chaque résultat est différent</div>
 <div class="rp">Aucune traçabilité des décisions</div>
@@ -306,7 +316,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="rp">Le dernier mot n'appartient à personne</div>
 </div></div>
 <div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--success);height:100%">
-<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px">✅ L'IA utile</p>
+<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px"><i data-lucide="check-circle" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'IA utile</p>
 <div class="rp">Un agent qui exécute des règles définies par des humains</div>
 <div class="rp">Prévisible — les règles sont encodées, les résultats vérifiables</div>
 <div class="rp">Chaque décision documentée, versionnée, traçable</div>
@@ -322,13 +332,13 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ey b fu">Le principe fondamental</div>
 <div class="frow fu" data-d="2" style="margin-top:1.2em">
 <div class="fcell" style="background:rgba(59,43,50,.4);border-radius:var(--rl) 0 0 var(--rl);border:1px solid rgba(13,155,138,.18);border-right:none">
-<div class="fi">🧑‍💼</div><div class="fr">Humains</div><div class="fv w">Décident</div><div class="fd mu">L'intention, les valeurs, les règles, les exceptions</div>
+<div class="fi"><i data-lucide="briefcase"></i></div><div class="fr">Humains</div><div class="fv w">Décident</div><div class="fd mu">L'intention, les valeurs, les règles, les exceptions</div>
 </div>
 <div class="fcell" style="background:rgba(13,155,138,.2);border:1px solid rgba(95,227,208,.22);border-left:none;border-right:none">
-<div class="fi">🤖</div><div class="fr">Agents IA</div><div class="fv bl">Exécutent</div><div class="fd mu">Les tâches répétitives, les vérifications, la documentation</div>
+<div class="fi"><i data-lucide="bot"></i></div><div class="fr">Agents IA</div><div class="fv bl">Exécutent</div><div class="fd mu">Les tâches répétitives, les vérifications, la documentation</div>
 </div>
 <div class="fcell" style="background:rgba(24,121,78,.2);border-radius:0 var(--rl) var(--rl) 0;border:1px solid rgba(24,121,78,.3);border-left:none">
-<div class="fi">🛡️</div><div class="fr">Le système</div><div class="fv" style="color:#6ee7b7">Garantit</div><div class="fd mu">La cohérence, la conformité, la traçabilité</div>
+<div class="fi"><i data-lucide="shield"></i></div><div class="fr">Le système</div><div class="fv" style="color:#6ee7b7">Garantit</div><div class="fd mu">La cohérence, la conformité, la traçabilité</div>
 </div>
 </div>
 <p class="fu" data-d="4" style="margin-top:1.8em;font-size:1.14rem;color:rgba(255,255,255,.70)">L'IA amplifie l'expertise humaine. Elle ne la remplace pas.</p>
@@ -341,10 +351,10 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ey b fu">Valeurs non négociables dans Agentica</div>
 <h3 class="w fu" data-d="1" style="margin-bottom:1em">4 principes. Aucune exception.</h3>
 <div class="prx fu" data-d="2">
-<div class="pr"><div class="pico">🏛️</div><div><div class="pt">Souveraineté numérique</div><div class="pd">Les données, les décisions et les outils restent sous notre contrôle. Aucune dépendance externe non maîtrisée.</div></div></div>
-<div class="pr"><div class="pico">♿</div><div><div class="pt">Accessibilité d'abord</div><div class="pd">WCAG 2.1 AA, minimum. Non contournable. Vérifiée automatiquement à chaque changement.</div></div></div>
-<div class="pr"><div class="pico">🔍</div><div><div class="pt">Auditabilité totale</div><div class="pd">Chaque décision est traçable, versionnée, justifiée. On peut répondre à "pourquoi" à n'importe quel moment.</div></div></div>
-<div class="pr"><div class="pico">✋</div><div><div class="pt">Le dernier mot est humain</div><div class="pd">Les agents proposent. Les humains approuvent. Toujours. Sans exception. C'est inscrit dans le code.</div></div></div>
+<div class="pr"><div class="pico"><i data-lucide="landmark"></i></div><div><div class="pt">Souveraineté numérique</div><div class="pd">Les données, les décisions et les outils restent sous notre contrôle. Aucune dépendance externe non maîtrisée.</div></div></div>
+<div class="pr"><div class="pico"><i data-lucide="accessibility"></i></div><div><div class="pt">Accessibilité d'abord</div><div class="pd">WCAG 2.1 AA, minimum. Non contournable. Vérifiée automatiquement à chaque changement.</div></div></div>
+<div class="pr"><div class="pico"><i data-lucide="search"></i></div><div><div class="pt">Auditabilité totale</div><div class="pd">Chaque décision est traçable, versionnée, justifiée. On peut répondre à "pourquoi" à n'importe quel moment.</div></div></div>
+<div class="pr"><div class="pico"><i data-lucide="hand"></i></div><div><div class="pt">Le dernier mot est humain</div><div class="pd">Les agents proposent. Les humains approuvent. Toujours. Sans exception. C'est inscrit dans le code.</div></div></div>
 </div>
 </section>
 
@@ -353,23 +363,23 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="slide-logo" aria-hidden="true"></div>
 <div class="ey b fu">Méthodologie</div>
 <h3 class="w fu" data-d="1" style="margin-bottom:.5em">Le pipeline de gouvernance</h3>
-<p class="lead mu fu" data-d="2" style="margin-bottom:1.3em;font-size:clamp(.82rem,1.2vw,.96rem)">Chaque étape a un rôle précis. Les portes humaines ✋ ne peuvent pas être contournées.</p>
+<p class="lead mu fu" data-d="2" style="margin-bottom:1.3em;font-size:clamp(.82rem,1.2vw,.96rem)">Chaque étape a un rôle précis. Les portes humaines <i data-lucide="hand" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> ne peuvent pas être contournées.</p>
 <div class="gflow fu" data-d="3">
-<div class="gstep"><div class="gnode gate">📐</div><div class="glbl">Décision UX</div><div class="gtag h">✋ Humain</div></div>
+<div class="gstep"><div class="gnode gate"><i data-lucide="ruler"></i></div><div class="glbl">Décision UX</div><div class="gtag h"><i data-lucide="hand" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode auto">🔢</div><div class="glbl">Encodage tokens</div><div class="gtag a">Auto</div></div>
+<div class="gstep"><div class="gnode auto"><i data-lucide="hash"></i></div><div class="glbl">Encodage tokens</div><div class="gtag a">Auto</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode auto">🎨</div><div class="glbl">Sync Figma</div><div class="gtag a">Auto</div></div>
+<div class="gstep"><div class="gnode auto"><i data-lucide="palette"></i></div><div class="glbl">Sync Figma</div><div class="gtag a">Auto</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode auto">💻</div><div class="glbl">Génération code</div><div class="gtag a">Auto</div></div>
+<div class="gstep"><div class="gnode auto"><i data-lucide="monitor"></i></div><div class="glbl">Génération code</div><div class="gtag a">Auto</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode auto">🧪</div><div class="glbl">Tests WCAG + régression</div><div class="gtag a">Auto</div></div>
+<div class="gstep"><div class="gnode auto"><i data-lucide="test-tube"></i></div><div class="glbl">Tests WCAG + régression</div><div class="gtag a">Auto</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode gate">👁️</div><div class="glbl">Révision PR</div><div class="gtag h">✋ Humain</div></div>
+<div class="gstep"><div class="gnode gate"><i data-lucide="eye"></i></div><div class="glbl">Révision PR</div><div class="gtag h"><i data-lucide="hand" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode auto">📝</div><div class="glbl">Docs générée</div><div class="gtag a">Auto</div></div>
+<div class="gstep"><div class="gnode auto"><i data-lucide="file-text"></i></div><div class="glbl">Docs générée</div><div class="gtag a">Auto</div></div>
 <div class="garr">→</div>
-<div class="gstep"><div class="gnode gate">🚀</div><div class="glbl">Déploiement</div><div class="gtag h">✋ Humain</div></div>
+<div class="gstep"><div class="gnode gate"><i data-lucide="rocket"></i></div><div class="glbl">Déploiement</div><div class="gtag h"><i data-lucide="hand" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div></div>
 </div>
 <div class="fu" data-d="4" style="margin-top:1.5em;display:flex;gap:20px;justify-content:center">
 <div style="display:flex;align-items:center;gap:8px;font-size:1.1rem;color:rgba(255,255,255,0.7)"><div style="width:13px;height:13px;border-radius:50%;background:rgba(13,155,138,.16);border:1px solid rgba(0,169,156,.35)"></div>Automatisé par les agents</div>
@@ -457,7 +467,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em;max-width:28ch">La gouvernance intégrée par conception</h3>
 <div class="cgrid fu" data-d="2">
 <div class="ccol al">
-<h4>✅ Les agents font automatiquement</h4>
+<h4><i data-lucide="check-circle" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Les agents font automatiquement</h4>
 <div class="ci ok"><span>✓</span>Détecter les dérives et incohérences dans le système</div>
 <div class="ci ok"><span>✓</span>Vérifier la conformité WCAG à chaque changement</div>
 <div class="ci ok"><span>✓</span>Générer la documentation et les notes de mise à jour</div>
@@ -502,7 +512,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ar"><strong>Quoi</strong>Séparation primitif → sémantique → composant</div>
 <div class="ar"><strong>Pourquoi</strong>Découpler les valeurs des intentions UX</div>
 <div class="ar"><strong>Rejeté</strong>Tokens à niveau unique (trop couplé)</div>
-<div class="ar"><strong>Statut</strong>✅ Actif — 58 ADRs documentés au total</div></div>
+<div class="ar"><strong>Statut</strong><i data-lucide="check-circle" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Actif — 58 ADRs documentés au total</div></div>
 <div class="ac"><div class="an">Ce que ça change</div><div class="at">Une organisation qui ne perd plus son savoir</div>
 <div class="ar"><strong>Traçabilité</strong>Chaque décision a une justification documentée</div>
 <div class="ar"><strong>Continuité</strong>Le système mémorise, même si les personnes changent</div>
@@ -520,13 +530,13 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ey d fu">L'équipe invisible</div>
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em">Les 4 agents au travail</h3>
 <div class="arow fu" data-d="2">
-<div class="agc"><div class="agh"><div class="agico" style="background:rgba(13,155,138,.12)">🎨</div><div><div class="agn">Agent Design</div><div class="agr">Surveille la cohérence visuelle</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:rgba(13,155,138,.12)"><i data-lucide="palette"></i></div><div><div class="agn">Agent Design</div><div class="agr">Surveille la cohérence visuelle</div></div></div>
 <div class="agb"><div class="agdo">Détecte toute dérive par rapport aux standards du système</div><div class="agno">Ne modifie jamais sans approbation humaine</div></div></div>
-<div class="agc"><div class="agh"><div class="agico" style="background:#e8f0ff">💻</div><div><div class="agn">Agent Code</div><div class="agr">Garantit la conformité technique</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:#e8f0ff"><i data-lucide="monitor"></i></div><div><div class="agn">Agent Code</div><div class="agr">Garantit la conformité technique</div></div></div>
 <div class="agb"><div class="agdo">Détecte les écarts et propose des correctifs documentés</div><div class="agno">Ne déploie jamais sans approbation humaine</div></div></div>
-<div class="agc"><div class="agh"><div class="agico" style="background:var(--success-bg)">🧪</div><div><div class="agn">Agent QA</div><div class="agr">Valide avant chaque livraison</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:var(--success-bg)"><i data-lucide="test-tube"></i></div><div><div class="agn">Agent QA</div><div class="agr">Valide avant chaque livraison</div></div></div>
 <div class="agb"><div class="agdo">Vérifie la conformité WCAG et bloque si ça ne passe pas</div><div class="agno">Ne déploie jamais sans validation humaine</div></div></div>
-<div class="agc"><div class="agh"><div class="agico" style="background:#f3eeff">📝</div><div><div class="agn">Agent Docs</div><div class="agr">Maintient la mémoire vivante</div></div></div>
+<div class="agc"><div class="agh"><div class="agico" style="background:#f3eeff"><i data-lucide="file-text"></i></div><div><div class="agn">Agent Docs</div><div class="agr">Maintient la mémoire vivante</div></div></div>
 <div class="agb"><div class="agdo">Génère et maintient la documentation automatiquement</div><div class="agno">Ne publie rien sans révision humaine</div></div></div>
 </div>
 </section>
@@ -543,15 +553,15 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div style="display:flex;gap:32px;align-items:center;justify-content:center" class="fu" data-d="2">
 <div>
 <div class="dbox" onclick="window.open('https://designsystem.gnegreiros.com','_blank')">
-<div style="font-size:2.3rem;margin-bottom:9px">🔗</div>
+<div style="font-size:2.3rem;margin-bottom:9px"><i data-lucide="external-link" style="width:2.3rem;height:2.3rem;stroke-width:1.5;"></i></div>
 <div class="durl">designsystem.gnegreiros.com</div>
 <div class="dhint">Cliquez pour ouvrir dans un nouvel onglet</div>
 </div>
 <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;justify-content:center">
-<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">📐 Fondations</div>
-<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">🧩 Composants</div>
-<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">📋 37 Décisions</div>
-<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)">🤖 Pour les agents</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)"><i data-lucide="ruler" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Fondations</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)"><i data-lucide="puzzle" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Composants</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)"><i data-lucide="clipboard-list" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> 37 Décisions</div>
+<div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:7px 11px;font-size:.76rem;color:rgba(255,255,255,0.8)"><i data-lucide="bot" style="width:.9em;height:.9em;vertical-align:-.1em;stroke-width:1.5;"></i> Pour les agents</div>
 </div>
 </div>
 <div >
@@ -572,17 +582,17 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <p class="lead mu fu" data-d="3" style="margin-top:1em">Chaque rôle a une raison différente de s'y intéresser.</p>
 <div class="fu" data-d="4" style="margin-top:1.6em;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:900px">
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px">🎯</div>
+    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="target" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Moins d'incertitude</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Les standards de qualité s'appliquent dans chaque équipe, automatiquement — même en période de croissance ou de roulement.</div>
   </div>
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px">📊</div>
+    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="bar-chart-2" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Plus de prévisibilité</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Moins de rework tardif, moins de surprises en UAT. Les délais sont mieux tenus parce que les erreurs sont signalées tôt — pas en fin de projet.</div>
   </div>
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px">🧬</div>
+    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="dna" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Un savoir qui reste</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Les décisions et les règles sont encodées dans le système — elles ne dépendent plus d'une personne et ne partent pas à la retraite.</div>
   </div>
@@ -598,7 +608,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 
   <div style="background:var(--subtle);padding:0">
     <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
-      <span style="font-size:1rem">⏳</span>
+      <span style="font-size:1rem"><i data-lucide="timer" style="width:1rem;height:1rem;stroke-width:1.5;"></i></span>
       <span style="font-weight:600;font-size:1.05rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">Aujourd'hui</span>
     </div>
     <div style="padding:8px 0">
@@ -636,15 +646,15 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
     <p style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-light);margin-bottom:10px">Ce que la direction en gagne</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
       <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px">🧭 Contrôle sans micro-gestion</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="compass" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Contrôle sans micro-gestion</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Les standards s'appliquent automatiquement — sans superviser chaque équipe.</div>
       </div>
       <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px">📦 Livraisons plus prévisibles</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="package" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Livraisons plus prévisibles</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Moins de rework tardif. Moins de surprises en UAT. Des délais mieux tenus.</div>
       </div>
       <div style="padding:14px 16px">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px">🏛️ Résilience organisationnelle</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="landmark" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Résilience organisationnelle</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Le savoir institutionnel est encodé. Il ne part plus avec les personnes qui quittent.</div>
       </div>
     </div>
@@ -669,9 +679,9 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 <div class="ey d fu">Cas d'usage concrets pour notre contexte</div>
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1em">Ce qui est possible avec une bonne architecture</h3>
 <div class="ucases fu" data-d="2">
-<div class="uc" style="border-top-color:var(--brand-dark)"><div class="unum">Cas 01</div><div class="uti">Cohérence automatique entre équipes</div><div class="ude">Quand une équipe utilise une variante incorrecte dans une interface citoyenne, le système le détecte et propose la correction — avant la livraison en production.</div><div class="uga">⚡ Moins de révisions en fin de projet. Moins de friction.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Réduction des coûts de révision et de rework en fin de projet</p></div>
-<div class="uc u2"><div class="unum">Cas 02</div><div class="uti">Conformité WCAG sans audit manuel</div><div class="ude">Chaque composant embarque ses règles d'accessibilité. Avant toute livraison, l'agent QA vérifie la conformité WCAG 2.1 AA automatiquement et bloque si ça ne passe pas.</div><div class="uga">♿ L'accessibilité n'est plus une case à cocher — c'est une propriété du système.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Réduction du risque légal lié à la non-conformité aux standards d'accessibilité</p></div>
-<div class="uc u3"><div class="unum">Cas 03</div><div class="uti">Documentation institutionnelle vivante</div><div class="ude">Quand une décision change — un libellé, un formulaire, une politique — la documentation se met à jour automatiquement. La connaissance ne dépend plus d'une seule personne.</div><div class="uga">🧠 La mémoire institutionnelle devient une infrastructure.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Continuité opérationnelle préservée même en cas de roulement d'équipe</p></div>
+<div class="uc" style="border-top-color:var(--brand-dark)"><div class="unum">Cas 01</div><div class="uti">Cohérence automatique entre équipes</div><div class="ude">Quand une équipe utilise une variante incorrecte dans une interface citoyenne, le système le détecte et propose la correction — avant la livraison en production.</div><div class="uga"><i data-lucide="zap" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Moins de révisions en fin de projet. Moins de friction.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Réduction des coûts de révision et de rework en fin de projet</p></div>
+<div class="uc u2"><div class="unum">Cas 02</div><div class="uti">Conformité WCAG sans audit manuel</div><div class="ude">Chaque composant embarque ses règles d'accessibilité. Avant toute livraison, l'agent QA vérifie la conformité WCAG 2.1 AA automatiquement et bloque si ça ne passe pas.</div><div class="uga"><i data-lucide="accessibility" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'accessibilité n'est plus une case à cocher — c'est une propriété du système.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Réduction du risque légal lié à la non-conformité aux standards d'accessibilité</p></div>
+<div class="uc u3"><div class="unum">Cas 03</div><div class="uti">Documentation institutionnelle vivante</div><div class="ude">Quand une décision change — un libellé, un formulaire, une politique — la documentation se met à jour automatiquement. La connaissance ne dépend plus d'une seule personne.</div><div class="uga"><i data-lucide="brain" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> La mémoire institutionnelle devient une infrastructure.</div><p style="font-size:.88rem;color:var(--muted);margin-top:9px;font-style:italic">→ Continuité opérationnelle préservée même en cas de roulement d'équipe</p></div>
 </div>
 <p class="fu" data-d="4" style="margin-top:1em;font-size:1.12rem;color:var(--muted)">Ce ne sont pas des vœux pieux. C'est ce qu'Agentica fait déjà, à petite échelle.</p>
 </section>
@@ -791,6 +801,7 @@ window.addEventListener('load',()=>{
   new QRCode(document.getElementById('qr2'),Object.assign({},o,{text:'https://designsystem.gnegreiros.com'}));
 });
 upd();
+lucide.createIcons();
 </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pipeline de construction — Agentica</title>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -139,6 +140,11 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
   .pipe-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
   body{padding:28px 18px 60px}
 }
+/* Lucide icons */
+i[data-lucide]{display:inline-flex;align-items:center;justify-content:center}
+svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle}
+.card-icon svg.lucide{width:28px;height:28px}
+.pipe-icon svg.lucide{width:26px;height:26px}
 </style>
 </head>
 <body>
@@ -161,17 +167,17 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c3">
     <div class="card dark">
-      <span class="card-icon">🧭</span>
+      <span class="card-icon"><i data-lucide="compass"></i></span>
       <div class="card-title">Principes non négociables</div>
       <div class="card-body">Définir 4 valeurs avant tout : souveraineté numérique, accessibilité WCAG 2.1 AA, auditabilité totale, dernier mot humain. Ces principes ne changent jamais.</div>
     </div>
     <div class="card green">
-      <span class="card-icon">📐</span>
+      <span class="card-icon"><i data-lucide="ruler"></i></span>
       <div class="card-title">Architecture à 3 niveaux de tokens</div>
       <div class="card-body">Primitif → Sémantique → Composant. La décision la plus structurante : découpler les valeurs physiques des intentions UX. Codifiée dans ADR-001.</div>
     </div>
     <div class="card dark">
-      <span class="card-icon">📋</span>
+      <span class="card-icon"><i data-lucide="clipboard-list"></i></span>
       <div class="card-title">Premier ADR</div>
       <div class="card-body">Documenter la première décision de design dans un fichier versionné. Ce fichier devient la mémoire du système. Tout commence ici.</div>
     </div>
@@ -232,7 +238,7 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c2">
     <div class="card white">
-      <span class="card-icon">🧠</span>
+      <span class="card-icon"><i data-lucide="brain"></i></span>
       <div class="card-title">ADRs — Mémoire institutionnelle</div>
       <div class="card-body">Architecture Decision Records : chaque décision documentée (quoi, pourquoi, alternatives rejetées, conséquences). Les agents lisent les ADRs avant d'agir. Aujourd'hui : <strong>58 ADRs actifs</strong>.</div>
       <ul class="checklist" style="--brand-light:#0D9B8A">
@@ -242,7 +248,7 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
       </ul>
     </div>
     <div class="card white">
-      <span class="card-icon">📄</span>
+      <span class="card-icon"><i data-lucide="file-text"></i></span>
       <div class="card-title">AGENTS.md — La constitution des agents</div>
       <div class="card-body">Le premier fichier que tout agent doit lire avant d'agir dans le dépôt. Définit ce qui est autorisé, ce qui est interdit, comment escalader, et comment demander une révision humaine.</div>
       <ul class="checklist" style="--brand-light:#0D9B8A">
@@ -252,7 +258,7 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
       </ul>
     </div>
     <div class="card white">
-      <span class="card-icon">🎨</span>
+      <span class="card-icon"><i data-lucide="palette"></i></span>
       <div class="card-title">Figma synchronisé avec les tokens</div>
       <div class="card-body">Les tokens sont la source de vérité. Figma est un miroir — pas l'inverse. Toute dérive visuelle dans Figma est détectée automatiquement par l'Agent Design.</div>
       <ul class="checklist" style="--brand-light:#0D9B8A">
@@ -262,7 +268,7 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
       </ul>
     </div>
     <div class="card white">
-      <span class="card-icon">🔗</span>
+      <span class="card-icon"><i data-lucide="link"></i></span>
       <div class="card-title">Pipeline CI/CD avec portes humaines</div>
       <div class="card-body">Chaque PR passe par des vérifications automatiques. Aucune modification ne peut atteindre la branche principale sans approbation humaine explicite.</div>
       <ul class="checklist" style="--brand-light:#0D9B8A">
@@ -282,7 +288,7 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 <div class="section">
   <div class="phase-label ph-build">Architecture · Pipeline</div>
   <div class="section-title">Comment ça avance — le pipeline de gouvernance</div>
-  <div class="section-desc">Chaque changement suit ce chemin. Les portes ✋ ne peuvent pas être contournées.</div>
+  <div class="section-desc">Chaque changement suit ce chemin. Les portes <i data-lucide="hand" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> ne peuvent pas être contournées.</div>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:rgba(13,155,138,.6)"></div>Automatisé par les agents</div>
@@ -291,44 +297,44 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="pipeline">
     <div class="pipe-step human">
-      <div class="pipe-icon">📐</div>
+      <div class="pipe-icon"><i data-lucide="ruler"></i></div>
       <div class="pipe-label">Décision UX</div>
-      <div class="pipe-tag h">✋ Humain</div>
+      <div class="pipe-tag h"><i data-lucide="hand" style="width:.85em;height:.85em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div>
     </div>
     <div class="pipe-step auto">
-      <div class="pipe-icon">🔢</div>
+      <div class="pipe-icon"><i data-lucide="hash"></i></div>
       <div class="pipe-label">Encodage tokens</div>
       <div class="pipe-tag a">Auto</div>
     </div>
     <div class="pipe-step auto">
-      <div class="pipe-icon">🎨</div>
+      <div class="pipe-icon"><i data-lucide="palette"></i></div>
       <div class="pipe-label">Sync Figma</div>
       <div class="pipe-tag a">Auto</div>
     </div>
     <div class="pipe-step auto">
-      <div class="pipe-icon">💻</div>
+      <div class="pipe-icon"><i data-lucide="monitor"></i></div>
       <div class="pipe-label">Génération code</div>
       <div class="pipe-tag a">Auto</div>
     </div>
     <div class="pipe-step auto">
-      <div class="pipe-icon">🧪</div>
+      <div class="pipe-icon"><i data-lucide="test-tube"></i></div>
       <div class="pipe-label">Tests WCAG</div>
       <div class="pipe-tag a">Auto</div>
     </div>
     <div class="pipe-step human">
-      <div class="pipe-icon">👁️</div>
+      <div class="pipe-icon"><i data-lucide="eye"></i></div>
       <div class="pipe-label">Révision PR</div>
-      <div class="pipe-tag h">✋ Humain</div>
+      <div class="pipe-tag h"><i data-lucide="hand" style="width:.85em;height:.85em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div>
     </div>
     <div class="pipe-step auto">
-      <div class="pipe-icon">📝</div>
+      <div class="pipe-icon"><i data-lucide="file-text"></i></div>
       <div class="pipe-label">Docs générée</div>
       <div class="pipe-tag a">Auto</div>
     </div>
     <div class="pipe-step human">
-      <div class="pipe-icon">🚀</div>
+      <div class="pipe-icon"><i data-lucide="rocket"></i></div>
       <div class="pipe-label">Déploiement</div>
-      <div class="pipe-tag h">✋ Humain</div>
+      <div class="pipe-tag h"><i data-lucide="hand" style="width:.85em;height:.85em;vertical-align:-.1em;stroke-width:1.5;"></i> Humain</div>
     </div>
   </div>
 </div>
@@ -345,25 +351,25 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c4">
     <div class="card dark" style="border-top:4px solid var(--brand)">
-      <span class="card-icon">🎨</span>
+      <span class="card-icon"><i data-lucide="palette"></i></span>
       <div class="card-title">Agent Design</div>
       <div class="card-body">Surveille Figma en continu. Détecte les composants détachés du système, les tokens manquants, les espacements non conformes.</div>
       <span class="card-tag tag-auto">Surveille</span>
     </div>
     <div class="card dark" style="border-top:4px solid #7aa3f0">
-      <span class="card-icon">💻</span>
+      <span class="card-icon"><i data-lucide="monitor"></i></span>
       <div class="card-title">Agent Code</div>
       <div class="card-body">Détecte les valeurs codées en dur dans le code. Génère des correctifs, ouvre des PR avec description complète.</div>
       <span class="card-tag tag-auto">Corrige</span>
     </div>
     <div class="card dark" style="border-top:4px solid var(--success)">
-      <span class="card-icon">🧪</span>
+      <span class="card-icon"><i data-lucide="test-tube"></i></span>
       <div class="card-title">Agent QA</div>
       <div class="card-body">Tests WCAG 2.1 AA automatiques à chaque changement. Détecte les régressions visuelles. Bloque tout changement non conforme.</div>
       <span class="card-tag tag-auto">Bloque</span>
     </div>
     <div class="card dark" style="border-top:4px solid #a78bfa">
-      <span class="card-icon">📝</span>
+      <span class="card-icon"><i data-lucide="file-text"></i></span>
       <div class="card-title">Agent Docs</div>
       <div class="card-body">Génère automatiquement les notes de mise à jour, guides de migration, et maintient la documentation synchronisée avec le code.</div>
       <span class="card-tag tag-auto">Génère</span>
@@ -387,32 +393,32 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c3">
     <div class="card green">
-      <span class="card-icon">♿</span>
+      <span class="card-icon"><i data-lucide="accessibility"></i></span>
       <div class="card-title">Accessibilité par construction</div>
       <div class="card-body">Chaque composant embarque ses règles WCAG 2.1 AA. 21 critères vérifiés automatiquement avant toute livraison. Aucun contournement possible.</div>
     </div>
     <div class="card dark">
-      <span class="card-icon">🔍</span>
+      <span class="card-icon"><i data-lucide="search"></i></span>
       <div class="card-title">Régression visuelle bloquante</div>
       <div class="card-body">Les captures visuelles sont comparées à chaque PR. Toute déviation non intentionnelle bloque la fusion. L'historique visuel est versionnée.</div>
     </div>
     <div class="card dark">
-      <span class="card-icon">🚫</span>
+      <span class="card-icon"><i data-lucide="ban"></i></span>
       <div class="card-title">Zéro valeur codée en dur</div>
       <div class="card-body">Le lint de tokens détecte toute couleur hex, espacement px ou taille en dur dans le code. Ces erreurs bloquent la PR — sans exception.</div>
     </div>
     <div class="card dark">
-      <span class="card-icon">📊</span>
+      <span class="card-icon"><i data-lucide="bar-chart-2"></i></span>
       <div class="card-title">Traçabilité complète</div>
       <div class="card-body">Chaque décision, correction et déploiement est versionnée dans Git. On peut répondre à "pourquoi" pour n'importe quel état du système.</div>
     </div>
     <div class="card green">
-      <span class="card-icon">🔄</span>
+      <span class="card-icon"><i data-lucide="rotate-cw"></i></span>
       <div class="card-title">Propagation automatique</div>
       <div class="card-body">Un changement primitif se propage automatiquement vers le sémantique et le composant. Les dérives sont signalées en temps réel, pas découvertes en UAT.</div>
     </div>
     <div class="card dark">
-      <span class="card-icon">✋</span>
+      <span class="card-icon"><i data-lucide="hand"></i></span>
       <div class="card-title">Portes humaines immuables</div>
       <div class="card-body">3 points de contrôle humain dans le pipeline. Décision UX, révision PR, déploiement. Ces portes sont inscrites dans le code — pas dans une politique.</div>
     </div>
@@ -431,25 +437,25 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c2">
     <div class="card dark">
-      <span class="card-icon">📋</span>
+      <span class="card-icon"><i data-lucide="clipboard-list"></i></span>
       <div class="card-title">ADRs — Décisions permanentes</div>
       <div class="card-body">58 décisions documentées, versionnées, jamais supprimées. L'historique architectural est complet et auditable à tout moment par les humains et les agents.</div>
       <span class="card-tag tag-gate">58 actifs · versionné Git</span>
     </div>
     <div class="card dark">
-      <span class="card-icon">🔖</span>
+      <span class="card-icon"><i data-lucide="bookmark"></i></span>
       <div class="card-title">Changelogs générés automatiquement</div>
       <div class="card-body">L'Agent Docs génère les notes de version à chaque fusion. Aucune rédaction manuelle. Le format est standardisé et lisible par les agents suivants.</div>
       <span class="card-tag tag-auto">Agent Docs · Auto</span>
     </div>
     <div class="card dark">
-      <span class="card-icon">🗺️</span>
+      <span class="card-icon"><i data-lucide="map"></i></span>
       <div class="card-title">Guides de migration auto-générés</div>
       <div class="card-body">Quand un token change de nom ou de valeur, le guide de migration est produit automatiquement. Les équipes consommatrices savent quoi faire sans intervention manuelle.</div>
       <span class="card-tag tag-auto">Agent Docs · Auto</span>
     </div>
     <div class="card dark">
-      <span class="card-icon">🌐</span>
+      <span class="card-icon"><i data-lucide="globe"></i></span>
       <div class="card-title">Site public · designsystem.gnegreiros.com</div>
       <div class="card-body">Le site est généré depuis les tokens et les ADRs. La documentation web est toujours synchronisée avec le code source. Ce que vous voyez est ce qui est déployé.</div>
       <span class="card-tag tag-auto">Déployé · GitHub Pages</span>
@@ -507,32 +513,32 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 
   <div class="cards c3">
     <div class="card emerald">
-      <span class="card-icon">🧩</span>
+      <span class="card-icon"><i data-lucide="puzzle"></i></span>
       <div class="card-title">Nouveaux composants sans règles nouvelles</div>
       <div class="card-body">Tout nouveau composant hérite automatiquement des tokens et des règles existantes. Pas besoin de redéfinir les principes — ils s'appliquent par construction.</div>
     </div>
     <div class="card emerald">
-      <span class="card-icon">👥</span>
+      <span class="card-icon"><i data-lucide="users"></i></span>
       <div class="card-title">Nouvelles équipes sans formation longue</div>
       <div class="card-body">Les ADRs expliquent le "pourquoi". AGENTS.md explique les règles. Une nouvelle équipe peut contribuer en lisant le système — pas en demandant aux experts.</div>
     </div>
     <div class="card emerald">
-      <span class="card-icon">🤖</span>
+      <span class="card-icon"><i data-lucide="bot"></i></span>
       <div class="card-title">Nouveaux agents sans réécriture</div>
       <div class="card-body">L'architecture de rôles permet d'ajouter des agents spécialisés (i18n, performance, sécurité) sans modifier les agents existants ni les tokens.</div>
     </div>
     <div class="card emerald">
-      <span class="card-icon">🏗️</span>
+      <span class="card-icon"><i data-lucide="layers"></i></span>
       <div class="card-title">Multi-produit depuis une seule source</div>
       <div class="card-body">Les tokens sémantiques peuvent alimenter plusieurs produits simultanément. Un changement de marque se propage dans tous les produits en une seule PR.</div>
     </div>
     <div class="card emerald">
-      <span class="card-icon">🔒</span>
+      <span class="card-icon"><i data-lucide="lock"></i></span>
       <div class="card-title">Zéro vendor lock-in</div>
       <div class="card-body">Code source public, hébergé sur GitHub, aucune dépendance propriétaire non maîtrisée. Le système reste sous contrôle organisationnel complet.</div>
     </div>
     <div class="card emerald">
-      <span class="card-icon">📈</span>
+      <span class="card-icon"><i data-lucide="trending-up"></i></span>
       <div class="card-title">Métriques qui évoluent avec le système</div>
       <div class="card-body">714 tokens, 58 ADRs, 36 échelles, 21 critères WCAG — ces chiffres croissent avec le système. Chaque ajout est tracé, documenté, et versionnée.</div>
     </div>
@@ -574,5 +580,6 @@ body{background:var(--brand-deep);min-height:100vh;padding:48px 40px 80px}
 </div>
 
 </div>
+<script>lucide.createIcons();</script>
 </body>
 </html>
