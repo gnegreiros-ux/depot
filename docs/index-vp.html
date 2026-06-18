@@ -218,13 +218,15 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 .slide.dark svg.lucide,.slide.navy svg.lucide{color:rgba(255,255,255,.9)}
 .slide.light svg.lucide,.slide.white svg.lucide{color:var(--text)}
 .agd svg.lucide{width:36px;height:36px}
-.gnode svg.lucide{width:28px;height:28px}
+.gnode svg.lucide{width:36px;height:36px}
 .gnode.gate svg.lucide{color:rgba(237,107,134,.9)}
-.agico svg.lucide{width:20px;height:20px}
+.agico svg.lucide{width:26px;height:26px}
 .agh .agico svg.lucide{color:#fff}
 .pico svg.lucide{width:26px;height:26px}
 .fi svg.lucide{width:40px;height:40px}
 .cadre-ico svg.lucide{width:52px;height:52px}
+.card-ico svg.lucide{width:32px;height:32px}
+.slide.white svg.wico,.slide.light svg.wico{color:#fff}
 </style>
 </head>
 <body>
@@ -614,17 +616,17 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <p class="lead mu fu" data-d="3" style="margin-top:1em">Chaque rôle a une raison différente de s'y intéresser.</p>
 <div class="fu" data-d="4" style="margin-top:1.6em;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:900px">
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="target" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
+    <div class="card-ico" style="margin-bottom:8px"><i data-lucide="target"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Moins d'incertitude</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Les standards de qualité s'appliquent dans chaque équipe, automatiquement — même en période de croissance ou de roulement.</div>
   </div>
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="bar-chart-2" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
+    <div class="card-ico" style="margin-bottom:8px"><i data-lucide="bar-chart-2"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Plus de prévisibilité</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Moins de rework tardif, moins de surprises en UAT. Les délais sont mieux tenus parce que les erreurs sont signalées tôt — pas en fin de projet.</div>
   </div>
   <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-top:3px solid var(--brand-light);border-radius:var(--r);padding:18px 20px;text-align:left">
-    <div style="font-size:1.4rem;margin-bottom:8px"><i data-lucide="dna" style="width:1.6rem;height:1.6rem;stroke-width:1.5;"></i></div>
+    <div class="card-ico" style="margin-bottom:8px"><i data-lucide="dna"></i></div>
     <div style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Un savoir qui reste</div>
     <div style="font-size:.88rem;color:rgba(255,255,255,.58);line-height:1.6">Les décisions et les règles sont encodées dans le système — elles ne dépendent plus d'une personne et ne partent pas à la retraite.</div>
   </div>
@@ -678,15 +680,15 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
     <p style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-light);margin-bottom:10px">Ce que la direction en gagne</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
       <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="compass" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Contrôle sans micro-gestion</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="compass" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Contrôle sans micro-gestion</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Les standards s'appliquent automatiquement — sans superviser chaque équipe.</div>
       </div>
       <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="package" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Livraisons plus prévisibles</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="package" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Livraisons plus prévisibles</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Moins de rework tardif. Moins de surprises en UAT. Des délais mieux tenus.</div>
       </div>
       <div style="padding:14px 16px">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="landmark" style="width:1em;height:1em;vertical-align:-.15em;stroke-width:1.5;"></i> Résilience organisationnelle</div>
+        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="landmark" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Résilience organisationnelle</div>
         <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Le savoir institutionnel est encodé. Il ne part plus avec les personnes qui quittent.</div>
       </div>
     </div>
@@ -704,24 +706,24 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <p class="sm fu" data-d="2" style="margin-bottom:1.3em;max-width:74ch">Ce n'est pas « compatible avec React, Vue ou Angular ». C'est plus fondamental que ça — c'est une question de résilience organisationnelle.</p>
 <div class="fu" data-d="3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;max-width:1020px">
   <div style="background:var(--subtle);border-radius:var(--r);padding:22px 18px;border-left:5px solid var(--brand);text-align:left">
-    <div style="margin-bottom:10px"><i data-lucide="book-open" style="width:1.5rem;height:1.5rem;stroke-width:1.5;color:var(--brand);"></i></div>
+    <div class="card-ico" style="margin-bottom:10px"><i data-lucide="book-open"></i></div>
     <div style="font-weight:700;color:var(--brand-dark);margin-bottom:7px;font-size:1.04rem">Les décisions restent</div>
     <div style="font-size:.93rem;color:var(--muted);line-height:1.65">Quand votre organisation migre vers une nouvelle technologie, les décisions de design et leurs justifications sont déjà encodées. Elles ne disparaissent pas avec les anciens outils.</div>
   </div>
   <div style="background:var(--subtle);border-radius:var(--r);padding:22px 18px;border-left:5px solid var(--brand);text-align:left">
-    <div style="margin-bottom:10px"><i data-lucide="shield-check" style="width:1.5rem;height:1.5rem;stroke-width:1.5;color:var(--brand);"></i></div>
+    <div class="card-ico" style="margin-bottom:10px"><i data-lucide="shield-check"></i></div>
     <div style="font-weight:700;color:var(--brand-dark);margin-bottom:7px;font-size:1.04rem">Les règles persistent</div>
     <div style="font-size:.93rem;color:var(--muted);line-height:1.65">L'accessibilité WCAG, la gouvernance, les contrôles de conformité — ils s'appliquent dans n'importe quel contexte technique. Pas besoin de les reconstruire à chaque migration.</div>
   </div>
   <div style="background:var(--subtle);border-radius:var(--r);padding:22px 18px;border-left:5px solid var(--brand);text-align:left">
-    <div style="margin-bottom:10px"><i data-lucide="brain" style="width:1.5rem;height:1.5rem;stroke-width:1.5;color:var(--brand);"></i></div>
+    <div class="card-ico" style="margin-bottom:10px"><i data-lucide="brain"></i></div>
     <div style="font-weight:700;color:var(--brand-dark);margin-bottom:7px;font-size:1.04rem">La mémoire survit</div>
     <div style="font-size:.93rem;color:var(--muted);line-height:1.65">Le savoir institutionnel est dans le système, pas dans les outils. Une migration technologique ne réinitialise pas la mémoire organisationnelle — elle repart avec ses 58 ADRs intacts.</div>
   </div>
 </div>
 <div class="fu" data-d="4" style="margin-top:1.2em;max-width:1020px">
   <div style="background:var(--brand-dark);border-radius:var(--r);padding:14px 22px;display:flex;align-items:center;gap:14px">
-    <i data-lucide="landmark" style="width:1.4rem;height:1.4rem;stroke-width:1.5;color:var(--brand-light);flex-shrink:0;"></i>
+    <i data-lucide="landmark" class="wico" style="flex-shrink:0;"></i>
     <p style="font-size:1.02rem;color:rgba(255,255,255,.75);line-height:1.65;margin:0">
       <strong style="color:var(--brand-light)">Pour la direction :</strong> Vous n'investissez pas dans une technologie. Vous investissez dans une façon de travailler qui ne deviendra pas obsolète — quelle que soit la technologie utilisée demain.
     </p>
