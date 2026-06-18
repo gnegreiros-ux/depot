@@ -182,7 +182,7 @@ h4{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:600;line-height:1.35}
 .kh{position:fixed;bottom:62px;right:20px;background:rgba(27,16,22,.9);color:rgba(255,255,255,.72);font-size:14px;padding:5px 9px;border-radius:5px;pointer-events:none;transition:opacity 1s}
 .kh.hidden{opacity:0}
 
-.ab-row{font-size:clamp(.88rem,1.1vw,.98rem);line-height:1.45;padding:8px 20px;border-bottom:1px solid var(--border);display:flex;gap:11px;align-items:flex-start}
+.ab-row{font-size:clamp(.85rem,1.05vw,.94rem);line-height:1.4;padding:6px 20px;border-bottom:1px solid var(--border);display:flex;gap:11px;align-items:flex-start}
 .ab-row:last-child{border-bottom:none}
 .ab-old::before{content:'→';color:var(--danger);flex-shrink:0;font-weight:400;margin-top:1px}
 .ab-new::before{content:'→';color:var(--brand);flex-shrink:0;font-weight:400;margin-top:1px}
@@ -275,32 +275,25 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <section class="slide light" data-act="Acte 1 — Le problème">
 <div class="slide-logo" aria-hidden="true"></div>
 <div class="ey d fu">Reconnaissez-vous ces situations?</div>
-<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:25ch">Ce qu'on fait encore manuellement</h3>
-<div class="cols fu" data-d="2">
-<div class="col">
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="refresh-cw" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Le bouton qui change de couleur</p><p class="sm">Deux équipes, deux versions du même composant. Laquelle est la bonne? On ne sait plus.</p></div>
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="clipboard-list" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> La doc qui devient périmée</p><p class="sm">Le guide a été mis à jour… en Confluence… il y a 8 mois. Peut-être.</p></div>
-<div class="card" style="text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="search" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'audit d'accessibilité manuel</p><p class="sm">On sort l'outil, on documente dans un Excel, on envoie un rapport. La prochaine fois, on recommence.</p></div>
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.4em;max-width:28ch">Trois problèmes que chaque organisation paie sans les mesurer</h3>
+<div class="fu" data-d="2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;max-width:1040px">
+  <div style="background:var(--subtle);border-radius:var(--r);padding:26px 22px;border-left:6px solid var(--slate);text-align:left">
+    <div style="font-size:2rem;margin-bottom:14px"><i data-lucide="git-branch" style="width:2rem;height:2rem;stroke-width:1.5;color:var(--slate)"></i></div>
+    <p style="font-weight:700;color:var(--text);font-size:1.06rem;margin-bottom:8px">Des équipes qui n'appliquent pas les mêmes règles</p>
+    <p class="sm">Deux équipes, deux façons de faire. Les arbitrages se répètent. Les livrables divergent. Personne n'a tort — il n'y a juste pas de référence commune.</p>
+  </div>
+  <div style="background:var(--subtle);border-radius:var(--r);padding:26px 22px;border-left:6px solid var(--slate);text-align:left">
+    <div style="font-size:2rem;margin-bottom:14px"><i data-lucide="user-minus" style="width:2rem;height:2rem;stroke-width:1.5;color:var(--slate)"></i></div>
+    <p style="font-weight:700;color:var(--text);font-size:1.06rem;margin-bottom:8px">Du savoir qui repart avec les personnes qui quittent</p>
+    <p class="sm">Les décisions importantes ne sont pas documentées. Quand la personne qui les connaît part, l'organisation recommence à zéro — ou refait les mêmes erreurs.</p>
+  </div>
+  <div style="background:#fff;border-radius:var(--r);padding:26px 22px;border-left:6px solid var(--brand);text-align:left">
+    <div style="font-size:2rem;margin-bottom:14px"><i data-lucide="clock" style="width:2rem;height:2rem;stroke-width:1.5;color:var(--brand)"></i></div>
+    <p style="font-weight:700;color:var(--brand-dark);font-size:1.06rem;margin-bottom:8px">Des erreurs découvertes trop tard, en fin de projet</p>
+    <p class="sm">Les problèmes de cohérence et de conformité ne surgissent pas en début de projet. Ils apparaissent quand le coût de les corriger est le plus élevé.</p>
+  </div>
 </div>
-<div class="col">
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="ruler" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> La décision qu'on re-prend</p><p class="sm">Pourquoi ce formulaire est à 3 colonnes? Personne ne s'en souvient. On refait la discussion.</p></div>
-<div class="card" style="margin-bottom:12px;text-align:left;border-left:8px solid var(--slate);background:var(--subtle)"><p style="font-weight:700;color:var(--text);margin-bottom:3px"><i data-lucide="link" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Le design qui ne survit pas au dev</p><p class="sm">La maquette était exacte. L'intégration ajoute ses propres interprétations. On découvre en UAT.</p><p class="sm" style="font-size:.82rem;color:var(--muted);margin-top:6px;font-style:italic">UAT — tests d'acceptation utilisateur, la dernière validation avant la mise en production.</p></div>
-<div class="card" style="text-align:left;border-left:8px solid var(--brand);background:#fff"><p style="font-weight:600;color:var(--brand);margin-bottom:6px"><i data-lucide="lightbulb" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> Et si tout ça se gérait automatiquement?</p><p class="sm">Pas en remplaçant les humains. En leur retirant le travail répétitif et sans valeur ajoutée.</p></div>
-</div>
-</div>
-</section>
-
-<!-- 5 STATS -->
-<section class="slide dark" data-act="Acte 1 — Le problème">
-<div class="slide-logo" aria-hidden="true"></div>
-<div class="ey b fu">Systèmes de design — sans IA</div>
-<h3 class="w fu" data-d="1" style="margin-bottom:1.4em">Un système de design seul améliore déjà tout ça</h3>
-<div class="stat-grid fu" data-d="2">
-<div class="sc2"><span class="sn">2×</span><span class="sl">Livraisons plus fréquentes pour les équipes avec un système de design mature</span><span class="ss">Sparkbox Design Systems Survey 2024</span></div>
-<div class="sc2"><span class="sn">80%</span><span class="sl">Réduction des violations d'accessibilité avec des composants WCAG AA natifs</span><span class="ss">IBM Carbon Case Study</span></div>
-<div class="sc2"><span class="sn">34%</span><span class="sl">Plus de chances de respecter les délais de livraison avec un système de design</span><span class="ss">Sparkbox Design Systems Survey 2024</span></div>
-</div>
-<p class="fu" data-d="4" style="margin-top:1.8em;font-size:1.04rem;color:rgba(255,255,255,.68)">Et ça, c'est sans l'IA. Imaginez la prochaine étape.</p>
+<p class="fu" data-d="3" style="margin-top:1.4em;font-size:1.04rem;color:var(--muted)">Ce qu'on ne mesure pas, on continue à le payer.</p>
 </section>
 
 <!-- 6 ACT2 -->
@@ -308,38 +301,17 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <div class="slide-logo" aria-hidden="true"></div>
 <div class="abg">2</div>
 <div class="ey b fu">Acte 2</div>
-<h2 class="w fu" data-d="2" style="margin:.4em 0;text-align:center">L'IA utile × l'IA <span class="bl">gadget</span></h2>
-<p class="lead mu fu" data-d="3" style="margin-top:1em">La vraie question n'est pas «&nbsp;l'IA va-t-elle me remplacer?&nbsp;»<br>C'est «&nbsp;à quoi je préfère passer mon temps?&nbsp;»</p>
-<p class="fu" data-d="4" style="margin-top:1.2em;font-size:1.12rem;color:rgba(255,255,255,.58);font-style:italic">L'IA ne prend pas les emplois. Elle prend les tâches qui volaient le temps de vos équipes.</p>
+<h2 class="w fu" data-d="2" style="margin:.4em 0">L'IA qui travaille<br><span class="bl">pour nous</span></h2>
+<p class="lead mu fu" data-d="3" style="margin-top:1em;max-width:44ch">Pas ChatGPT. Pas un assistant qui génère sans règles. Une IA qui exécute les décisions que <em>vous</em> avez prises.</p>
+<div class="fu" data-d="4" style="margin-top:1.6em;display:flex;gap:10px;flex-direction:column;align-items:flex-start">
+  <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.8)"><span style="color:var(--brand-light);font-weight:700;font-size:1.1rem">→</span> Prévisible — les règles sont connues à l'avance.</div>
+  <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.8)"><span style="color:var(--brand-light);font-weight:700;font-size:1.1rem">→</span> Traçable — chaque action est documentée.</div>
+  <div style="display:flex;align-items:center;gap:12px;font-size:1rem;color:rgba(255,255,255,.8)"><span style="color:var(--brand-light);font-weight:700;font-size:1.1rem">→</span> Sous votre contrôle — le dernier mot est toujours humain.</div>
+</div>
 <div class="fu" data-d="5" style="margin-top:2em;display:flex;gap:10px;align-items:center">
   <div style="display:flex;align-items:center;gap:7px;background:rgba(13,155,138,.18);border:1px solid rgba(95,227,208,.3);border-radius:99px;padding:6px 13px;font-size:.76rem;color:var(--brand-light);letter-spacing:.06em;text-transform:uppercase;font-weight:600"><i data-lucide="brain" style="width:.85em;height:.85em;stroke-width:1.5;"></i> Humains · Décident</div>
   <div style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:99px;padding:6px 13px;font-size:.76rem;color:rgba(255,255,255,.18);letter-spacing:.06em;text-transform:uppercase"><i data-lucide="bot" style="width:.85em;height:.85em;stroke-width:1.5;"></i> Agents · Exécutent</div>
   <div style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:99px;padding:6px 13px;font-size:.76rem;color:rgba(255,255,255,.18);letter-spacing:.06em;text-transform:uppercase"><i data-lucide="shield" style="width:.85em;height:.85em;stroke-width:1.5;"></i> Système · Garantit</div>
-</div>
-</section>
-
-<!-- 7 IA UTILE VS GADGET -->
-<section class="slide white" data-act="Acte 2 — L'IA utile">
-<div class="slide-logo" aria-hidden="true"></div>
-<div class="ey d fu">Parlons clairement</div>
-<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.2em;max-width:26ch">Ce n'est pas ChatGPT. C'est quelque chose de plus précis.</h3>
-<div class="cols fu" data-d="2">
-<div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--danger);height:100%">
-<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px"><i data-lucide="x-circle" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'IA gadget</p>
-<div class="rp">Un assistant qui génère du contenu sans règles ni contraintes</div>
-<div class="rp">Imprévisible — chaque résultat est différent</div>
-<div class="rp">Aucune traçabilité des décisions</div>
-<div class="rp">Dépendant d'une plateforme externe</div>
-<div class="rp">Le dernier mot n'appartient à personne</div>
-</div></div>
-<div class="col"><div class="card" style="text-align:left;border-top:8px solid var(--success);height:100%">
-<p style="font-weight:700;font-size:1.12rem;color:var(--text);margin-bottom:11px"><i data-lucide="check-circle" style="width:1.1em;height:1.1em;vertical-align:-.2em;stroke-width:1.5;"></i> L'IA utile</p>
-<div class="rp">Un agent qui exécute des règles définies par des humains</div>
-<div class="rp">Prévisible — les règles sont encodées, les résultats vérifiables</div>
-<div class="rp">Chaque décision documentée, versionnée, traçable</div>
-<div class="rp">Sous contrôle organisationnel — données et outils chez nous</div>
-<div class="rp"><strong>Le dernier mot est toujours humain</strong></div>
-</div></div>
 </div>
 </section>
 
@@ -371,7 +343,12 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
     <div style="font-size:.82rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.07em;border-top:1px solid rgba(255,255,255,.12);padding-top:10px">Actes 4 &amp; 5 · L'investissement organisationnel protégé</div>
   </div>
 </div>
-<p class="fu" data-d="4" style="margin-top:1.4em;font-size:1rem;color:rgba(255,255,255,.65)">Chaque slide qui suit s'ancre dans l'un de ces trois piliers.</p>
+<div class="fu" data-d="4" style="margin-top:1em;width:100%;max-width:1060px;background:rgba(13,155,138,.2);border:2px solid rgba(95,227,208,.45);border-radius:var(--r);padding:16px 24px;display:flex;align-items:center;gap:16px">
+  <i data-lucide="shield-check" style="flex-shrink:0;color:var(--brand-light);width:30px;height:30px;stroke-width:1.5;"></i>
+  <p style="font-size:1.05rem;color:#fff;line-height:1.55;margin:0">
+    <strong style="color:var(--brand-light)">Fil conducteur :</strong> Le système protège l'investissement organisationnel indépendamment des technologies.
+  </p>
+</div>
 </section>
 
 <!-- 10 PRINCIPES -->
@@ -634,76 +611,129 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 </section>
 
 <!-- 20 AVANT APRÈS -->
-<section class="slide white" data-act="Acte 4 — Pour nous">
+<section class="slide white" data-act="Acte 4 — Pour nous" style="justify-content:flex-start;padding-top:3.5vw">
 <div class="slide-logo" aria-hidden="true"></div>
 <div class="ey d fu">Ce que ça change concrètement</div>
-<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:1.3em;max-width:32ch">Quel que soit notre rôle, le changement est le même</h3>
-<div class="fu" data-d="2" style="display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;max-width:960px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border)">
+<h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:.8em;max-width:32ch">Quel que soit notre rôle, le changement est le même</h3>
+<div class="fu" data-d="2" style="margin-top:.6em;display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;max-width:960px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--border)">
 
   <div style="background:var(--subtle);padding:0">
-    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+    <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
       <span style="font-size:1rem"><i data-lucide="timer" style="width:1rem;height:1rem;stroke-width:1.5;"></i></span>
-      <span style="font-weight:600;font-size:1.05rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">Aujourd'hui</span>
+      <span style="font-weight:600;font-size:1rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase">Aujourd'hui</span>
     </div>
-    <div style="padding:8px 0">
-      <div class="ab-row ab-old">Vérification manuelle de la conformité</div>
+    <div style="padding:4px 0">
       <div class="ab-row ab-old">Connaissance qui reste dans la tête des gens</div>
-      <div class="ab-row ab-old">Dérives découvertes en fin de projet, souvent en UAT</div>
+      <div class="ab-row ab-old">Dérives découvertes en fin de projet, souvent trop tard</div>
       <div class="ab-row ab-old">Documentation périmée dès qu'une décision change</div>
-      <div class="ab-row ab-old">Audits ponctuels, coûteux, souvent trop tardifs</div>
       <div class="ab-row ab-old">Règles réexpliquées à chaque nouveau collaborateur</div>
-      <div class="ab-row ab-old">Savoir concentré dans quelques individus clés</div>
-      <div class="ab-row ab-old">Coûts de formation répétés à chaque nouveau collaborateur</div>
+      <div class="ab-row ab-old">Le savoir repart avec les personnes qui quittent</div>
     </div>
   </div>
 
   <div style="background:#fff;padding:0;border-left:1px solid var(--border)">
-    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(13,155,138,.06),rgba(237,107,134,.04))">
+    <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(13,155,138,.06),rgba(237,107,134,.04))">
       <span style="font-size:1rem">✦</span>
-      <span style="font-weight:600;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-dark);font-weight:600">Avec un système agentique</span>
+      <span style="font-weight:600;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-dark)">Avec un système agentique</span>
     </div>
-    <div style="padding:8px 0">
-      <div class="ab-row ab-new">Surveillance continue, automatisée, sans intervention</div>
+    <div style="padding:4px 0">
       <div class="ab-row ab-new">Connaissance encodée dans le système — transmissible</div>
       <div class="ab-row ab-new">Anomalies signalées en temps réel, avant la livraison</div>
       <div class="ab-row ab-new">Documentation générée et maintenue automatiquement</div>
-      <div class="ab-row ab-new">Conformité garantie en continu, traçable à tout moment</div>
       <div class="ab-row ab-new">Les règles s'expliquent elles-mêmes — toujours à jour</div>
       <div class="ab-row ab-new">Connaissance institutionnalisée — indépendante des personnes</div>
-      <div class="ab-row ab-new">Standards auto-maintenus — l'intégration de nouveaux membres s'accélère</div>
     </div>
   </div>
 
 </div>
-<div class="fu" data-d="4" style="margin-top:1.2em;width:100%;max-width:960px">
-  <div style="background:var(--brand-dark);border-radius:var(--r);padding:16px 20px 14px;margin-bottom:10px">
-    <p style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-light);margin-bottom:10px">Ce que la direction en gagne</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
-      <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="compass" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Contrôle sans micro-gestion</div>
-        <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Les standards s'appliquent automatiquement — sans superviser chaque équipe.</div>
+<div class="fu" data-d="4" style="margin-top:.7em;width:100%;max-width:960px">
+  <div style="background:var(--brand-dark);border-radius:var(--r);padding:14px 18px 12px">
+    <p style="font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-light);margin-bottom:10px">Ce que la direction en gagne</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+        <div style="font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:7px"><i data-lucide="compass" class="wico" style="vertical-align:-.15em;stroke-width:1.5;width:1em;height:1em;"></i> Contrôle sans micro-gestion</div>
+        <div style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.5">Les standards s'appliquent automatiquement — sans superviser chaque équipe.</div>
       </div>
-      <div style="padding:14px 16px;border-right:1px solid rgba(255,255,255,.08)">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="package" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Livraisons plus prévisibles</div>
-        <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Moins de rework tardif. Moins de surprises en UAT. Des délais mieux tenus.</div>
+      <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+        <div style="font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:7px"><i data-lucide="package" class="wico" style="vertical-align:-.15em;stroke-width:1.5;width:1em;height:1em;"></i> Livraisons plus prévisibles</div>
+        <div style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.5">Moins de rework tardif. Moins de surprises en fin de projet. Des délais mieux tenus.</div>
       </div>
-      <div style="padding:14px 16px">
-        <div style="font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px"><i data-lucide="landmark" class="wico" style="vertical-align:-.15em;stroke-width:1.5;"></i> Résilience organisationnelle</div>
-        <div style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.55">Le savoir institutionnel est encodé. Il ne part plus avec les personnes qui quittent.</div>
+      <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:10px 14px">
+        <div style="font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:7px"><i data-lucide="landmark" class="wico" style="vertical-align:-.15em;stroke-width:1.5;width:1em;height:1em;"></i> Résilience organisationnelle</div>
+        <div style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.5">Le savoir institutionnel est encodé. Il ne repart plus avec les personnes qui quittent.</div>
       </div>
     </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)">
+      <p style="font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.55;margin:0"><strong style="color:#fff">Le principe :</strong> nous continuons à prendre les décisions importantes. Le système s'assure qu'elles sont respectées — automatiquement, en permanence, et de façon traçable.</p>
+    </div>
   </div>
-  <p style="font-size:.92rem;color:var(--muted);line-height:1.65;padding:0 4px"><strong style="color:var(--text)">Le principe :</strong> nous continuons à prendre les décisions importantes. Le système s'assure qu'elles sont respectées — automatiquement, en permanence, et de façon traçable.</p>
 </div>
 </section>
 
 
-<!-- ACT4 AGNOSTICISME TECHNOLOGIQUE -->
+<!-- ACT4 ARCHITECTURE DURABLE -->
+<section class="slide dark" data-act="Acte 4 — Pour nous">
+<div class="slide-logo" aria-hidden="true"></div>
+<div class="ey b fu">Pourquoi c'est structurel</div>
+<h3 class="w fu" data-d="1" style="margin-bottom:.8em;max-width:28ch">Décisions d'abord.<br>Technologies ensuite.</h3>
+<div class="fu" data-d="2" style="display:flex;gap:28px;width:100%;max-width:1020px;align-items:flex-start">
+
+  <div style="flex:1;display:flex;flex-direction:column">
+    <div style="background:var(--brand);border-radius:12px 12px 0 0;padding:15px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:4px">Permanent</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px"><i data-lucide="brain" style="width:1.1em;height:1.1em;stroke-width:1.5;"></i> Décisions</div>
+      <div style="font-size:.83rem;color:rgba(255,255,255,.78);margin-top:3px">Valeurs, principes, pourquoi</div>
+    </div>
+    <div style="display:flex;justify-content:center;padding:3px 0;background:rgba(255,255,255,.04)"><span style="color:var(--brand-light);font-size:1.1rem;font-weight:700">↓</span></div>
+    <div style="background:rgba(13,155,138,.14);border:1px solid rgba(95,227,208,.2);border-top:none;padding:15px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--brand-light);margin-bottom:4px">Durable</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px"><i data-lucide="book-open" style="width:1.1em;height:1.1em;stroke-width:1.5;"></i> Connaissances</div>
+      <div style="font-size:.83rem;color:rgba(255,255,255,.65);margin-top:3px">ADRs, règles encodées, mémoire institutionnelle</div>
+    </div>
+    <div style="display:flex;justify-content:center;padding:3px 0;background:rgba(255,255,255,.04)"><span style="color:var(--brand-light);font-size:1.1rem;font-weight:700">↓</span></div>
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-top:none;padding:15px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:4px">Stable</div>
+      <div style="font-size:1.1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px"><i data-lucide="puzzle" style="width:1.1em;height:1.1em;stroke-width:1.5;"></i> Composants &amp; standards</div>
+      <div style="font-size:.83rem;color:rgba(255,255,255,.75);margin-top:3px">Tokens, bibliothèques, gouvernance WCAG</div>
+    </div>
+    <div style="display:flex;justify-content:center;padding:3px 0;background:rgba(255,255,255,.04)"><span style="color:rgba(255,255,255,.45);font-size:1.1rem;font-weight:700">↓</span></div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 12px 12px;padding:15px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px">Variable</div>
+      <div style="font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><i data-lucide="code" style="width:1.1em;height:1.1em;stroke-width:1.5;"></i> Technologies</div>
+      <div style="font-size:.83rem;color:rgba(255,255,255,.58);margin-top:3px">React, Vue, Angular… ce qui peut changer</div>
+    </div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding-top:4px">
+    <div style="background:rgba(13,155,138,.1);border:1px solid rgba(95,227,208,.18);border-radius:var(--r);padding:18px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-light);margin-bottom:10px">Ce qui demeure</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:.93rem;color:rgba(255,255,255,.82);display:flex;gap:8px"><span style="color:var(--brand-light);flex-shrink:0">→</span>Les décisions de design</div>
+        <div style="font-size:.93rem;color:rgba(255,255,255,.82);display:flex;gap:8px"><span style="color:var(--brand-light);flex-shrink:0">→</span>Les connaissances encodées</div>
+        <div style="font-size:.93rem;color:rgba(255,255,255,.82);display:flex;gap:8px"><span style="color:var(--brand-light);flex-shrink:0">→</span>Les contrats institutionnels</div>
+        <div style="font-size:.93rem;color:rgba(255,255,255,.82);display:flex;gap:8px"><span style="color:var(--brand-light);flex-shrink:0">→</span>La mémoire organisationnelle</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:18px 20px">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px">Ce qui peut changer</div>
+      <div style="font-size:.93rem;color:rgba(255,255,255,.62);line-height:1.7">Les frameworks · Les bibliothèques · Les outils · Les équipes</div>
+    </div>
+    <div style="background:rgba(13,155,138,.08);border:1px solid rgba(95,227,208,.15);border-radius:var(--r);padding:16px 20px">
+      <p style="font-size:.96rem;color:rgba(255,255,255,.82);line-height:1.65;margin:0">
+        <strong style="color:var(--brand-light)">Le message :</strong> Les organisations investissent dans leurs connaissances — pas dans leurs frameworks.
+      </p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ACT4 SOURCE UNIQUE DE VÉRITÉ -->
 <section class="slide light" data-act="Acte 4 — Pour nous">
 <div class="slide-logo" aria-hidden="true"></div>
-<div class="ey d fu">Ce que le système garantit — indépendamment de la technologie</div>
+<div class="ey d fu">Source unique de vérité</div>
 <h3 class="fu" data-d="1" style="color:var(--text);margin-bottom:.8em;max-width:28ch">L'investissement organisationnel survit aux choix technologiques</h3>
-<p class="sm fu" data-d="2" style="margin-bottom:1.3em;max-width:74ch">Ce n'est pas « compatible avec React, Vue ou Angular ». C'est plus fondamental que ça — c'est une question de résilience organisationnelle.</p>
+<p class="sm fu" data-d="2" style="margin-bottom:1.3em;max-width:74ch">Ce n'est pas « compatible avec React, Vue ou Angular ». C'est plus fondamental — le système protège les décisions, les connaissances, les standards. Pas les outils.</p>
 <div class="fu" data-d="3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;max-width:1020px">
   <div style="background:var(--subtle);border-radius:var(--r);padding:22px 18px;border-left:5px solid var(--brand);text-align:left">
     <div class="card-ico" style="margin-bottom:10px"><i data-lucide="book-open"></i></div>
@@ -721,12 +751,18 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
     <div style="font-size:.93rem;color:var(--muted);line-height:1.65">Le savoir institutionnel est dans le système, pas dans les outils. Une migration technologique ne réinitialise pas la mémoire organisationnelle — elle repart avec ses 58 ADRs intacts.</div>
   </div>
 </div>
-<div class="fu" data-d="4" style="margin-top:1.2em;max-width:1020px">
-  <div style="background:var(--brand-dark);border-radius:var(--r);padding:14px 22px;display:flex;align-items:center;gap:14px">
-    <i data-lucide="landmark" class="wico" style="flex-shrink:0;"></i>
-    <p style="font-size:1.02rem;color:rgba(255,255,255,.75);line-height:1.65;margin:0">
-      <strong style="color:var(--brand-light)">Pour la direction :</strong> Vous n'investissez pas dans une technologie. Vous investissez dans une façon de travailler qui ne deviendra pas obsolète — quelle que soit la technologie utilisée demain.
-    </p>
+<div class="fu" data-d="4" style="margin-top:1.2em;max-width:1020px;display:grid;grid-template-columns:3fr 2fr;gap:12px">
+  <div style="background:var(--brand-dark);border-radius:var(--r);padding:20px 24px;border-left:4px solid var(--brand-light)">
+    <div style="font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:11px">Pour la direction</div>
+    <p style="font-size:1.04rem;color:rgba(255,255,255,.9);line-height:1.7;margin:0">Vous n'investissez pas dans une technologie. Vous investissez dans une façon de travailler qui ne deviendra pas obsolète — quelle que soit la technologie utilisée demain.</p>
+  </div>
+  <div style="background:var(--brand-dark);border-radius:var(--r);padding:20px 24px">
+    <div style="font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:13px">Source unique de vérité</div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="font-size:1.08rem;font-weight:700;color:#fff">→ Une seule décision.</div>
+      <div style="font-size:1.08rem;font-weight:700;color:#fff">→ Plusieurs technologies.</div>
+      <div style="font-size:1.08rem;font-weight:700;color:var(--brand-light)">→ Aucun verrou.</div>
+    </div>
   </div>
 </div>
 </section>
@@ -780,8 +816,8 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <div class="bg"><div class="bgl">Code source</div><div class="bgv">100% public</div></div>
 <div class="bg"><div class="bgl">Vendor lock-in</div><div class="bgv">Aucun</div></div>
 </div>
-<div style="margin-top:13px;background:rgba(13,155,138,.1);border:1px solid rgba(13,155,138,.22);border-radius:var(--r);padding:13px 15px">
-<p style="font-size:1.06rem;color:rgba(255,255,255,.7);line-height:1.65"><strong style="color:var(--brand-light)">Ce que ça implique pour une organisation :</strong><br>Avec les bons outils et le bon mandat, une équipe dédiée peut déployer ce type d'infrastructure à l'échelle — et transformer durablement la façon dont vos équipes conçoivent, livrent et maintiennent les produits numériques.</p>
+<div style="margin-top:13px;background:rgba(13,155,138,.18);border:2px solid rgba(95,227,208,.35);border-radius:var(--r);padding:16px 18px">
+<p style="font-size:1.06rem;color:#fff;line-height:1.7"><strong style="color:var(--brand-light)">Ce que ça implique pour une organisation :</strong><br>Avec les bons outils et le bon mandat, une équipe dédiée peut déployer ce type d'infrastructure à l'échelle — et transformer durablement la façon dont vos équipes conçoivent, livrent et maintiennent les produits numériques.</p>
 </div>
 </div>
 </div>
@@ -805,28 +841,45 @@ svg.lucide{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;s
 <section class="slide dark" data-act="Fin">
 <div class="slide-logo" aria-hidden="true"></div>
 <div class="ey b fu">Merci</div>
-<h1 class="w fu" data-d="1" style="max-width:16ch;margin:.3em  0;font-size:clamp(1.8rem,4.2vw,3.8rem)">Les humains <span class="bl">décident</span>.<br>Les agents <span class="bl">exécutent</span>.<br>Le système <span class="bl">garantit</span>.</h1>
-<div class="fu" data-d="3" style="margin-top:1.7em;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:flex-start">
-<div style="display:flex;flex-direction:column;gap:10px">
-<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
-<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Le projet</div>
-<div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.04rem;color:var(--brand-light)">designsystem.gnegreiros.com</div>
+<div class="fu" data-d="1" style="margin-top:.5em;display:grid;grid-template-columns:5fr 4fr auto;gap:20px;width:100%;max-width:1040px;align-items:start">
+
+  <!-- Col 1 : Message -->
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <h1 class="w" style="margin:0;font-size:clamp(1.6rem,3.2vw,2.8rem)">Les humains <span class="bl">décident</span>.<br>Les agents <span class="bl">exécutent</span>.<br>Le système <span class="bl">garantit</span>.</h1>
+    <p style="font-size:clamp(.88rem,1.05vw,.96rem);color:rgba(255,255,255,.65);line-height:1.6;margin:0">Et le système protège l'investissement organisationnel indépendamment des technologies.</p>
+    <div style="background:rgba(13,155,138,.1);border:1px solid rgba(95,227,208,.15);border-radius:var(--r);padding:11px 15px">
+      <p style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.65;margin:0">Les technologies sont temporaires. Les connaissances sont durables. Agentica sépare les décisions des implémentations — pour que les équipes et les technologies puissent évoluer sans perdre ce qui a été construit.</p>
+    </div>
+  </div>
+
+  <!-- Col 2 : Infos -->
+  <div style="display:flex;flex-direction:column;gap:9px">
+    <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);padding:11px 15px">
+      <div style="font-size:.64rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Le projet</div>
+      <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.88rem;color:var(--brand-light)">designsystem.gnegreiros.com</div>
+    </div>
+    <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);padding:11px 15px">
+      <div style="font-size:.64rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Code source</div>
+      <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.8rem;color:var(--brand-light);line-height:1.5">github.com/gnegreiros-ux/<br>agentic-design-system</div>
+    </div>
+    <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);padding:11px 15px">
+      <div style="font-size:.64rem;color:rgba(255,255,255,.65);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px">Présenté par</div>
+      <div style="font-size:.9rem;color:#fff;font-weight:600">Guilherme Negreiros · BXC · RAMQ</div>
+    </div>
+    <div style="background:rgba(13,155,138,.1);border:1px solid rgba(95,227,208,.18);border-radius:var(--r);padding:11px 15px">
+      <div style="font-size:.64rem;font-weight:700;color:var(--brand-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Infrastructure de connaissances</div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.68);line-height:1.55;margin:0">Agentica protège les investissements en séparant les décisions des implémentations.</p>
+    </div>
+  </div>
+
+  <!-- Col 3 : QR -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <div class="qrw" id="qr2"></div>
+    <div class="qrl" style="text-align:center">Scanner pour explorer Agentica</div>
+  </div>
+
 </div>
-<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
-<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Code source</div>
-<div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.08rem;color:var(--brand-light)">github.com/gnegreiros-ux/agentic-design-system</div>
-</div>
-<div style="text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,0.3);border-radius:var(--r);padding:13px 17px">
-<div style="font-size:.68rem;color:rgba(255,255,255,.70);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Présenté par</div>
-<div style="font-size:1.04rem;color:#fff;font-weight:600">Guilherme Negreiros · BXC · RAMQ</div>
-</div>
-</div>
-<div >
-<div class="qrw" id="qr2"></div>
-<div class="qrl">Scanner pour explorer Agentica</div>
-</div>
-</div>
-<p class="fu" data-d="5" style="margin-top:1.8em;font-size:.76rem;color:rgba(255,255,255,0.38)">Bureau d'expérience client · RAMQ · 2026</p>
+<p class="fu" data-d="5" style="margin-top:1.4em;font-size:.76rem;color:rgba(255,255,255,0.38)">Bureau d'expérience client · RAMQ · 2026</p>
 </section>
 
 </div><!-- /deck -->
