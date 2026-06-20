@@ -23,9 +23,12 @@
 html,body{height:100%;overflow:hidden;background:var(--brand-deep)}
 body{display:flex;flex-direction:column}
 #deck{flex:1;position:relative;overflow:hidden}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3.5vw 5.5vw;opacity:0;pointer-events:none;transform:translateY(28px);transition:opacity var(--T),transform var(--T)}
-.slide.active{opacity:1;pointer-events:all;transform:translateY(0)}
-.slide.exit{opacity:0;transform:translateY(-28px)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3.5vw 5.5vw;opacity:0;pointer-events:none;transition:opacity var(--T)}
+.slide.active{opacity:1;pointer-events:all}
+.slide.exit{opacity:0}
+.slide>*:not(.bg-wrap){transform:translateY(28px);transition:transform var(--T)}
+.slide.active>*:not(.bg-wrap){transform:translateY(0)}
+.slide.exit>*:not(.bg-wrap){transform:translateY(-28px)}
 .slide.dark{background:var(--brand-deep)}
 .slide.navy{background:var(--brand-dark)}
 .slide.light{background:var(--off)}
@@ -67,7 +70,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 .w{color:#fff}.bl{color:var(--brand-light)}.bd{color:var(--brand)}.mu{color:rgba(255,255,255,.68)}
 /* Full-bleed image system */
 .bg-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;display:flex;align-items:center;justify-content:flex-end}
-.bg-img{height:70vh;width:auto;flex-shrink:0;display:block;mix-blend-mode:screen;opacity:.82}
+.bg-img{height:70vh;width:auto;flex-shrink:0;display:block;mix-blend-mode:screen;opacity:.82;will-change:transform}
 .bg-blur{position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);mask-image:linear-gradient(to right,black 0%,black 10%,transparent 40%);-webkit-mask-image:linear-gradient(to right,black 0%,black 10%,transparent 40%)}
 .bg-fade{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,17,23,.94) 0%,rgba(15,17,23,.84) 28%,rgba(15,17,23,.5) 50%,rgba(15,17,23,.2) 68%,transparent 86%)}
 .slide-content{position:relative;z-index:2;width:100%;max-width:1200px}
