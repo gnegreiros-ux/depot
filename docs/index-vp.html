@@ -84,7 +84,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 /* 3-statement hero block */
 .stmt-block{display:flex;flex-direction:column;gap:.15em}
 .stmt{font-size:clamp(1.6rem,3vw,2.8rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;color:#fff}
-.stmt .dim{color:rgba(255,255,255,.28)}
+.stmt .dim{color:rgba(255,255,255,.52)}
 .stmt .hi{color:var(--brand-light)}
 /* Asset pills (slide 5) */
 .asset-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.4em}
@@ -142,9 +142,9 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="content-w">
       <div class="ey b fu" data-d="1">IA Agentique · RAMQ · BXC</div>
       <div class="stmt-block fu" data-d="2" style="margin-top:.5em">
-        <span class="stmt">Les humains décident.</span>
-        <span class="stmt">L'IA exécute.</span>
-        <span class="stmt hi">Le système garantit.</span>
+        <span class="stmt">Les humains <span class="hi">décident.</span></span>
+        <span class="stmt">L'IA <span class="hi">exécute.</span></span>
+        <span class="stmt">Le système <span class="hi">garantit.</span></span>
       </div>
       <p class="lead mu fu" data-d="3" style="margin-top:1.2em">Guilherme Negreiros · UX Designer · Bureau d'expérience client</p>
     </div>
@@ -328,7 +328,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="bg-fade"></div>
   </div>
   <div class="slide-content">
-    <div class="content-w">
+    <div class="content-w" style="background:rgba(15,17,23,.68);border-radius:14px;padding:24px 28px">
       <div class="ey b fu" data-d="1">Acte III — Agentica</div>
       <h2 class="w fu" data-d="2">4 agents spécialisés</h2>
       <p class="sm fu" data-d="3" style="margin-top:.4em;margin-bottom:.9em;color:rgba(255,255,255,.55)">Les agents augmentent les équipes. Ils n'en prennent pas la place.</p>
@@ -490,7 +490,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
           <p class="qrl">designsystem.gnegreiros.com</p>
         </div>
         <div>
-          <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;color:#fff;line-height:1.35">designsystem<br>.gnegreiros.com</p>
+          <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;color:#fff;line-height:1.35;white-space:nowrap">designsystem.gnegreiros.com</p>
           <p class="sm" style="color:rgba(255,255,255,.4);margin-top:.6em">Documentation · Composants<br>ADRs · Tokens · Storybook</p>
         </div>
       </div>
@@ -514,9 +514,9 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="content-w">
       <div class="ey b fu" data-d="1">Acte VI — Conclusion</div>
       <div class="stmt-block fu" data-d="2" style="margin-top:.4em">
-        <span class="stmt">Les humains décident.</span>
-        <span class="stmt">L'IA exécute.</span>
-        <span class="stmt hi">Le système garantit.</span>
+        <span class="stmt">Les humains <span class="hi">décident.</span></span>
+        <span class="stmt">L'IA <span class="hi">exécute.</span></span>
+        <span class="stmt">Le système <span class="hi">garantit.</span></span>
       </div>
       <p class="lead mu fu" data-d="3" style="margin-top:1.3em">J'ai fait ça seul, en temps libre.</p>
       <p class="lead fu" data-d="4" style="margin-top:.4em;color:var(--brand-light);font-weight:700;font-size:clamp(1.1rem,2vw,1.55rem)">Imaginez ce qu'une équipe entière pourrait accomplir.</p>
