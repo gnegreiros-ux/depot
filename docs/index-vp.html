@@ -184,7 +184,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 <section class="slide dark" data-act="Acte I — Pourquoi ?">
 <div class="slide-logo" aria-hidden="true"></div>
   <div class="bg-wrap">
-    <img src="img/IMG-CONTEXT.png" alt="" class="bg-img">
+    <img src="img/IMG-ADOPTION.png" alt="" class="bg-img">
     <div class="bg-blur"></div>
     <div class="bg-fade"></div>
   </div>
@@ -603,7 +603,7 @@ function upd(){
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
   if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
-  if(e.key==='Escape'){slides[cur].classList.remove('active');cur=0;slides[0].classList.add('active');upd();}
+  if(e.key==='Escape'){if(cur===0)return;const prev=cur;slides[prev].classList.remove('active');slides[prev].classList.add('exit');setTimeout(()=>slides[prev].classList.remove('exit'),500);cur=0;slides[0].classList.remove('exit');slides[0].classList.add('active');upd();}
 });
 setTimeout(()=>document.getElementById('kh').classList.add('hidden'),4500);
 window.addEventListener('load',()=>{
