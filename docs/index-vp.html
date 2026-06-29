@@ -70,9 +70,9 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 .w{color:#fff}.bl{color:var(--brand-light)}.bd{color:var(--brand)}.mu{color:rgba(255,255,255,.68)}
 /* Full-bleed image system */
 .bg-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;display:flex;align-items:center;justify-content:flex-end}
-.bg-img{height:70vh;width:auto;flex-shrink:0;display:block;mix-blend-mode:screen;opacity:.82;will-change:transform}
-.bg-blur{position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);mask-image:linear-gradient(to right,black 0%,black 10%,transparent 40%);-webkit-mask-image:linear-gradient(to right,black 0%,black 10%,transparent 40%)}
-.bg-fade{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,17,23,.94) 0%,rgba(15,17,23,.84) 28%,rgba(15,17,23,.5) 50%,rgba(15,17,23,.2) 68%,transparent 86%)}
+.bg-img{height:70vh;width:auto;flex-shrink:0;display:block;mix-blend-mode:screen;opacity:1;will-change:transform}
+.bg-blur{position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);mask-image:linear-gradient(to right,black 0%,black 15%,transparent 45%);-webkit-mask-image:linear-gradient(to right,black 0%,black 15%,transparent 45%)}
+.bg-fade{position:absolute;inset:0;background:linear-gradient(to right,rgba(15,17,23,.97) 0%,rgba(15,17,23,.9) 28%,rgba(15,17,23,.45) 50%,rgba(15,17,23,.1) 68%,transparent 82%)}
 .slide-content{position:relative;z-index:2;width:100%;max-width:1200px}
 .content-w{width:46%;text-align:left}
 /* Bullet rows */
@@ -94,9 +94,9 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 .asset{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:9px 16px;font-size:.9rem;color:#fff;display:flex;align-items:center;gap:8px}
 /* Stat cards (slide 13) */
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:780px}
-.stat-c{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 14px;text-align:center}
+.stat-c{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:18px 14px;text-align:center}
 .stat-n{font-size:clamp(2rem,3vw,2.8rem);font-weight:700;color:var(--brand-light);line-height:1;display:block;margin-bottom:6px}
-.stat-l{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.4}
+.stat-l{font-size:.82rem;color:rgba(255,255,255,.82);line-height:1.4}
 /* Agent cards v2 (slide 9) */
 .ag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:640px}
 .ag2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;text-align:left}
@@ -170,39 +170,35 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
       <div class="ey b fu" data-d="1">Acte I — Pourquoi ?</div>
       <h2 class="w fu" data-d="2">Pourquoi maintenant ?</h2>
       <div style="margin-top:1.1em">
-        <p class="bul fu" data-d="3">L'IA générative est passée de curiosité à capacité opérationnelle</p>
-        <p class="bul fu" data-d="3">Les équipes cherchent à faire plus avec les mêmes ressources</p>
-        <p class="bul fu" data-d="4">Les décisions restent dans les têtes — pas dans les systèmes</p>
-        <p class="bul fu" data-d="4">Le savoir repart avec les gens qui quittent</p>
+        <p class="bul fu" data-d="3">La Transformation numérique est en cours — le bon moment pour agir</p>
+        <p class="bul fu" data-d="3">L'IA agentique est disponible dès aujourd'hui, pas dans 5 ans</p>
+        <p class="bul fu" data-d="4">Nos équipes sont sollicitées au maximum — sans ressources supplémentaires</p>
+        <p class="bul fu" data-d="4">Les décisions restent dans les têtes, pas dans les systèmes</p>
+        <p class="bul fu" data-d="5">Le savoir repart avec chaque départ</p>
       </div>
-      <p class="lead mu fu" data-d="5" style="margin-top:1.3em">Et si l'IA agentique pouvait augmenter notre impact ?</p>
+      <p class="lead mu fu" data-d="5" style="margin-top:1.3em">Et si l'IA agentique pouvait changer la donne ?</p>
     </div>
   </div>
 </section>
 
 <!-- 3 GÉNÉRATIVE VS AGENTIQUE -->
-<section class="slide dark" data-act="Acte I — Pourquoi ?">
-<div class="slide-logo" aria-hidden="true"></div>
-  <div class="bg-wrap">
-    <img src="img/IMG-ADOPTION.png" alt="" class="bg-img">
-    <div class="bg-blur"></div>
-    <div class="bg-fade"></div>
-  </div>
-  <div class="slide-content">
-    <div class="content-w">
-      <div class="ey b fu" data-d="1">Acte I — Pourquoi ?</div>
-      <h2 class="w fu" data-d="2">Générative ou agentique ?</h2>
-      <p class="lead mu fu" data-d="3" style="margin-top:.7em;margin-bottom:1.2em">Deux capacités distinctes, souvent confondues.</p>
-      <div class="duo fu" data-d="4">
-        <div class="duo-col">
-          <div class="duo-ico"><i data-lucide="message-square"></i></div>
-          <div class="duo-title">IA Générative</div>
-          <div class="duo-sub">Répond à une question.<br>S'arrête là.<br><br><span style="opacity:.6;font-size:.82rem">ChatGPT · Claude.ai</span></div>
+<section class="slide white" data-act="Acte I — Pourquoi ?">
+<div class="slide-logo" style="background-image:var(--logo-light)" aria-hidden="true"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div style="max-width:700px;width:100%">
+      <div class="ey d fu" data-d="1">Acte I — Pourquoi ?</div>
+      <h2 class="fu" data-d="2" style="color:var(--text);margin-top:.3em">Générative ou agentique ?</h2>
+      <p class="fu" data-d="3" style="margin-top:.6em;margin-bottom:1.4em;color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem)">Deux capacités distinctes, souvent confondues.</p>
+      <div class="duo fu" data-d="4" style="max-width:640px;margin:0 auto">
+        <div class="duo-col" style="background:rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.1)">
+          <div class="duo-ico" style="color:var(--muted)"><i data-lucide="message-square"></i></div>
+          <div class="duo-title" style="color:var(--text)">IA Générative</div>
+          <div class="duo-sub" style="color:var(--muted)">Répond à une question.<br>S'arrête là.<br><br><span style="font-size:.82rem;color:var(--muted);opacity:.7">ChatGPT · Claude.ai</span></div>
         </div>
         <div class="duo-col">
           <div class="duo-ico"><i data-lucide="workflow"></i></div>
-          <div class="duo-title">IA Agentique</div>
-          <div class="duo-sub">Exécute un mandat complet,<br>étape par étape.<br><br><span style="color:var(--brand-light);font-size:.85rem;line-height:1.5">Encadrée par vos normes,<br>règles et approbations.</span><br><br><span style="opacity:.6;font-size:.82rem">Claude Code · Cursor</span></div>
+          <div class="duo-title" style="color:var(--text)">IA Agentique</div>
+          <div class="duo-sub" style="color:var(--muted)">Exécute un mandat complet,<br>étape par étape.<br><br><span style="color:var(--brand);font-size:.85rem;font-weight:600;line-height:1.5">Encadrée par vos normes,<br>règles et approbations.</span><br><br><span style="font-size:.82rem;color:var(--muted);opacity:.7">Claude Code · Cursor</span></div>
         </div>
       </div>
     </div>
@@ -258,7 +254,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
         <span class="pill teal"><i data-lucide="git-commit-horizontal"></i> Décisions documentées</span>
         <span class="pill teal"><i data-lucide="check-circle"></i> Approbation humaine</span>
       </div>
-      <p class="sm fu" data-d="5" style="margin-top:1em;color:rgba(255,255,255,.5);line-height:1.6">Les agents respectent les règles que <em>vous</em> définissez — normes d'accessibilité, politiques d'organisation, critères de qualité. Rien n'est laissé à l'improvisation de l'IA.</p>
+      <p class="sm fu" data-d="5" style="margin-top:1em;color:rgba(255,255,255,.5);line-height:1.6">Les agents respectent les règles que <em>nous</em> définissons — normes d'accessibilité, politiques d'organisation, critères de qualité. Rien n'est laissé à l'improvisation de l'IA.</p>
     </div>
   </div>
 </section>
@@ -303,15 +299,15 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="content-w">
       <div class="ey b fu" data-d="1">Acte III — Agentica</div>
       <h2 class="w fu" data-d="2">Agentica</h2>
-      <p class="lead mu fu" data-d="3" style="margin-top:.8em">Un système de design agentique construit par une seule personne, en temps libre, avec Claude Code.</p>
-      <p class="lead mu fu" data-d="4" style="margin-top:.7em;line-height:1.6">Un système de design, c'est le langage visuel commun d'une organisation — composants, couleurs, règles d'accessibilité. Agentica y ajoute une couche : des agents IA qui le lisent, le comprennent, et génèrent du travail conforme automatiquement.</p>
-      <div class="asset-row fu" data-d="5">
+      <p class="lead fu" data-d="3" style="margin-top:.6em;color:var(--brand-light);font-weight:700;line-height:1.4">Un exemple concret. Pas une proposition de projet.</p>
+      <p class="lead mu fu" data-d="4" style="margin-top:.8em">Un système de design agentique construit par une seule personne, en temps libre, avec Claude Code.</p>
+      <p class="lead mu fu" data-d="5" style="margin-top:.6em;line-height:1.6">Un système de design, c'est la source de vérité partagée d'une organisation pour ses produits numériques — composants réutilisables, règles d'accessibilité, principes et décisions documentées — qui garantit cohérence et qualité sur toutes les interfaces. Agentica y ajoute une couche : des agents IA qui le lisent, le comprennent, et génèrent du travail conforme automatiquement.</p>
+      <div class="asset-row fu" data-d="6">
         <span class="asset"><i data-lucide="file-text"></i> Documentation</span>
         <span class="asset"><i data-lucide="code-2"></i> Code</span>
         <span class="asset"><i data-lucide="figma"></i> Figma</span>
         <span class="asset"><i data-lucide="shield-check"></i> Audits WCAG</span>
       </div>
-      <p class="lead fu" data-d="6" style="margin-top:1em;color:var(--brand-light);font-weight:700;line-height:1.5">Un exemple concret.<br>Pas une proposition de projet.</p>
     </div>
   </div>
 </section>
@@ -330,11 +326,11 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
       <h2 class="w fu" data-d="2">Des garanties intégrées</h2>
       <p class="sm fu" data-d="3" style="margin-top:.5em;margin-bottom:.9em;color:rgba(255,255,255,.55)">Chaque composant s'engage à respecter ces critères — automatiquement</p>
       <div class="fu" data-d="4">
-        <div class="feat"><span class="feat-ico"><i data-lucide="accessibility"></i></span> Accessibilité WCAG 2.1 AA</div>
-        <div class="feat"><span class="feat-ico"><i data-lucide="zap"></i></span> Comportements et états interactifs</div>
-        <div class="feat"><span class="feat-ico"><i data-lucide="copy"></i></span> Variantes et configurations</div>
-        <div class="feat"><span class="feat-ico"><i data-lucide="book-open"></i></span> Documentation intégrée</div>
-        <div class="feat"><span class="feat-ico"><i data-lucide="code-2"></i></span> Code lisible par l'humain et l'agent</div>
+        <div class="feat"><span class="feat-ico"><i data-lucide="accessibility"></i></span> Accessibilité WCAG 2.1 AA — garantie pour tous les utilisateurs</div>
+        <div class="feat"><span class="feat-ico"><i data-lucide="zap"></i></span> Réactions définies — survol, clic, erreur, état désactivé</div>
+        <div class="feat"><span class="feat-ico"><i data-lucide="copy"></i></span> Déclinaisons prévues — taille, couleur, état, configuration</div>
+        <div class="feat"><span class="feat-ico"><i data-lucide="book-open"></i></span> Guide d'utilisation intégré dans le composant lui-même</div>
+        <div class="feat"><span class="feat-ico"><i data-lucide="code-2"></i></span> Code compréhensible par l'équipe et par les agents IA</div>
       </div>
       <p class="sm fu" data-d="5" style="margin-top:.8em;color:rgba(255,255,255,.45)">Architecture agnostique · Web Components · Zéro dépendance de framework</p>
     </div>
@@ -359,7 +355,6 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
         <span class="stmt"><span class="dim">Aucun</span> verrou.</span>
       </div>
       <p class="lead mu fu" data-d="4" style="margin-top:1.2em">Chaque décision de design documentée est réutilisable par tous les outils de développement — aujourd'hui et demain.</p>
-      <p class="sm fu" data-d="5" style="margin-top:.6em;color:rgba(255,255,255,.35)">ADR = décision documentée avec son raisonnement · React, Angular, Vue = technologies qui construisent les interfaces web</p>
     </div>
   </div>
 </section>
@@ -377,34 +372,34 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
       <div class="ey b fu" data-d="1">Acte III — Agentica</div>
       <h2 class="w fu" data-d="2">4 agents spécialisés</h2>
       <p class="sm fu" data-d="3" style="margin-top:.4em;margin-bottom:.9em;color:rgba(255,255,255,.55)">Les agents augmentent les équipes. Ils n'en prennent pas la place.</p>
-      <div class="ag-grid fu" data-d="4">
-        <div class="ag2" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
-          <div class="ag2-h">
-            <div class="ag2-ico" style="background:rgba(13,155,138,.12);border:1px solid rgba(13,155,138,.25)"><i data-lucide="pen-tool" style="color:var(--brand)"></i></div>
-            <div><div class="ag2-name" style="color:#fff">Designer</div><div class="ag2-role" style="color:rgba(255,255,255,.55)">Tokens · Composants</div></div>
+      <div class="ag-grid fu" data-d="4" style="max-width:720px">
+        <div class="ag2" style="background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18)">
+          <div class="ag2-h" style="padding:18px 20px">
+            <div class="ag2-ico" style="width:46px;height:46px;background:rgba(13,155,138,.18);border:1px solid rgba(13,155,138,.35)"><i data-lucide="pen-tool" style="color:var(--brand-light)"></i></div>
+            <div><div class="ag2-name" style="color:#fff;font-size:1.05rem">Designer</div><div class="ag2-role" style="color:rgba(255,255,255,.75)">Tokens · Composants</div></div>
           </div>
-          <div class="ag2-b" style="color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.07)">Génère les spécifications visuelles</div>
+          <div class="ag2-b" style="color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.12);padding:12px 20px">Génère les spécifications visuelles</div>
         </div>
-        <div class="ag2" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
-          <div class="ag2-h">
-            <div class="ag2-ico" style="background:rgba(13,155,138,.12);border:1px solid rgba(13,155,138,.25)"><i data-lucide="code-2" style="color:var(--brand)"></i></div>
-            <div><div class="ag2-name" style="color:#fff">Développeur</div><div class="ag2-role" style="color:rgba(255,255,255,.55)">Web Components</div></div>
+        <div class="ag2" style="background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18)">
+          <div class="ag2-h" style="padding:18px 20px">
+            <div class="ag2-ico" style="width:46px;height:46px;background:rgba(13,155,138,.18);border:1px solid rgba(13,155,138,.35)"><i data-lucide="code-2" style="color:var(--brand-light)"></i></div>
+            <div><div class="ag2-name" style="color:#fff;font-size:1.05rem">Développeur</div><div class="ag2-role" style="color:rgba(255,255,255,.75)">Web Components</div></div>
           </div>
-          <div class="ag2-b" style="color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.07)">Implémente les composants conformes</div>
+          <div class="ag2-b" style="color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.12);padding:12px 20px">Implémente les composants conformes</div>
         </div>
-        <div class="ag2" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
-          <div class="ag2-h">
-            <div class="ag2-ico" style="background:rgba(13,155,138,.12);border:1px solid rgba(13,155,138,.25)"><i data-lucide="book-open" style="color:var(--brand)"></i></div>
-            <div><div class="ag2-name" style="color:#fff">Documentaliste</div><div class="ag2-role" style="color:rgba(255,255,255,.55)">Storybook · Guides</div></div>
+        <div class="ag2" style="background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18)">
+          <div class="ag2-h" style="padding:18px 20px">
+            <div class="ag2-ico" style="width:46px;height:46px;background:rgba(13,155,138,.18);border:1px solid rgba(13,155,138,.35)"><i data-lucide="book-open" style="color:var(--brand-light)"></i></div>
+            <div><div class="ag2-name" style="color:#fff;font-size:1.05rem">Documentaliste</div><div class="ag2-role" style="color:rgba(255,255,255,.75)">Storybook · Guides</div></div>
           </div>
-          <div class="ag2-b" style="color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.07)">Produit la documentation technique</div>
+          <div class="ag2-b" style="color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.12);padding:12px 20px">Produit la documentation technique</div>
         </div>
-        <div class="ag2" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
-          <div class="ag2-h">
-            <div class="ag2-ico" style="background:rgba(13,155,138,.12);border:1px solid rgba(13,155,138,.25)"><i data-lucide="shield-check" style="color:var(--brand)"></i></div>
-            <div><div class="ag2-name" style="color:#fff">Validateur</div><div class="ag2-role" style="color:rgba(255,255,255,.55)">WCAG · Conformité</div></div>
+        <div class="ag2" style="background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18)">
+          <div class="ag2-h" style="padding:18px 20px">
+            <div class="ag2-ico" style="width:46px;height:46px;background:rgba(13,155,138,.18);border:1px solid rgba(13,155,138,.35)"><i data-lucide="shield-check" style="color:var(--brand-light)"></i></div>
+            <div><div class="ag2-name" style="color:#fff;font-size:1.05rem">Validateur</div><div class="ag2-role" style="color:rgba(255,255,255,.75)">WCAG · Conformité</div></div>
           </div>
-          <div class="ag2-b" style="color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.07)">Audite l'accessibilité automatiquement</div>
+          <div class="ag2-b" style="color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.12);padding:12px 20px">Audite l'accessibilité automatiquement</div>
         </div>
       </div>
     </div>
@@ -469,7 +464,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
 <section class="slide dark" data-act="Acte IV — Architecture durable">
 <div class="slide-logo" aria-hidden="true"></div>
   <div class="bg-wrap">
-    <img src="img/IMG-DESUETUDE.png" alt="" class="bg-img">
+    <img src="img/IMG-DESUETUDE.png" alt="" class="bg-img" style="mix-blend-mode:normal;opacity:.85">
     <div class="bg-blur"></div>
     <div class="bg-fade"></div>
   </div>
@@ -503,7 +498,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="content-w">
       <div class="ey b fu" data-d="1">Acte V — La preuve</div>
       <h2 class="w fu" data-d="2">Ce qui a été accompli</h2>
-      <p class="sm fu" data-d="3" style="color:rgba(255,255,255,.45);margin-bottom:1.1em">1 personne · temps libre · Claude Code — normalement le travail d'une équipe de 4 spécialistes</p>
+      <p class="sm fu" data-d="3" style="color:rgba(255,255,255,.75);margin-bottom:1.1em">1 personne · temps libre · Claude Code — normalement le travail d'une équipe de 4 spécialistes</p>
       <div class="stat-grid fu" data-d="4">
         <div class="stat-c"><span class="stat-n">714</span><span class="stat-l">tokens de design</span></div>
         <div class="stat-c"><span class="stat-n">58</span><span class="stat-l">ADRs capturés</span></div>
