@@ -524,27 +524,32 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;line-height:1.25;letter-sp
     <div class="content-w">
       <div class="ey b fu" data-d="1">Acte V — La preuve</div>
       <h2 class="w fu" data-d="2">Explorez Agentica</h2>
-      <div class="fu" data-d="3" style="margin-top:1.1em;display:flex;align-items:flex-start;gap:14px;max-width:520px">
-        <div style="width:38px;height:38px;border-radius:50%;background:rgba(13,155,138,.2);border:1px solid rgba(13,155,138,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px">
-          <i data-lucide="mic" style="color:var(--brand-light);width:17px;height:17px"></i>
-        </div>
-        <div style="flex:1">
-          <p style="font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Balado · L'humain pilote l'IA avec Agentica</p>
-          <audio controls style="width:100%;accent-color:var(--brand);height:34px">
+      <div class="fu" data-d="3" style="margin-top:1.2em;display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px">
+        <!-- Balado -->
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:30px;height:30px;border-radius:50%;background:rgba(13,155,138,.2);border:1px solid rgba(13,155,138,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <i data-lucide="mic" style="color:var(--brand-light);width:14px;height:14px"></i>
+            </div>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.07em;text-transform:uppercase">Balado · IA générative</p>
+          </div>
+          <p style="font-size:.9rem;font-weight:600;color:#fff;line-height:1.3">L'humain pilote l'IA avec Agentica</p>
+          <audio controls style="width:100%;accent-color:var(--brand);height:32px">
             <source src="audio/Podcast_lhumain_pilote_IA_avec_Agentica_v1.mp3" type="audio/mpeg">
           </audio>
-          <p style="margin-top:8px;font-size:.72rem;color:rgba(255,255,255,.35);line-height:1.5">Fiction générée par IA (NotebookLM). Ce dialogue est un exemple d'IA générative — pas un vrai balado. Aucun animateur réel, aucune diffusion existante.</p>
+          <p style="font-size:.68rem;color:rgba(255,255,255,.3);line-height:1.5;margin-top:2px">Fiction générée par NotebookLM — dialogue simulé, pas une vraie émission.</p>
         </div>
-      </div>
-      <p class="lead mu fu" data-d="4" style="margin-top:1.2em;margin-bottom:1em">Scannez pour accéder au système de design en production</p>
-      <div class="fu" data-d="5" style="display:flex;align-items:center;gap:28px">
-        <div>
-          <div class="qrw" id="qr1"></div>
-          <p class="qrl">designsystem.gnegreiros.com</p>
-        </div>
-        <div>
-          <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:700;color:#fff;line-height:1.35;white-space:nowrap">designsystem.gnegreiros.com</p>
-          <p class="sm" style="color:rgba(255,255,255,.4);margin-top:.6em">Documentation · Composants<br>ADRs · Tokens · Storybook</p>
+        <!-- QR -->
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px;align-self:flex-start">
+            <div style="width:30px;height:30px;border-radius:50%;background:rgba(13,155,138,.2);border:1px solid rgba(13,155,138,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <i data-lucide="scan-line" style="color:var(--brand-light);width:14px;height:14px"></i>
+            </div>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.07em;text-transform:uppercase">Système de design</p>
+          </div>
+          <div class="qrw" id="qr1" style="margin:0 auto"></div>
+          <p style="font-size:.9rem;font-weight:700;color:#fff">designsystem.gnegreiros.com</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.5">Documentation · Composants<br>ADRs · Tokens · Storybook</p>
         </div>
       </div>
     </div>
