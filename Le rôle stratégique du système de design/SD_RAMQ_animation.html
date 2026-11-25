@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Le système de design, expliqué simplement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --navy:#0B1F3A; --grey:#51607A; --orange:#F26A1B; --blue:#1D5FA8; --blue2:#2F7FEF;
+    --red:#E5484D; --amber:#F2B705; --green:#2FA65A;
+    --font: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;background:#0B1F3A;overflow:hidden;font-family:var(--font)}
+  #wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  #stage{position:relative;width:1920px;height:1080px;transform-origin:center center;
+    background:linear-gradient(135deg,#FFFFFF 0%,#EEF4FC 100%);overflow:hidden;color:var(--navy)}
+  #svg{position:absolute;inset:0}
+  .abs{position:absolute}
+  .op0{opacity:0}
+
+  /* Titre d'ouverture */
+  #openTitle{left:0;right:0;top:560px;text-align:center}
+  #openTitle h1{font-size:76px;font-weight:800;letter-spacing:-1px}
+  #openTitle p{font-size:30px;color:var(--grey);margin-top:18px}
+  #openBar{left:915px;top:530px;height:6px;width:90px;border-radius:3px;background:var(--orange)}
+
+  /* En-tête de chapitre */
+  .head{left:80px;top:52px;width:1760px}
+  .head .k{font-size:19px;font-weight:700;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .head .t{font-size:46px;font-weight:800;letter-spacing:-0.5px;margin-top:8px}
+
+  /* Annotations par couche */
+  .row{left:900px;width:960px}
+  .row .lab{font-size:17px;font-weight:700;letter-spacing:1.5px;color:var(--blue)}
+  .row .main{font-size:32px;font-weight:800;margin-top:6px;display:flex;align-items:center;gap:16px}
+  .row .main i{width:18px;height:18px;border-radius:50%;display:inline-block;flex:none}
+  .row .sub{font-size:23px;color:var(--grey);margin-top:6px;line-height:1.35}
+
+  /* Navigation des scénarios */
+  #nav{left:80px;top:985px;width:1760px;display:flex;gap:20px}
+  .chip{flex:1;height:64px;border-radius:14px;border:1.5px solid #B9CEEC;background:#fff;
+    display:flex;align-items:center;gap:14px;padding:0 18px;font-size:18px;font-weight:600;color:var(--navy)}
+  .chip b{width:32px;height:32px;border-radius:50%;background:#E3EEFD;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+  .chip .v{font-size:15px;font-weight:600;color:var(--grey);white-space:nowrap;margin-top:3px}
+  .chip .v i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .chipOn{position:absolute;top:0;height:64px;border-radius:14px;background:var(--navy)}
+
+  #trans{left:0;right:0;top:300px;text-align:center}
+  #trans .k{font-size:22px;font-weight:700;letter-spacing:3px;color:var(--orange);text-transform:uppercase}
+  #trans h2{font-size:72px;font-weight:800;letter-spacing:-1px;margin-top:14px}
+  #trans p{font-size:30px;color:var(--grey);margin-top:18px}
+  #trans p b{color:var(--navy)}
+  #transLine{left:880px;top:270px;width:160px;height:6px;border-radius:3px;background:var(--orange);transform-origin:center}
+  #caption{left:80px;width:1760px;top:990px;text-align:center;font-size:28px;font-weight:600}
+  #caption span{background:#fff;border:1.5px solid #B9CEEC;border-radius:40px;padding:14px 32px;display:inline-block}
+
+  /* Valeur */
+  #cards{left:80px;top:250px;width:1760px;display:flex;gap:24px}
+  .card{flex:1;background:#fff;border:1.5px solid #CFDDF2;border-radius:20px;padding:30px 28px;height:290px;
+    box-shadow:0 8px 24px rgba(11,31,58,.08)}
+  .card svg{width:56px;height:56px}
+  .card h3{font-size:28px;font-weight:800;margin:18px 0 10px}
+  .card p{font-size:21px;color:var(--grey);line-height:1.4}
+  #final{left:80px;top:600px;width:1760px;height:300px;border-radius:24px;background:#E3EEFD;padding:44px 56px;display:flex;gap:60px;align-items:center}
+  #final .big{font-size:44px;font-weight:800;line-height:1.2;flex:1.1;border-left:7px solid var(--orange);padding-left:32px}
+  #final .big em{font-style:normal;color:var(--orange)}
+  #final .small{flex:1;font-size:24px;line-height:1.45}
+  #final .small b{font-weight:800}
+
+  #progress{left:0;bottom:0;height:6px;background:var(--orange)}
+
+  /* Contrôles (masqués en mode rendu) */
+  #ctrl{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;
+    background:rgba(11,31,58,.88);color:#fff;padding:8px 12px;border-radius:12px;font:14px var(--font);z-index:10;
+    opacity:.15;transition:opacity .2s}
+  #ctrl:hover{opacity:1}
+  #ctrl button{background:#1D5FA8;color:#fff;border:0;border-radius:8px;padding:7px 12px;font:600 14px var(--font);cursor:pointer}
+  #ctrl button:focus-visible{outline:3px solid #F2B705;outline-offset:2px}
+  #ctrl label{display:flex;gap:6px;align-items:center;cursor:pointer}
+  body.render #ctrl{display:none}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <svg id="svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gSD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2F7FEF"/><stop offset="1" stop-color="#3CC3F2"/></linearGradient>
+      <linearGradient id="gFE" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B5BD0"/><stop offset="1" stop-color="#7C88EA"/></linearGradient>
+      <filter id="fGlow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#2F9BF2" flood-opacity="0.6"/></filter>
+      <filter id="fShadow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="14"/></filter>
+      <filter id="fPill" x="-20%" y="-40%" width="140%" height="200%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B1F3A" flood-opacity="0.2"/></filter>
+    </defs>
+    <g id="logo"></g>
+    <g id="stack"></g>
+  </svg>
+
+  <div id="openBar" class="abs op0"></div>
+  <div id="openTitle" class="abs op0">
+    <h1>Le système de design, expliqué simplement</h1>
+    <p>Pourquoi il protège l’expérience de nos utilisateurs, quelle que soit la technologie choisie</p>
+  </div>
+
+  <div id="heads"></div>
+  <div id="rows"></div>
+  <div id="trans" class="abs op0">
+    <div class="k">Mise à l’épreuve</div>
+    <h2>Quatre scénarios d’architecture</h2>
+    <p>Pour chacun, une même question : <b>qui contrôle l’expérience de nos utilisateurs ?</b></p>
+  </div>
+  <div id="transLine" class="abs op0"></div>
+  <div id="caption" class="abs op0"><span>Le système de design encadre le frontend, qui construit ce que l’utilisateur vit.</span></div>
+  <div id="nav" class="abs op0"></div>
+
+  <div id="cards" class="abs"></div>
+  <div id="final" class="abs op0">
+    <div class="big">Les plateformes peuvent changer.<br><em>L’expérience utilisateur doit demeurer cohérente.</em></div>
+    <div class="small">Les plateformes gèrent les données, les processus et les capacités métier.<br><b>Le système de design gouverne l’expérience utilisateur.</b><br>Les deux sont complémentaires.</div>
+  </div>
+  <div id="progress" class="abs"></div>
+</div></div>
+
+<div id="ctrl" role="toolbar" aria-label="Contrôles de l’animation">
+  <button id="bPrev" aria-label="Chapitre précédent">◀◀</button>
+  <button id="bPlay" aria-label="Lecture ou pause">❚❚</button>
+  <button id="bNext" aria-label="Chapitre suivant">▶▶</button>
+  <label><input type="checkbox" id="cPres"> Mode présentation (pause à chaque chapitre)</label>
+  <span id="tc">0:00</span>
+</div>
+
+<script>
+/* ===================================================================== Outils */
+const NS = "http://www.w3.org/2000/svg";
+const clamp = (v, a=0, b=1) => Math.max(a, Math.min(b, v));
+const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2;
+const up = (t, a, b) => ease(clamp((t - a) / (b - a)));
+const sharp = w => clamp((w - .5) * 2);
+const C = { red:"#E5484D", amber:"#F2B705", green:"#2FA65A", lime:"#7FB342" };
+
+function el(tag, attrs={}, parent){
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const P = p => p.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+
+function slab(g, cx, cy, w, h, t, c){
+  const T=[[cx,cy-h/2],[cx+w/2,cy],[cx,cy+h/2],[cx-w/2,cy]];
+  const L=[[cx-w/2,cy],[cx,cy+h/2],[cx,cy+h/2+t],[cx-w/2,cy+t]];
+  const R=[[cx,cy+h/2],[cx+w/2,cy],[cx+w/2,cy+t],[cx,cy+h/2+t]];
+  const s = {stroke:c.stroke, "stroke-width":1, "stroke-linejoin":"round"};
+  el("polygon",{points:P(L),fill:c.left,...s},g);
+  el("polygon",{points:P(R),fill:c.right,...s},g);
+  el("polygon",{points:P(T),fill:c.top,...s},g);
+}
+function ghost(g, cx, cy, w, h, t, col, fo=.05){
+  const T=[[cx,cy-h/2],[cx+w/2,cy],[cx,cy+h/2],[cx-w/2,cy]];
+  el("polygon",{points:P(T),fill:col,"fill-opacity":fo,stroke:col,"stroke-width":2,"stroke-dasharray":"9 7"},g);
+  for (const [x,y] of [[cx-w/2,cy],[cx,cy+h/2],[cx+w/2,cy]])
+    el("line",{x1:x,y1:y,x2:x,y2:y+t,stroke:col,"stroke-width":2,"stroke-dasharray":"5 6"},g);
+  el("polyline",{points:P([[cx-w/2,cy+t],[cx,cy+h/2+t],[cx+w/2,cy+t]]),fill:"none",stroke:col,"stroke-width":2,"stroke-dasharray":"9 7"},g);
+}
+function grid(g, cx, cy, w, h, n=5){
+  const B=[cx,cy-h/2], R=[cx+w/2,cy], F=[cx,cy+h/2], L=[cx-w/2,cy];
+  const lerp=(a,b,f)=>[a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f];
+  for (let i=1;i<n;i++){ const f=i/n;
+    for (const [s,e] of [[lerp(B,R,f),lerp(L,F,f)],[lerp(B,L,f),lerp(R,F,f)]])
+      el("line",{x1:s[0],y1:s[1],x2:e[0],y2:e[1],stroke:"#fff","stroke-opacity":.2,"stroke-width":1.2},g);
+  }
+}
+function tiles(g, cx, cy, w, h, t, specs, gap=12){
+  const w2=w/2-gap, h2=h/2-gap/2;
+  const cen={back:[cx,cy-h/4],left:[cx-w/4,cy],right:[cx+w/4,cy],front:[cx,cy+h/4]};
+  for (const pos of ["back","left","right","front"]){
+    const s=specs[pos], [x,y]=cen[pos];
+    if (s.ghost) ghost(g,x,y,w2,h2,t,s.ghost,.03);
+    else slab(g,x,y-(s.dy||0),w2,h2,t+(s.dy||0),s);
+  }
+}
+function person(g, x, y, s, col){
+  el("ellipse",{cx:x,cy:y,rx:16*s,ry:6*s,fill:"#0B1F3A","fill-opacity":.15},g);
+  el("path",{d:`M${x-13*s},${y-2*s} q0,-27 ${13*s},-27 q${13*s},0 ${13*s},27 z`,fill:col},g);
+  el("circle",{cx:x,cy:y-38*s,r:10*s,fill:col},g);
+}
+function pill(g, cx, cy, text){
+  const w = text.length*11 + 44;
+  el("rect",{x:cx-w/2,y:cy-22,width:w,height:44,rx:22,fill:"#fff",stroke:"#D5E1F2",filter:"url(#fPill)"},g);
+  const tx = el("text",{x:cx,y:cy+7,"text-anchor":"middle","font-family":"Inter, Segoe UI, Arial, sans-serif","font-size":20,"font-weight":700,fill:"#0B1F3A"},g);
+  tx.textContent = text;
+}
+
+/* ===================================================================== Couleurs des couches */
+const PAL = {
+  ux:{top:"#EAF2FF",left:"#C8DAF4",right:"#B2C9EC",stroke:"#8EAEDD"},
+  sd:{top:"url(#gSD)",left:"#1656BD",right:"#0E4499",stroke:"#0E4499"},
+  fe:{top:"url(#gFE)",left:"#3644A8",right:"#2B378C",stroke:"#2B378C"},
+  vend:{top:"#A3AECB",left:"#8390B2",right:"#717E9F",stroke:"#6A7696"},
+  base:{top:"#1B3F75",left:"#112B53",right:"#0A1F40",stroke:"#0A1F40"},
+};
+
+/* ===================================================================== Pile principale */
+const CX=560, SW=340, SH=170, ST=22, Y={ux:300, fe:485, sd:670, base:855};
+const stack = document.getElementById("stack");
+const V = {};                    // variantes : V[nom] = <g>
+const mk = (name, parent=stack) => (V[name] = el("g",{},parent));
+
+// ombre et guides
+mk("shadow"); el("ellipse",{cx:CX,cy:Y.base+ST+30,rx:SW/2,ry:SH/3.2,fill:"#0B1F3A","fill-opacity":.18,filter:"url(#fShadow)"},V.shadow);
+mk("guides");
+for (const x of [CX-SW/2, CX+SW/2]) el("line",{x1:x,y1:Y.ux+ST,x2:x,y2:Y.base,stroke:"#9DB8E0","stroke-width":1.2,"stroke-dasharray":"4 6"},V.guides);
+
+// Base (plateformes)
+const baseWrap = mk("baseWrap");
+slab(mk("baseWhole",baseWrap), CX,Y.base,SW,SH,ST,PAL.base);
+tiles(mk("baseSilos",baseWrap), CX,Y.base,SW,SH,ST,
+  Object.fromEntries([["back",22],["left",10],["right",30],["front",16]].map(([p,dy])=>[p,{...PAL.base,stroke:"#3A5E95",dy}])),18);
+for (const [n,label] of [["baseA","Plateforme A"],["baseB","Plateforme B"],["baseC","Plateforme C"]]){
+  const g = mk(n,baseWrap); slab(g,CX,Y.base,SW,SH,ST,PAL.base); pill(g,CX,Y.base+4,label);
+}
+
+// Système de design
+const sdWrap = mk("sdWrap");
+{ const g = mk("sdWhole",sdWrap); slab(g,CX,Y.sd,SW,SH,ST,PAL.sd); grid(g,CX,Y.sd,SW,SH); }
+ghost(mk("sdGhost",sdWrap), CX,Y.sd,SW,SH,ST,C.red);
+{ const solid={...PAL.sd}; tiles(mk("sdPartial",sdWrap),CX,Y.sd,SW,SH,ST,{back:solid,left:solid,right:{ghost:C.amber},front:{ghost:C.amber}},10); }
+{ const g = mk("sdGlow",sdWrap); g.setAttribute("filter","url(#fGlow)"); slab(g,CX,Y.sd,SW,SH,ST,PAL.sd); grid(g,CX,Y.sd,SW,SH); }
+
+// Frontend
+const feWrap = mk("feWrap");
+slab(mk("feWhole",feWrap), CX,Y.fe,SW,SH,ST,PAL.fe);
+{ const m=(top,dy)=>({...PAL.fe,top,dy,stroke:"#5A67C8"});
+  tiles(mk("feFrag",feWrap),CX,Y.fe,SW,SH,ST,{back:m("#4B5BD0",10),left:m("#7A5BD0",0),right:m("#3F8ED8",16),front:m("#5E6FA8",4)},14); }
+{ const g = mk("feVendor",feWrap);          // frontend du fournisseur relié directement au backend
+  for (const x0 of [CX-SW/2, CX+SW/2-14])
+    el("rect",{x:x0,y:Y.fe+ST-4,width:14,height:Y.base-Y.fe-ST+8,fill:PAL.vend.left,stroke:PAL.vend.stroke,"stroke-width":1},g);
+  slab(g,CX,Y.fe,SW,SH,ST,PAL.vend); }
+{ const g = mk("feGlow",feWrap); g.setAttribute("filter","url(#fGlow)"); slab(g,CX,Y.fe,SW,SH,ST,PAL.fe); }
+mk("feCheck",feWrap);
+el("polygon",{points:P([[CX,Y.fe-SH/2],[CX+SW/2,Y.fe],[CX,Y.fe+SH/2],[CX-SW/2,Y.fe]]),fill:"none",stroke:C.green,"stroke-width":5},V.feCheck);
+
+// Expérience utilisateur
+const uxWrap = mk("uxWrap");
+slab(mk("uxWhole",uxWrap), CX,Y.ux,SW,SH,ST,PAL.ux);
+{ const m=(top,dy)=>({...PAL.ux,top,dy});
+  tiles(mk("uxFrag",uxWrap),CX,Y.ux,SW,SH,ST,{back:m("#EAF2FF",14),left:m("#FCE4E4",0),right:m("#FFF1CC",22),front:m("#E4F4EA",6)},16); }
+slab(mk("uxAmber",uxWrap), CX,Y.ux,SW,SH,ST,{...PAL.ux,top:"#FFF6DC",stroke:C.amber});
+{ const g = mk("uxGlow",uxWrap); g.setAttribute("filter","url(#fGlow)"); slab(g,CX,Y.ux,SW,SH,ST,PAL.ux); }
+// contour de validation (test de la plateforme)
+mk("uxCheck",uxWrap);
+el("polygon",{points:P([[CX,Y.ux-SH/2],[CX+SW/2,Y.ux],[CX,Y.ux+SH/2],[CX-SW/2,Y.ux]]),fill:"none",stroke:C.green,"stroke-width":5},V.uxCheck);
+mk("sdCheck",sdWrap);
+el("polygon",{points:P([[CX,Y.sd-SH/2],[CX+SW/2,Y.sd],[CX,Y.sd+SH/2],[CX-SW/2,Y.sd]]),fill:"none",stroke:C.green,"stroke-width":5},V.sdCheck);
+
+// Utilisateurs
+person(mk("pplBlue",uxWrap), CX-36, Y.ux-36, 1.05, "#1F6FEB");
+person(V.pplBlue, CX+30, Y.ux-26, .92, "#3C9BF0");
+person(mk("pplGrey",uxWrap), CX-38, Y.ux-36, .95, "#7C8CA8");
+person(V.pplGrey, CX+42, Y.ux-22, .92, "#7C8CA8");
+
+// Connecteurs vers les annotations
+const conn = {};
+for (const k of ["ux","sd","fe","base"]){
+  conn[k] = el("g",{},stack);
+  el("line",{x1:CX+SW/2+16,y1:Y[k],x2:870,y2:Y[k],stroke:"#2F7FEF","stroke-width":1.5,"stroke-dasharray":"5 6"},conn[k]);
+  el("circle",{cx:870,cy:Y[k],r:5,fill:"#2F7FEF"},conn[k]);
+}
+
+/* ===================================================================== Petite pile d’ouverture */
+const logo = document.getElementById("logo");
+const LG = {};
+for (const [k,y,c] of [["base",440,PAL.base],["sd",380,PAL.sd],["fe",320,PAL.fe],["ux",260,PAL.ux]]){
+  LG[k] = el("g",{},logo); slab(LG[k],960,y,180,90,14,c);
+}
+
+/* ===================================================================== États (chapitres) */
+const S = [
+  {key:"open",  t0:0,  t1:6},
+  {key:"intro", t0:6,  t1:27, k:"Les notions de base", t:"Quatre couches, quatre rôles",
+    rows:{
+      ux:{main:"Ce que vivent les utilisateurs à l’écran", sub:"Citoyens, professionnels et personnel : formulaires, boutons, messages, parcours."},
+      sd:{main:"Le cadre : règles communes et pièces réutilisables", sub:"Couleurs, composants, gabarits, accessibilité : il encadre la construction des écrans."},
+      fe:{main:"Les écrans, bâtis sur ce cadre", sub:"Avec des frameworks comme Angular ou React, ou une plateforme d’expérience."},
+      base:{main:"Là où vivent les données et les processus", sub:"Par exemple Salesforce, Dynamics ou nos applications maison."}}},
+  {key:"trans", t0:27, t1:32},
+  {key:"s1", t0:32, t1:44, k:"Scénario 1 · situation actuelle", t:"Tout maison, en silo",
+    rows:{
+      ux:{dot:C.red, main:"Incohérente", sub:"Chaque équipe décide de l’expérience de son propre service."},
+      sd:{dot:C.red, main:"Aucun système de design", sub:"Les mêmes éléments sont conçus et codés plusieurs fois."},
+      fe:{main:"Un frontend maison par équipe", sub:"Angular, React… chacun ses outils et ses composants, sans SD."},
+      base:{main:"Backends maison, en silo", sub:"Indépendance technologique : faible"}}},
+  {key:"s2", t0:44, t1:56, k:"Scénario 2", t:"Tout maison, avec un système de design partagé",
+    rows:{
+      ux:{dot:C.green, main:"Cohérente", sub:"L’organisation gouverne l’expérience."},
+      sd:{dot:C.green, main:"Système de design central", sub:"On conçoit une fois, on réutilise partout."},
+      fe:{main:"Frontend maison + composants du SD", sub:"Angular ou React, avec les mêmes composants partout."},
+      base:{main:"Backends maison", sub:"Indépendance technologique : élevée"}}},
+  {key:"s3", t0:56, t1:68, k:"Scénario 3", t:"Une plateforme commerciale intégrée",
+    rows:{
+      ux:{dot:C.amber, main:"Cohérence moyenne", sub:"Le fournisseur contrôle une partie de l’expérience."},
+      sd:{dot:C.amber, main:"Système de design partiel", sub:"Un thème appliqué à l’interface du fournisseur."},
+      fe:{main:"Frontend fourni par la plateforme", sub:"Relié directement au backend, sans passer par notre SD : il dépend du fournisseur."},
+      base:{main:"Plateforme commerciale intégrée", sub:"Par exemple Salesforce ou Dynamics · Indépendance technologique : faible"}}},
+  {key:"s4", t0:68, t1:80, k:"Scénario 4", t:"Plateforme commerciale « headless » + système de design",
+    rows:{
+      ux:{dot:C.green, main:"Cohérente", sub:"L’organisation gouverne l’expérience."},
+      sd:{dot:C.green, main:"Système de design central", sub:"Il encadre tous les écrans, peu importe la plateforme."},
+      fe:{main:"Frontend découplé + SD", sub:"Angular, React ou plateforme d’expérience, relié au backend par API."},
+      base:{main:"Plateformes « headless »", sub:"Données et processus en coulisses · Indépendance : élevée"}}},
+  {key:"swap", t0:80, t1:91, k:"Le test", t:"Et si on change de plateforme ?",
+    rows:{
+      ux:{dot:C.green, main:"L’expérience reste la même", sub:"Les utilisateurs ne vivent aucune rupture."},
+      sd:{dot:C.green, main:"Le système de design reste en place", sub:"C’est lui qui gouverne l’expérience."},
+      fe:{dot:C.green, main:"Le frontend reste en place", sub:"Il se rebranche sur la nouvelle plateforme par API."},
+      base:{main:"La plateforme du backend change", sub:"Nouveau fournisseur, nouvelle technologie… en coulisses."}}},
+  {key:"end", t0:91, t1:104, k:"La valeur", t:"Ce que le système de design apporte à l’organisation"},
+];
+const DURATION = 104;
+const CHAPTERS = S.map(s => s.t0);
+const byKey = Object.fromEntries(S.map(s => [s.key, s]));
+const FADE = .8;
+function W(key, t){
+  const s = byKey[key];
+  const a = s.t0 === 0 ? 1 : up(t, s.t0, s.t0+FADE);
+  const b = s.t1 >= DURATION ? 0 : up(t, s.t1, s.t1+FADE);
+  return clamp(a - b);
+}
+
+/* ---------- En-têtes et annotations HTML */
+const heads = document.getElementById("heads"), rowsEl = document.getElementById("rows");
+const H = {}, R = {};
+const LABELS = {ux:"EXPÉRIENCE UTILISATEUR", sd:"SYSTÈME DE DESIGN", fe:"FRONTEND · COUCHE DE PRÉSENTATION", base:"BACKEND · PLATEFORMES MÉTIER"};
+for (const s of S){
+  if (!s.t) continue;
+  const h = document.createElement("div"); h.className = "abs head op0";
+  h.innerHTML = `<div class="k">${s.k}</div><div class="t">${s.t}</div>`;
+  heads.appendChild(h); H[s.key] = h;
+  if (!s.rows) continue;
+  R[s.key] = {};
+  for (const k of ["ux","sd","fe","base"]){
+    const r = s.rows[k], d = document.createElement("div");
+    d.className = "abs row op0"; d.style.top = (Y[k]-62)+"px";
+    d.innerHTML = `<div class="lab">${LABELS[k]}</div><div class="main">${r.dot?`<i style="background:${r.dot}"></i>`:""}${r.main}</div><div class="sub">${r.sub}</div>`;
+    rowsEl.appendChild(d); R[s.key][k] = d;
+  }
+}
+
+/* ---------- Navigation des scénarios */
+const nav = document.getElementById("nav");
+const NAVD = [["1","Tout maison en silo","Nulle",C.red],["2","Tout maison + SD partagé","Élevée",C.green],
+              ["3","Plateforme commerciale intégrée","Faible",C.red],["4","Plateforme headless + SD","Très élevée",C.green]];
+const chips = NAVD.map(([n,l,v,c]) => {
+  const d = document.createElement("div"); d.className = "chip";
+  d.innerHTML = `<b>${n}</b><div><div>${l}</div><div class="v"><i style="background:${c}"></i>Valeur du SD : ${v}</div></div>`;
+  nav.appendChild(d); return d;
+});
+
+/* ---------- Cartes de valeur */
+const ICONS = {
+  coh:'<rect x="6" y="10" width="20" height="36" rx="4" fill="#2F7FEF"/><rect x="30" y="10" width="20" height="36" rx="4" fill="#2F7FEF"/><path d="M12 28h8M36 28h8" stroke="#fff" stroke-width="3" stroke-linecap="round"/>',
+  eff:'<path d="M28 6a22 22 0 1 0 22 22" fill="none" stroke="#2F7FEF" stroke-width="5" stroke-linecap="round"/><path d="M42 4l8 9-11 3z" fill="#2F7FEF"/><circle cx="28" cy="28" r="7" fill="#F26A1B"/>',
+  acc:'<circle cx="28" cy="10" r="6" fill="#2F7FEF"/><path d="M10 20h36M28 20v14l-9 16M28 34l9 16" stroke="#2F7FEF" stroke-width="5" stroke-linecap="round" fill="none"/>',
+  lib:'<rect x="6" y="34" width="44" height="14" rx="3" fill="#0B2A52"/><rect x="6" y="18" width="44" height="12" rx="3" fill="#2F7FEF"/><path d="M14 6h28" stroke="#F26A1B" stroke-width="5" stroke-linecap="round"/><path d="M36 2l7 4-7 4" fill="none" stroke="#F26A1B" stroke-width="3"/>',
+  col:'<circle cx="14" cy="16" r="7" fill="#1D5FA8"/><path d="M2 42q0-16 12-16t12 16z" fill="#1D5FA8"/><circle cx="42" cy="16" r="7" fill="#2F7FEF"/><path d="M30 42q0-16 12-16t12 16z" fill="#2F7FEF"/><circle cx="28" cy="24" r="8" fill="#F26A1B"/><path d="M14 54q0-18 14-18t14 18z" fill="#F26A1B"/>',
+};
+const CARDS = [
+  ["coh","Cohérence","Une expérience uniforme d’un service à l’autre : moins de confusion pour les utilisateurs."],
+  ["eff","Efficience","On conçoit et on code une fois, puis on réutilise partout : moins de travail refait."],
+  ["acc","Accessibilité","Les normes d’accessibilité sont intégrées une fois, dans les composants."],
+  ["lib","Liberté de choix","On peut changer de plateforme sans refaire l’expérience."],
+  ["col","Collaboration","Un langage commun entre les équipes et les directions."],
+];
+const cardsEl = document.getElementById("cards");
+const cardEls = CARDS.map(([i,h,p]) => {
+  const d = document.createElement("div"); d.className = "card op0";
+  d.innerHTML = `<svg viewBox="0 0 56 56" aria-hidden="true">${ICONS[i]}</svg><h3>${h}</h3><p>${p}</p>`;
+  cardsEl.appendChild(d); return d;
+});
+
+/* ===================================================================== Rendu à l’instant t */
+const $ = id => document.getElementById(id);
+function setG(g, op, dx=0, dy=0, sc=1, ox=CX, oy=0){
+  g.setAttribute("opacity", op.toFixed(3));
+  g.style.display = op < .002 ? "none" : "";
+  const tr = sc === 1 ? `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`
+    : `translate(${(dx+ox*(1-sc)).toFixed(1)} ${(dy+oy*(1-sc)).toFixed(1)}) scale(${sc.toFixed(4)})`;
+  g.setAttribute("transform", tr);
+}
+function setD(d, op, dx=0, dy=0){
+  d.style.opacity = op.toFixed(3);
+  d.style.visibility = op < .002 ? "hidden" : "visible";
+  d.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+}
+
+function render(t){
+  const w = Object.fromEntries(S.map(s => [s.key, W(s.key, t)]));
+
+  /* Ouverture */
+  const o = 1 - up(t, 5.2, 6);
+  setG(LG.base, up(t,.3,1.1)*o, 0, (1-up(t,.3,1.1))*-60);
+  setG(LG.sd,   up(t,.7,1.5)*o, 0, (1-up(t,.7,1.5))*-60);
+  setG(LG.fe,   up(t,1.1,1.9)*o, 0, (1-up(t,1.1,1.9))*-60);
+  setG(LG.ux,   up(t,1.5,2.3)*o, 0, (1-up(t,1.5,2.3))*-60);
+  setD($("openTitle"), up(t,1.8,2.8)*o, 0, (1-up(t,1.8,2.8))*24);
+  $("openBar").style.opacity = (up(t,2.4,3.2)*o).toFixed(3);
+  $("openBar").style.transform = `scaleX(${up(t,2.4,3.2).toFixed(3)})`;
+
+  /* Visibilité globale de la pile */
+  const stackOn = up(t, 6, 6.4) * (1 - up(t, 27, 27.6)) + up(t, 31.6, 32.4) * (1 - up(t, 91, 91.8));
+  const stackShift = -40 * up(t, 91, 91.8) + 40 * (1 - up(t, 31.6, 32.4)) * (t > 30 ? 1 : 0);
+
+  /* Entrées des couches pendant l'introduction */
+  const eBase = up(t, 6.5, 7.5), eUx = up(t, 10, 11), eSd = up(t, 14, 15.2), eFe = up(t, 18, 19.2), ePpl = up(t, 11, 11.8);
+  setG(V.shadow, stackOn*eBase);
+  setG(V.guides, stackOn*Math.min(eFe,eSd)*.9);
+
+  /* --- Base */
+  setG(V.baseWrap, stackOn, 0, (1-eBase)*-90 + stackShift);
+  setG(V.baseWhole, w.intro + w.s2 + w.s3 + w.s4 + (1 - up(t,80,80.8))*w.swap);
+  setG(V.baseSilos, w.s1);
+  // test : A sort à droite, B entre par la gauche, puis B sort et C entre
+  const aOut = up(t,82,83), bIn = up(t,83.2,84.2), bOut = up(t,86,87), cIn = up(t,87.2,88.2);
+  setG(V.baseA, w.swap*up(t,80,80.8)*(1-aOut), aOut*520);
+  setG(V.baseB, w.swap*bIn*(1-bOut), (1-bIn)*-520 + bOut*520);
+  setG(V.baseC, w.swap*cIn, (1-cIn)*-520);
+
+  /* --- Frontend */
+  setG(V.feWrap, stackOn*eFe, (1-eFe)*480, stackShift);
+  setG(V.feWhole, w.intro + w.s2);
+  setG(V.feFrag, w.s1);
+  setG(V.feVendor, w.s3);
+  setG(V.feGlow, w.s4 + w.swap);
+
+  /* --- Système de design */
+  setG(V.sdWrap, stackOn*eSd, (1-eSd)*-480, stackShift);
+  setG(V.sdWhole, w.intro + w.s2);
+  setG(V.sdGhost, w.s1);
+  setG(V.sdPartial, w.s3);
+  setG(V.sdGlow, w.s4 + w.swap);
+
+  /* --- Expérience utilisateur */
+  const jitter = w.s1 > .5 ? Math.sin(t*5.3)*2.5 : 0;
+  setG(V.uxWrap, stackOn*eUx, 0, (1-eUx)*-90 + stackShift);
+  setG(V.uxWhole, w.intro + w.s2);
+  setG(V.uxFrag, w.s1, jitter*.4, jitter);
+  setG(V.uxAmber, w.s3);
+  setG(V.uxGlow, w.s4 + w.swap);
+  setG(V.pplBlue, ePpl*(1 - w.s1), 0, (1-ePpl)*-30);
+  setG(V.pplGrey, w.s1);
+  const pulse = w.swap * up(t,83.5,84.5) * (.55 + .45*Math.sin((t-83.5)*4));
+  setG(V.uxCheck, pulse); setG(V.sdCheck, pulse); setG(V.feCheck, pulse);
+
+  /* --- Connecteurs */
+  const rowOn = { base: up(t,7.2,7.9), ux: up(t,10.8,11.5), sd: up(t,15,15.7), fe: up(t,19,19.7) };
+  for (const k of ["ux","sd","fe","base"]) setG(conn[k], stackOn*rowOn[k], 0, stackShift);
+
+  /* --- En-têtes */
+  for (const k in H) setD(H[k], sharp(w[k]), 0, (1-sharp(w[k]))*10);
+
+  /* --- Annotations */
+  for (const k in R) for (const r of ["ux","sd","fe","base"]){
+    let a = sharp(w[k]);
+    if (k === "intro") a *= rowOn[r];
+    setD(R[k][r], a, (1-a)*20, 0);
+  }
+
+  /* --- Transition vers les scénarios */
+  const tr = up(t,27.5,28.3)*(1-up(t,31,31.6));
+  setD($("trans"), tr, 0, (1-up(t,27.5,28.3))*20);
+  setD($("transLine"), up(t,27.9,28.9)*(1-up(t,31,31.6)));
+  $("transLine").style.transform = `scaleX(${up(t,27.9,28.9).toFixed(3)})`;
+
+  /* --- Légende d'introduction */
+  setD($("caption"), up(t,22.5,23.3)*(1-up(t,26.6,27.2)), 0, (1-up(t,22.5,23.3))*16);
+
+  /* --- Navigation des scénarios */
+  const navOn = up(t,28.2,28.6)*(1-up(t,80,80.8));
+  setD($("nav"), navOn, 0, -430*(1-up(t,31.1,32.1)));
+  ["s1","s2","s3","s4"].forEach((k,i) => {
+    const on = w[k];
+    const ci = up(t, 28.4+i*.4, 29+i*.4);
+    chips[i].style.opacity = ci.toFixed(3);
+    chips[i].style.transform = `translateY(${((1-ci)*30).toFixed(1)}px)`;
+    chips[i].style.background = on > .5 ? "#0B1F3A" : "#fff";
+    chips[i].style.color = on > .5 ? "#fff" : "#0B1F3A";
+    chips[i].style.borderColor = on > .5 ? "#0B1F3A" : "#B9CEEC";
+    chips[i].querySelector(".v").style.color = on > .5 ? "#DCE7F7" : "#51607A";
+  });
+
+  /* --- Valeur */
+  cardEls.forEach((c,i) => { const a = up(t, 92+i*.7, 92.8+i*.7); setD(c, a, 0, (1-a)*30); });
+  const f = up(t, 96.8, 97.8); setD($("final"), f, 0, (1-f)*30);
+
+  $("progress").style.width = (t/DURATION*1920).toFixed(1)+"px";
+}
+window.render = render; window.DURATION = DURATION; window.CHAPTERS = CHAPTERS;
+
+/* ===================================================================== Lecture */
+const isRender = new URLSearchParams(location.search).has("render");
+if (isRender) document.body.classList.add("render");
+
+function fit(){
+  const s = isRender ? 1 : Math.min(innerWidth/1920, innerHeight/1080);
+  $("stage").style.transform = `scale(${s})`;
+}
+addEventListener("resize", fit); fit();
+
+let t = 0, playing = !isRender, last = null, holdUntil = null;
+const fmt = x => `${Math.floor(x/60)}:${String(Math.floor(x%60)).padStart(2,"0")}`;
+function chapterIndex(x){ let i=0; CHAPTERS.forEach((c,k)=>{ if (x >= c - .01) i = k; }); return i; }
+function go(x){ t = clamp(x, 0, DURATION); holdUntil = null; render(t); $("tc").textContent = fmt(t); }
+function setPlay(p){ playing = p; $("bPlay").textContent = p ? "❚❚" : "▶"; last = null; }
+
+function loop(ts){
+  if (playing){
+    if (last != null){
+      const nt = t + (ts - last)/1000;
+      const next = CHAPTERS.find(c => c > t + .01);
+      if ($("cPres").checked && next != null && nt >= next - .05){ t = next - .05; setPlay(false); }
+      else t = nt;
+      if (t >= DURATION){ t = DURATION; setPlay(false); }
+      render(t); $("tc").textContent = fmt(t);
+    }
+    last = ts;
+  }
+  requestAnimationFrame(loop);
+}
+if (!isRender){
+  $("bPlay").onclick = () => { if (t >= DURATION) go(0); setPlay(!playing); };
+  $("bNext").onclick = () => { const n = CHAPTERS.find(c => c > t + .1); go(n ?? DURATION); setPlay(true); };
+  $("bPrev").onclick = () => { const i = chapterIndex(t); go(CHAPTERS[t - CHAPTERS[i] < 1.5 ? Math.max(0,i-1) : i]); setPlay(true); };
+  addEventListener("keydown", e => {
+    if (e.key === " " ){ e.preventDefault(); $("bPlay").click(); }
+    else if (e.key === "ArrowRight" || e.key === "PageDown"){ e.preventDefault(); $("bNext").click(); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp"){ e.preventDefault(); $("bPrev").click(); }
+    else if (e.key.toLowerCase() === "p"){ $("cPres").checked = !$("cPres").checked; }
+  });
+  $("stage").addEventListener("click", () => { if (!playing) $("bPlay").click(); });
+  render(0); requestAnimationFrame(loop);
+} else {
+  render(0);
+}
+</script>
+</body>
+</html>
